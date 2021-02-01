@@ -1,0 +1,37 @@
+{
+  "id": "",
+  "name": "",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "3956122",
+      "name": "数据统计",
+      "font_class": "kujialeqiyezhan_shujutongji",
+      "unicode": "e64d",
+      "unicode_decimal": 58957
+    },
+    {
+      "icon_id": "4670122",
+      "name": "管理",
+      "font_class": "guanli",
+      "unicode": "e602",
+      "unicode_decimal": 58882
+    },
+    {
+      "icon_id": "6176565",
+      "name": "监控",
+      "font_class": "jiankong",
+      "unicode": "e623",
+      "unicode_decimal": 58915
+    },
+    {
+      "icon_id": "7518273",
+      "name": "连接",
+      "font_class": "lianjie",
+      "unicode": "e64e",
+      "unicode_decimal": 58958
+    }
+  ]
+}

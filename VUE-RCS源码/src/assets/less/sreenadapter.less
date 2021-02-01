@@ -1,0 +1,125 @@
+///PC端页面适应不同的分辨率的方法
+//https://www.jianshu.com/p/4850a7b22228
+@media (min-width:1920px){       //最高
+  
+}
+@media (max-width:1400px){       // 1280x1024
+  .PieChart ,.page, .thumbContain{
+    width:100%!important;
+  }
+  .tasklist,.SearchPanel{
+    width:100%!important;
+  }
+}
+@media screen and (min-width:1000px ){
+  .mintSearch,.mint-tabbar,.mintfloor{
+    display: none!important;
+  }
+  .tasklist{
+    float: left;
+  }
+}
+@media (max-width:950px){
+  .page{
+    width: 100px;
+    height:auto!important;
+  }
+  .leftmenu{
+    display: none;
+  }
+  .pageMain{
+    background-color: #fff;
+    .panel{ 
+      top:85px!important;
+      padding-bottom: 4rem;
+    }
+    .wel{
+      display: none;
+    }
+    .floorGroup,.btngroup {
+      display: none!important;
+    }
+  }
+  //头部
+ .head{
+   position:fixed;
+   z-index: 999;
+
+   background-color: #fff;
+   .right{
+    left: 78%!important;
+   } 
+ }
+//  连接管理panel
+ #app .page .pannel:last-child .mswipper .swiper-slide{
+   width:100%!important;
+   .header,.coninfo{
+    width:95%!important;
+  //  position: relative!important;
+   }
+ }
+  .el-card,.conpanel,.header,.avginfo,.task{
+    width:96%!important;
+    position: relative!important;
+
+  }
+  .page{
+  margin:0 auto!important;
+  width: 100%!important;
+    .main{
+     .Monitor{
+       .map{
+         height:25rem!important;
+       }
+     }
+    }
+    .el-table{
+      width:100%!important;
+    }
+  }
+  .el-pagination{
+    margin-bottom: 4rem;
+  }
+  .foot{
+    display: none;
+  }
+  .mint-tabbar{
+    z-index: 99;
+  }
+   //任务列表页面
+  .SearchPanel,.sheader{
+    display: none!important;
+  }
+  //统计页面
+    .datachart {
+    ul{
+      margin:0 auto;
+    }
+      ul li{
+        width: 100%;}
+    .Panelborder{
+      width:99%!important;
+    }
+    }
+  // 登录页面
+   .login-left{ 
+    width: 85%!important;
+    margin:0 auto; 
+    padding:0px !important;
+    margin-left:1.5rem!important;
+   }
+  .login-right{
+    width: 100%!important;
+    padding:0px !important;
+  }
+  .login-form{
+   top:95px!important;
+   margin:0 auto!important;
+   position:relative!important;
+ }
+}
+
+
+@media (max-width:480px){
+   
+}

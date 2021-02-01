@@ -1,0 +1,7 @@
+POST http://192.168.0.12:8210/reg HTTP/1.1
+content-type: application/json
+
+{
+    "user": "use2srs2",
+    "pass": "aaa"
+}

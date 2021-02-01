@@ -1,0 +1,10 @@
+POST http://192.168.0.12:8210/queryTasklist HTTP/1.1
+content-type: application/json
+
+{   
+    "StartDateTime":  "2017-10-03 06:49:26",
+    "EndDateTime":    "2017-10-03 07:30:08",
+    "AGVID":          "AGV1",
+    "StartPlace":     "仓库发料区2",
+    "EndPlace":       "2楼线边仓"
+}

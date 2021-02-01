@@ -1,0 +1,86 @@
+.dashLines {
+  stroke-dasharray: 5; 
+}
+.circle{
+  background-color: lightblue;
+  text-align: center;
+  line-height:30px;
+  color:white; 
+  border-radius: 150px;
+}
+
+.AGV{
+  width: 30px;height: 30px;
+ // background-color: red;
+  background-image: url('../../../static/img/map/AGV/AGV.png');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-color: rgba(139, 142, 219, 0.8);
+  border-radius: 15px;
+  background-size: 25px;
+}
+.Place{
+  width: 30px;height: 30px;
+   border-radius: 30px;
+  text-align: center;
+  font-size: 15px;
+   background-color: rgba(0, 0, 200, 0.6); 
+}
+.PlaceLocked{
+  width: 30px;height: 30px;
+  border-radius: 30px; 
+  text-align: center;
+  font-size: 30px;
+   background-color: rgba(200, 0, 0, 0.6); 
+}
+.popupClass{
+   width: 100px;
+   height:80px;  
+   color:red;
+   font-size:30px;
+   font-weight:bold; 
+}
+.leaflet-pane .leaflet-map-pane{
+  overflow:hidden;
+  transform: none !important;
+}
+.popup{
+  margin:0 0;
+  font-family: 'STKaiti';
+  .leaflet-popup-content-wrapper{
+    background-color: transparent;
+    box-shadow: 0 0 0!important;
+  }
+.leaflet-popup-tip-container{
+    display: none!important;
+ }
+ .leaflet-popup-content{
+   margin:0 0; 
+ }
+ .leaflet-popup-close-button{
+    display: none!important; 
+ }
+} 
+.swiper-wrapper{
+  z-index: 0;
+  position: static!important;
+}
+//任务详情页面
+.el-steps{ 
+  justify-content:center!important;
+}
+.el-tag{
+  font-size: 1rem!important;
+}
+
+  //滚动条样式
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+    background-color: rgba(0, 0, 0, .3);
+}
+::-webkit-scrollbar-thumb {
+    // border-radius:5px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, .3);
+    background-color: rgba(0, 0, 0, .1)
+}

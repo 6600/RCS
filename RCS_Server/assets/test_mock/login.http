@@ -1,0 +1,7 @@
+POST http://192.168.0.12:8210/login HTTP/1.1
+content-type: application/json
+
+{
+    "user": "user",
+    "pass": "1223456"
+}
