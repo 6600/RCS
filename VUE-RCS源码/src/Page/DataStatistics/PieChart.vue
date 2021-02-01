@@ -1,7 +1,7 @@
 
 <template> 
 <div class="test"> 
-   <panelborder :title="title" width="100%" height="40rem" :chartype="type" :index="index"> 
+   <panelborder :title="title" width="100%" height="35rem" :chartype="type" :index="index"> 
     <div class="contain"> 
      <div class="avg canvcon" v-show="type == 'AGVStyle'"> 
       <ul class="Charge"> 
@@ -15,22 +15,16 @@
      <div class="order canvcon" v-show="type == 'OrderStyle'"> 
       <div class="pie" v-show="radio=='1'"> 
        <div @click="selectPie('Status')" style="width:30%;">
-        <div ref="OTaskStatus" style="width:100%;height:40rem;"></div> 
+        <div ref="OTaskStatus" style="width:100%;height:35rem;"></div> 
        </div> 
        <div @click="selectPie('TaskName')" style="width:70%;"> 
-        <div ref="OTaskName" style="width:100%;height:40rem;"></div> 
+        <div ref="OTaskName" style="width:100%;height:35rem;"></div> 
        </div> 
        <!-- <div ref='OOrderID' style="top:-1rem;"  :style="StaticPieStyle"></div>      --> 
       </div> 
      </div> 
      <!-- 物料统计 饼图 趋势图--> 
-     <div class="matter canvcon" v-show="type == 'matterStyle'"> 
-      <div class="pie" v-show="radio=='1'"> 
-       <div ref="MMaterialID" :style="matterPieStyle"></div> 
-       <!-- <div ref='MOrderID'       :style="StaticPieStyle"></div>     --> 
-       <!-- <div ref='MTaskTypeName'  style="top:-1rem;" :style="matterPieStyle" ></div>       --> 
-      </div> 
-     </div> 
+
     </div> 
    </panelborder> 
   </div> 
@@ -85,10 +79,10 @@ export default {
       } 
     },
     AGVPieStyle(){
-      return "width:50%;height:40rem;"
+      return "width:50%;height:35rem;"
     },
     RatechargeSty(){
-      return "width:50%;height:40rem;"
+      return "width:50%;height:35rem;"
     },
     OrderPieStyle(){
       return "width:18rem;height:26rem;"
@@ -273,7 +267,7 @@ export default {
          type: 'pie',  
          data:Option.series,  
           center: this.type=="AGVStyle"?["50%", "40%"]:["50%", "40%"],     //左位置，上位置;以圆为中心
-          radius :this.type=="AGVStyle"?'80%':'70%',
+          radius :this.type=="AGVStyle"?'60%':'40%',
           label: {                                                 //饼内百分比样式format:{c}
           normal: {
           //  position: 'inner',

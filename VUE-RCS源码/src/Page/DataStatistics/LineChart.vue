@@ -124,8 +124,8 @@ export default {
           break;
         case 'matterStyle':   
         Option = this.SeriesConvert('MaterialID',this.getDayMonLine) 
-       
-        Barchart.setOption(this.matLineOption(Option));   
+        // 物料统计的图表
+        // Barchart.setOption(this.matLineOption(Option));   
           break;
       } 
     

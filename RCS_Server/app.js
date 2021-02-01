@@ -51,7 +51,7 @@ app.use(allowCrossDomain);
 
 router(app); 
 app.use(function(req, res, next) {
-    console.log(req)
+    // console.log(req)
     var err = new Error('Not Found');
     err.status = 404;
     next(err);

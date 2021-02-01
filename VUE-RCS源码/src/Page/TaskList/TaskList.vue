@@ -492,7 +492,7 @@ import      HeaderList                                                          
         param = {
            StartDateTime:start,
            EndDateTime:end,
-           AGVID:this.mint.Car,
+           AGVID:this.AGVID,
            OrderID: this.OrderID ? this.OrderID : '',
            StartPlace:this.mint.StartP,
            EndPlace:this.mint.EndP,
@@ -505,7 +505,7 @@ import      HeaderList                                                          
            StartDateTime:this.TimeRange[0],
            EndDateTime:endDateTime,
            OrderID: this.OrderID ? this.OrderID : '',
-           AGVID:'全部',
+           AGVID: this.AGVID,
            StartPlace:'全部',
            EndPlace:'全部',
          }  
