@@ -127,6 +127,9 @@ var execPromiseSelect = function (sql, param = null) {
           logger.error('获取数据库连接失败：', err);
           return reject(err);
       }
+      console.log('执行SQL语句:')
+      console.log(sql)
+      console.log('------------------------------------------------------------------')
       connection.query(sql, param, function (error, results, fields) {
         connection.release();
         if (error) {

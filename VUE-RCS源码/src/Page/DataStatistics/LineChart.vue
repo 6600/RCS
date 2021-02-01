@@ -122,11 +122,6 @@ export default {
              Barchart.setOption(this.setStausBar(Option));  
   
           break;
-        case 'matterStyle':   
-        Option = this.SeriesConvert('MaterialID',this.getDayMonLine) 
-        // 物料统计的图表
-        // Barchart.setOption(this.matLineOption(Option));   
-          break;
       } 
     
      var zoomSize = 6;                                                     //点击放大缩小事件
@@ -419,37 +414,6 @@ var option = {
 };
 return option
   // Barchart.setOption(option)
-  },
-  
-  matLineOption(ConvData){                                     //后端数据过滤转换
-  ConvData.series.forEach(item=>{
-       item.type  ='line'
-       item.stack ='总量'
-   })
-    var option ={                                                
-       title:{  text:'物料统计' },
-       tooltip: {  trigger: 'axis' , 
-       //formatter: xAxis.formatter  
-       },
-       legend: {    
-         data: ConvData.Legend                                          //legend数据转换     
-       },
-       calculable: true,                          
-       xAxis: [{  
-         type: 'category',  
-         boundaryGap: false,
-         data:ConvData.xAxis       //设置X轴的范围可按(月份，日数)
-        }],
-        
-     yAxis: [{  type: 'value'  }],
-      dataZoom: [
-        {
-            type: 'inside'
-        }
-    ],
-     series:ConvData.series
-  }
-  return option
   },
   matLineConvert(data){
     console.log('物料数据初始化',this.PieSelectIDX,data)

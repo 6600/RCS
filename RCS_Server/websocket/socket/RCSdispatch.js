@@ -62,7 +62,7 @@ function RCSdispatch(context,data){
     logger.info('[UpdateAGVWorkTime][InsertWorktime]:插入稼动率表;'); 
     if(typeof(data.List)=='undefined'){ 
         wsTotable.InsertWorktime('agvworktime',data)  
-    }else{
+    } else{
       data.List.forEach(item=>{
         wsTotable.InsertWorktime('agvworktime',item)  
       })

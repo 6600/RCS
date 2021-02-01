@@ -64,7 +64,7 @@ export default {
     Charge(){
       if(this.type=='AGVStyle'){
         var length = this.StaticsData.length
-        console.log(this.StaticsData[length-1].charge.table.length);
+        console.log(this.StaticsData, length);
         if(this.StaticsData[length-1].charge.table.length>0){
           var charge ={...this.StaticsData[length-1].charge.table.find(val=>val.ID==this.ID)} 
           delete charge.ID
@@ -102,26 +102,12 @@ export default {
                             {text:"任务类别",ref:that.$refs.OTaskName},
                             {text:"任务状态",ref:that.$refs.OTaskStatus},
                             {text:"工单号",ref:that.$refs.OOrderID}
-                              ],
-                   matterStyle:[
-                            {text:"工单号",ref:that.$refs.MOrderID}, 
-                            {text:"物料号",ref:that.$refs.MMaterialID}, 
-                            {text:"任务类别",ref:that.$refs.MTaskTypeName}
-                            ]
+                              ]
                    } 
       console.log(this.type,idx,refs[this.type][idx]);
-           return refs[this.type][idx]
+        return refs[this.type][idx]
      }
     },
-  // Chartrefs(val){
-  //  return function(val){ 
-  //    var that = this;
-  //    var refs ={'AGVStyle':that.$refs.lines,
-  //               'OrderStyle':that.$refs.Oline,
-  //               'matterStyle':that.$refs.Mline}  
-  //    return  refs[val]
-  //  }
-  // },
     sectohour(val){                                      //秒转时分秒 (网上的源码)
       return function(value){             
         var theTime = parseInt(value);// 秒
@@ -179,10 +165,10 @@ export default {
      this.$nextTick(() =>{
        
         if(this.type=='AGVStyle'){                                          //画四辆小车的稼动率饼图 
-            ConvData = this.PieCovertOption(this.Piedata);                  //获取返回setOption的：formatter,serise
-           Option = this.PieOption(this.Pierefs(0),ConvData)
-           this.drawPieChart(this.Pierefs(0),this.Piedata,Option);         //画饼图  
-           this.drawPieChart(this.Pierefs(1),this.Piedata,this.MeterOption(this.Piedata));         //画稼动率仪表盘
+          ConvData = this.PieCovertOption(this.Piedata);                  //获取返回setOption的：formatter,serise
+          Option = this.PieOption(this.Pierefs(0),ConvData)
+          this.drawPieChart(this.Pierefs(0),this.Piedata,Option);         //画饼图  
+          this.drawPieChart(this.Pierefs(1),this.Piedata,this.MeterOption(this.Piedata));         //画稼动率仪表盘
         }else{                                                    //画订单和物料的趋线图 
            this.Piedata.forEach((Piedata,idx)=>{   
            if((idx<=1&&this.type=='OrderStyle')){
@@ -191,14 +177,7 @@ export default {
              Option = this.PieOption(this.Pierefs(idx),ConvData)
              this.drawPieChart(this.Pierefs(idx),Piedata,Option); 
 
-           }else if((idx==1&&this.type=='matterStyle')){            //画物料柱状图表
-            this.Barchart = this.$echarts.init(this.$refs.MMaterialID),Option
-              Option = this.matBarConvert(Piedata)
-              this.Barchart.setOption(this.matBarOption(Option));  
-              window.addEventListener('resize', function() { 
-                   that.Barchart.resize(); 
-             })
-           }  
+           }
        }) 
          } 
     });   
@@ -267,7 +246,7 @@ export default {
          type: 'pie',  
          data:Option.series,  
           center: this.type=="AGVStyle"?["50%", "40%"]:["50%", "40%"],     //左位置，上位置;以圆为中心
-          radius :this.type=="AGVStyle"?'60%':'40%',
+          radius :this.type=="AGVStyle"?'60%':'60%',
           label: {                                                 //饼内百分比样式format:{c}
           normal: {
           //  position: 'inner',
@@ -417,7 +396,11 @@ export default {
   },
 
  
-  drawPieChart(Pieref,pieData,Option){
+  drawPieChart(Pieref,pieData,Option) {
+    if (!Pieref.ref) {
+      console.error('dom不存在!')
+      return
+    }
      var that = this 
      try{
        var PieChart= this.$echarts.init(Pieref.ref);                //compute:Pierefs 获取返回this.refs
