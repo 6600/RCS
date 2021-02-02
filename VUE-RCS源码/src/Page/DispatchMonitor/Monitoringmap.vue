@@ -54,11 +54,12 @@ export default {
    returnTask(task,agv){
      let that  = this
      return function(task,agv){
-       var str = `<div style="width: 120px; height:80px;font-size:14px;font-weight:bold;" id="popup">
-           <div><span>任务:</span><span>`+task.TaskTypeName+`</span></div>
-           <div><span>耗时:</span><span>`+task.UsedTime+`</span></div>
-           <div><span>状态:</span><span>`+task.CurrentOperateDescription+`</span></div>
-           <div><span>异常:</span><span>`+task.WarningStatus+`</span></div>
+       var str = `<div class="status-${task.Movingstatus || 0}" style="width: 180px; font-size:14px;font-weight:bold;" id="popup">
+           <div><span>任务:</span><span>`+ (task.TaskTypeName || '') +`</span></div>
+           <div><span>耗时:</span><span>`+ (task.UsedTime || '')+`</span></div>
+           <div><span>状态:</span><span>`+ (task.CurrentOperateDescription || '') + `</span></div>
+           <div><span>异常:</span><span>`+ (task.WarningStatus || '') +`</span></div>
+           <div><span>电量:</span><span>`+ ((task.PowerPercent + '%') || '') +`</span></div>
            </div>` 
       if(task.WarningStatus!=''&&agv.warn!=task.WarningStatus){ 
          that.$emit('warninfo',{info:task.WarningStatus,idx:this.mapIdx}) 

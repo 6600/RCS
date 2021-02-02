@@ -10,9 +10,9 @@
         <el-menu-item  index="/DispatchMonitor" class='menuItem'     @click.native.prevent="handleback">
             <i class="iconfont icon-jiankong"></i> <span slot="title" >调度监控</span>
         </el-menu-item>
-        <el-menu-item  index="/Connections"     class='menuItem'     @click.native.prevent="handleback">
+        <!-- <el-menu-item  index="/Connections"     class='menuItem'     @click.native.prevent="handleback">
             <i class="iconfont icon-lianjie"></i> <span slot="title" >连接管理</span>
-        </el-menu-item> 
+        </el-menu-item>  -->
         <!-- <el-menu-item  index="/TaskList" class='menuItem'>
             <i class="iconfont icon-task"></i> <span slot="title" >任务列表</span>
         </el-menu-item> -->
