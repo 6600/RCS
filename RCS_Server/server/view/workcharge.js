@@ -49,8 +49,8 @@ var UpdateTable=function (table,obj,id){
          });
          CollStr = CollStr.substring(0, CollStr.length - 1);  
          valStr = valStr.substring(0, valStr.length - 1);  
- 
-   let sql =`update `+table+` set ` +valStr + ` where TaskID ='`+id+`'`
+         
+   let sql =`update `+ table+` set ` +valStr + ` where TaskID ='`+id+`'`
  //   console.log(sql) 
       return dbHelper.execPromiseSelect(sql)   
    }

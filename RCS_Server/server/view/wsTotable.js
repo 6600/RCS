@@ -13,7 +13,7 @@ var UpdateTaskinfo = function(table, obj, id) {
 	// CollStr = CollStr.substring(0, CollStr.length - 1);  
 	valStr = valStr.substring(0, valStr.length - 1);
 
-	let sql = `update ` + table + `set` + valStr + `where TaskID = '`+id+`'`
+	let sql = `update ` + table + ` set ` + valStr + `where TaskID = '`+id+`'`
 	//   console.log('更新记录',sql) 
 	return dbHelper.execPromiseSelect(sql)
 }
@@ -54,8 +54,7 @@ var InsertWorktime = function(table, obj) {
 	CollStr = CollStr.substring(0, CollStr.length - 1);
 	valStr = valStr.substring(0, valStr.length - 1);
 
-	let sql = `DELETE FROM ${table} WHERE AGVID=${obj['AGVID']} and WorkDate=${obj['WorkDate']};
-	INSERT INTO ${table} (${CollStr}) VALUES(${valStr});`
+	let sql = `DELETE FROM ${table} WHERE AGVID='${obj['AGVID']}' and WorkDate='${obj['WorkDate']}';INSERT INTO ${table} (${CollStr}) VALUES(${valStr});`
 
 	// console.log('添加worktime',obj) 
 	return dbHelper.execPromiseSelect(sql)
