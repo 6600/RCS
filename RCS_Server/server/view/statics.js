@@ -70,7 +70,7 @@ var QueryStatics = function (start,end,type,daymon,limit){
 //查询稼动率 5  type :day,mon,根据日期，月份
 var QueryWorkPie = function (start,end){    //秒数转时分:SEC_TO_TIME,时分转秒数:TIME_TO_SEC
    let sql = `select AGVID,sum(AbnormalTime) as '异常时间',sum(NormalTime) as '正常时间',sum(NormalTime)/(sum(NormalTime)+sum(AbnormalTime))*100 as '稼动率'
-       from (SELECT AGVID,from_unixtime(WorkDate,'%Y-%m') as date,unix_timestamp(NormalWorkEndTime)-unix_timestamp(NormalWorkStartTime) as NormalTime, unix_timestamp(AbNormalWorkEndTime)-unix_timestamp(AbNormalWorkStartTime) as AbnormalTime  
+       from (SELECT AGVID,from_unixtime(WorkDate,'%Y-%m') as date,NormalWorkTotal as NormalTime, AbNormalWorkTotal as AbnormalTime  
       FROM agvworktime  WHERE WorkDate >='`+start+`' and WorkDate<='`+end+`') temp group by AGVID order by AGVID`;
    let param = [start,end]; 
 
@@ -85,8 +85,8 @@ var QueryWork =function (start,end,daymon,id,limit){
        grouby= item =='mon'?grouby="DATE_FORMAT(WorkDate,'%y-%m')":"DATE_FORMAT(WorkDate,'%y-%m-%d')" 
                          
    sql += `SELECT AGVID,'稼动率' as name,group_concat(date) as date,group_concat(稼动率) as val FROM (select AGVID,date,concat(round(NormalTime/sum(NormalTime+AbnormalTime)*100),'%') as '稼动率'
-   from (SELECT AGVID,unix_timestamp(NormalWorkEndTime)-unix_timestamp(NormalWorkStartTime) as NormalTime,
-  unix_timestamp(AbNormalWorkEndTime)-unix_timestamp(AbNormalWorkStartTime) as AbnormalTime ,`+grouby+` as date 
+   from (SELECT AGVID,NormalWorkTotal as NormalTime,
+    AbNormalWorkTotal as AbnormalTime ,`+grouby+` as date 
    FROM agvworktime  WHERE WorkDate >='`+start+`' and WorkDate<='`+end+`') temp GROUP BY AGVID,date order by AGVID,date) temp GROUP BY ANY_VALUE(AGVID);`;
 }) 
 
