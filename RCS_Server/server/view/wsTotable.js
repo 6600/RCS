@@ -53,7 +53,9 @@ var InsertWorktime = function(table, obj) {
 	});
 	CollStr = CollStr.substring(0, CollStr.length - 1);
 	valStr = valStr.substring(0, valStr.length - 1);
-	let sql = `REPLACE INTO ` + table + ` (` + CollStr + `) VALUES(` + valStr + `)`
+
+	let sql = `DELETE FROM ${table} WHERE AGVID=${obj['AGVID']} and WorkDate=${obj['WorkDate']};
+	INSERT INTO ${table} (${CollStr}) VALUES(${valStr});`
 
 	// console.log('添加worktime',obj) 
 	return dbHelper.execPromiseSelect(sql)
