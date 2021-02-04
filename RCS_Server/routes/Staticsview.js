@@ -63,6 +63,7 @@ function(req, res, next) {
 				})
 				//物料统计返回json结构拼接
 				resJson.ReturnData.push({
+					hide: true,
 					ID: '物料统计',
 					title: '物料统计',
 					type: 'matterStyle',

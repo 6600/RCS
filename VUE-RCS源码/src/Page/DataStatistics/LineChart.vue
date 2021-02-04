@@ -13,7 +13,6 @@
 </template>
 
 <script> 
-import    Panelborder                from  './Panelborder' 
 import    Lradio                     from  './Lradio' 
 //import    echarts                    from  'echarts/lib/echarts'
 import    piePatternSrc              from  '@/assets/js/base64.js' 
@@ -25,7 +24,6 @@ export default {
   name:'Linechart',
   props:['title','data','type','width'],
   components:{
-    Panelborder,
     Lradio
   },
   data(){
@@ -210,14 +208,6 @@ export default {
             type: 'bar',
             itemStyle: {
                  normal: {
-								 label: {
-							  	show: true, //开启显示
-									position: 'top', //在上方显示
-									textStyle: { //数值样式
-										color: 'black',
-							   	fontSize: 16
-									}
-								}
 							},
                 color: that.$echarts.graphic.LinearGradient(
                     0, 0, 0, 1,
@@ -343,30 +333,10 @@ app.config = {
      }; 
     }
 }; 
-   var labelOption = {
-    show: true,
-    position: app.config.position,
-    distance: app.config.distance,
-    align: app.config.align,
-    verticalAlign: app.config.verticalAlign,
-    //rotate: app.config.rotate,
-    formatter: function(v){
-        let  seriesName=v.seriesName;
-        let  value  =v.value; 
-         return value+'\n' +seriesName.split('').join('\n')+'\n'+' '+' ';    //文字垂直显示
-      },
-    fontSize: 16,
-    rich: {
-        name: {
-            textBorderColor: '#fff'
-        }
-    }
-};
    
    BarOption.series.forEach(item=>{
        item.type='bar'
        item.barGap= 0
-       item.label=labelOption
     })
 
 var option = {

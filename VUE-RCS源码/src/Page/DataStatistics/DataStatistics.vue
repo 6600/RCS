@@ -23,7 +23,7 @@
       <!--报错 component lists rendered with v-for should have explicit key  v-show = 'isFirstShow' -->
      <ul class="PieChart">  
          <li v-for="(item,idx) in StaticsData.slice(0,6)"  @click="PieSelect(item,idx)"  >  
-         <PieChart :ID='item.ID' :title='item.title' :index="idx"  :Piedata='item.pie' :type='item.type' @pageresponse='Pageonresize'>   </PieChart>   
+         <PieChart v-if="!item.hide" :ID='item.ID' :title='item.title' :index="idx"  :Piedata='item.pie' :type='item.type' @pageresponse='Pageonresize'>   </PieChart>   
         </li>    
      </ul>   
       <div class="LineChart">
