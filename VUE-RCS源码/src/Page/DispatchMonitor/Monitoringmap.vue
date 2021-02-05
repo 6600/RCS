@@ -204,15 +204,14 @@ export default {
                                             
        })
      },
-     Updateplace(data){                                    //根据老王传过来的值渲染         
+     Updateplace(data){                                    //根据老王传过来的值渲染
+      console.log('准备更新车库', data)      
        data.forEach(item=>{
         this.leafmap.placeicons.map((place,index)=>{ 
-          if(place.ID==item.ID){       
+          if(place.ID==item.Name){       
              console.log('更新车库',item,place)  
-            try{            
-              this.leafmap.UpdatePlace(item.Locked,place,this.type) 
-             }catch(err){ console.log(err) }  
-            } 
+            this.leafmap.UpdatePlace(item.Locked, place, this.type)  
+          } 
          })                                  
        })
      },

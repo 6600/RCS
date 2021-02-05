@@ -119,14 +119,15 @@ loadPlace:function(Place,Map,type){                      //加载库位
  
  },
 UpdatePlace:function(Locked,place,type){ 
-  console.log('更新渲染车库',place)
+  
   let icon  = L.divIcon({ 
     tooltipAnchor: [0, -5],
     popupAnchor: [75,40], 
     className:  Locked=="TRUE"?'PlaceLocked':'Place',
     iconSize:type=='Monitor'?20:10,
    // html:place.PlaceID
-}); 
+  });
+  console.log('更新渲染车库',place.ID, Locked)
   place.setIcon(icon) 
 },
 UpdatePath:function(Occupy,path){ 

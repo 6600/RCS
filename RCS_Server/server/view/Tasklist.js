@@ -9,11 +9,21 @@ import dbHelper from '../dbHelper/DBConnection'
         CollStr+=item+','
     });
     CollStr = CollStr.substring(0, CollStr.length - 1);  
-
-    AGVID      = AGVID=="全部"?``:`and AGVID='`+AGVID+`'`
+    console.log(AGVID)
+    if (AGVID.length == 1) {
+      if (AGVID[0] == "全部") {
+        AGVID = ''
+      } else {
+        AGVID = `and AGVID='${AGVID[0]}'`
+      }
+      
+    } else {
+      AGVID = "and (AGVID = '" + ['C2', 'c1', 'CE'].join("' or AGVID = '") + "') "
+    }
     StartPlace = StartPlace=="全部"?``:`and StartPlaceDescription='`+StartPlace+`'`
     EndPlace   = EndPlace=="全部"?``:`and EndPlaceDescription='`+EndPlace+`'`
     OrderID = OrderID ? `and OrderID='` + OrderID + `'` : ``
+    
     let param = AGVID + StartPlace + EndPlace + OrderID
     sql =`select  `+CollStr+` FROM taskinfo WHERE SetTime >='` + StartTime+`' and SetTime<='`+FinishTime+`' and TaskTypeName!='充电任务' `+param+` order by SetTime desc`
     console.log(sql)

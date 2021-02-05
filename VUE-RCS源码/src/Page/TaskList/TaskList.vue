@@ -513,7 +513,7 @@ import      HeaderList                                                          
          
       //pc端开始，结束时间 param
       this.axios.post('/queryTasklist',param).then(data=>{
-        this.currentPage = 0
+        this.currentPage = 1
       //console.log('统计数据返回:','开始时间  ',param.StartDateTime,'结束时间  ',param.EndDateTime);
       //console.log(data.data.ReturnData);
         console.log(`获取信息条数${data.data.ReturnData.length}`)
@@ -532,7 +532,7 @@ import      HeaderList                                                          
         EndPlaceDescription:this.EndPlace,
         OrderID: this.OrderID
       }                                       //console 调试技巧https://www.jb51.net/article/137114.htm
-      this.TaskListView=this.multiFilter(this.TaskList,filters) 
+      // this.TaskListView=this.multiFilter(this.TaskList,filters) 
       console.log(`设置信息条数${this.TaskListView.length}`)
       this.settotalCount(this.TaskListView.length)  
     }, 
