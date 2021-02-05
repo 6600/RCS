@@ -59,7 +59,7 @@ export default {
            <div><span>耗时:</span><span>`+ (task.UsedTime || '')+`</span></div>
            <div><span>状态:</span><span>`+ (task.CurrentOperateDescription || '') + `</span></div>
            <div><span>异常:</span><span>`+ (task.WarningStatus || '') +`</span></div>
-           <div><span>电量:</span><span>`+ ((task.PowerPercent + '%') || '') +`</span></div>
+           <div><span>电量:</span><span>`+ ((task.PowerPercent) || '') +`</span></div>
            </div>` 
       if(task.WarningStatus!=''&&agv.warn!=task.WarningStatus){ 
          that.$emit('warninfo',{info:task.WarningStatus,idx:this.mapIdx}) 
@@ -257,41 +257,43 @@ export default {
         }
 
       },
-     UpdateAGV(data){  
-      //  console.log('渲染AGVstatus:'); 
-      // console.log(data.ID+'X:',data.X,data.ID+'Y:',data.Y)
-        let markerUpdate = false 
-        this.leafmap.markicons.forEach((AGV,idx)=>{    // 
-      
-       if(AGV.ID==data.ID){   
-         if(this.infloor(data,'update')>=0){                                            //遍历此地图的小车，判断小车坐标是否在此地图内
-          let pointXY = L.point(parseInt(data.X), parseInt(data.Y));                                   ///将像素坐标转成lanlng坐标
-          let pointlatlng = this.Lmap.unproject(pointXY, this.Lmap.getMaxZoom()-1);
-           AGV.setLatLng(pointlatlng); 
-           AGV.setRotationAngle(-parseInt(data.Th))                                           //https://github.com/bbecquet/Leaflet.RotatedMarker
-          let pop = AGV.getPopup()
-            pop.setLatLng(pointlatlng)  
-            AGV.bindPopup(pop).openPopup()            
-         }else{  
-           this.leafmap.markicons.forEach((AGV,idx)=>{
-             if(AGV.ID==data.ID){
-               this.leafmap.markicons.splice(idx,1)
-            } 
-          })
-         // console.log(this.mapIdx,'楼的',AGV.ID,'小车','跑到其他楼层');                 //如果跑到其他楼层时，删除此楼层的小车图标
-          AGV.remove()   
-        }  
-           markerUpdate = true
-        }
+      UpdateAGV(data) {
+        console.log('渲染AGVstatus:');
+        console.log(data)
+        let markerUpdate = false
+        this.leafmap.markicons.forEach((AGV, idx) => {
+          console.log(AGV)
+          if (AGV.ID == data.ID) {
+            if (this.infloor(data, 'update') >= 0) { //遍历此地图的小车，判断小车坐标是否在此地图内
+              let pointXY = L.point(parseInt(data.X), parseInt(data.Y)); ///将像素坐标转成lanlng坐标
+              let pointlatlng = this.Lmap.unproject(pointXY, this.Lmap.getMaxZoom() - 1);
+              AGV.setLatLng(pointlatlng);
+              AGV.setRotationAngle(-parseInt(data.Th))
+              //https://github.com/bbecquet/Leaflet.RotatedMarker
+              let pop = AGV.getPopup()
+              pop.setLatLng(pointlatlng)
+              AGV._icon.setAttribute("status", data['WarningStatus'] || 0)
+              AGV.bindPopup(pop).openPopup()
+            } else {
+              this.leafmap.markicons.forEach((AGV, idx) => {
+                if (AGV.ID == data.ID) {
+                  this.leafmap.markicons.splice(idx, 1)
+                }
+              })
+              // console.log(this.mapIdx,'楼的',AGV.ID,'小车','跑到其他楼层');                 //如果跑到其他楼层时，删除此楼层的小车图标
+              AGV.remove()
+            }
+            markerUpdate = true
+          }
         })
-      if(!markerUpdate&&this.infloor(data,'update')>=0){                                 //地图上不存在
-         let obj=this.leafmap.loadMarker(parseInt(data.X),parseInt(data.Y),'AGV',data.ID) 
-       //  console.log(data.ID,'小车跑到',this.mapIdx);
-           this.marklayer=obj.marklayer  
-       } 
-        this.Lmap.stop()                                 //停止地图跟随marker移动 
- 
-     },
+        if (!markerUpdate && this.infloor(data, 'update') >= 0) { //地图上不存在
+          let obj = this.leafmap.loadMarker(parseInt(data.X), parseInt(data.Y), 'AGV', data.ID)
+          //  console.log(data.ID,'小车跑到',this.mapIdx);
+          this.marklayer = obj.marklayer
+        }
+        this.Lmap.stop() //停止地图跟随marker移动 
+      },
+
      UpdateTask(data){                                                                //更新任务状态 信息
         this.leafmap.markicons.forEach((agv,idx)=>{
          console.log('渲染pop',agv);

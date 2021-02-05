@@ -144,7 +144,7 @@ UpdateMark:function(type){             //更新 avg,电梯，升降支架状态�
 /**
 * 加载marker图标  x坐标，y坐标，类型：ele,agv,autodoor,num编号：用于path,idx
 */
-loadMarker:function(x, y, type,id) { 
+loadMarker:function(x, y, type, id) { 
   var myIcon   
   var myIcon = L.divIcon({ 
       tooltipAnchor: [0, -15],

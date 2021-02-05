@@ -33,7 +33,7 @@
         
         <div class="info"> 
           <!-- 调度控制台 -->
-        <ControlBoard></ControlBoard>                                
+        <!-- <ControlBoard></ControlBoard>                                 -->
        </div>
      </div> 
   </div> 

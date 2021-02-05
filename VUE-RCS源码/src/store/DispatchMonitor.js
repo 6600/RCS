@@ -1,4 +1,5 @@
 import {point, circle, segment }                                        from '@flatten-js/core';    //api:https://alexbol99.github.io/flatten-js/Segment.html       
+import Vue from 'vue';
 function infloor(mapRange,x,y){
   let index = 0
    mapRange.forEach((item,idx)=>{ 
@@ -254,9 +255,10 @@ export default {
        let idx = infloor(state.mapRang,place.X,place.Y)   
        state.PlaceCache[idx][place.ID] = place 
        state.floormap[idx]['place'].forEach((item,index)=>{
-        if(item.PlaceID==place.ID){
-         state.floormap[idx]['place'][index].Locked = place.Locked     
-         console.log('vuex收到PlaceStatus:',idx,index,state.floormap[idx]['place'][index].Locked, place.Locked );  
+        //  console.log(item.PlaceID, place)
+        if(item.PlaceID==place.Name){
+          Vue.set(state.floormap[idx]['place'][index], 'Locked', place.Locked)    
+          console.log('vuex收到PlaceStatus:',idx,index,state.floormap[idx]['place'][index].Locked, place.Locked );  
         }
       })
       }) 

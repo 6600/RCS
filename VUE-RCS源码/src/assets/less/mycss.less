@@ -19,6 +19,15 @@
   border-radius: 15px;
   background-size: 25px;
 }
+.AGV[status="0"] {
+  background-color: yellow;
+}
+.AGV[status="1"] {
+  background-color: green;
+}
+.AGV[status="2"] {
+  background-color: red;
+}
 .Place{
   width: 30px;height: 30px;
    border-radius: 30px;
@@ -40,9 +49,11 @@
    font-size:30px;
    font-weight:bold; 
 }
-.leaflet-pane .leaflet-map-pane{
+.map .leaflet-map-pane{
   overflow:hidden;
   transform: none !important;
+  width: 100%;
+  height: 100%;
 }
 .popup{
   margin:0 0;
