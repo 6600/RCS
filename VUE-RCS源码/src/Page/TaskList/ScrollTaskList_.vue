@@ -556,10 +556,10 @@ let doudata = {
           param = {
            StartDateTime:this.$moment().format("YYYY-MM-DD")+' 00:00:00',
            EndDateTime:this.$moment().format("YYYY-MM-DD")+' 24:00:00',
-           AGVID:'全部',
+           AGVID: this.AGVID,
            OrderID: this.OrderID ? this.OrderID : '',
-           StartPlace:'全部',
-           EndPlace:'全部',
+           StartPlace: this.StartPlace,
+           EndPlace: this.EndPlace,
            }  
        }   
        this.axios.post('/queryTasklist',param).then(data=>{

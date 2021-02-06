@@ -261,7 +261,6 @@ export default {
         console.log(data)
         let markerUpdate = false
         this.leafmap.markicons.forEach((AGV, idx) => {
-          console.log(AGV)
           if (AGV.ID == data.ID) {
             if (this.infloor(data, 'update') >= 0) { //遍历此地图的小车，判断小车坐标是否在此地图内
               let pointXY = L.point(parseInt(data.X), parseInt(data.Y)); ///将像素坐标转成lanlng坐标
@@ -271,6 +270,7 @@ export default {
               //https://github.com/bbecquet/Leaflet.RotatedMarker
               let pop = AGV.getPopup()
               pop.setLatLng(pointlatlng)
+              pop._container.setAttribute("status", data['WarningStatus'] || 0)
               AGV._icon.setAttribute("status", data['WarningStatus'] || 0)
               AGV.bindPopup(pop).openPopup()
             } else {

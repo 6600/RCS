@@ -30,7 +30,7 @@
       </ul>
       <ul class='section4'>
         <li>筐条码</li>
-        <li><span v-for="(value2,key2) in Task['MaterialIDs'].split(';')" :key="key2">{{value2}}</span></li>
+        <li><span v-for="(value2,key2) in (Task['MaterialIDs'] ? Task['MaterialIDs'].split(';') : [])" :key="key2">{{value2}}</span></li>
       </ul>
     </Panel> 
     <div class="chart">

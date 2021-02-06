@@ -450,21 +450,26 @@ import      HeaderList                                                          
      } 
     },
        // 单元格的 style 的回调方法
-    cellStyle({row, column, rowIndex, columnIndex}) {      
-    if (columnIndex == 12) { 
-       var m1 = this.$moment(row.StartTime);
-       var m2 = this.$moment(row.FinishTime); 
-       var m3 = row.TokenMaxTime  
-        m3!=null?m3=m3.split(':'):m3=[0,0]
-       var m3sec = m3[0]*60+m3[1]
-       var pre = 1
-       var Negative = m3sec - (m2.valueOf()-m1.valueOf()) 
-       if(Negative<0) return `color:#ff0000;` 
-       else   return ``
-         
-        } else {
-            return ''
-        } 
+    cellStyle({row, column, rowIndex, columnIndex}) {
+      if (columnIndex == 12) {
+        var m1 = this.$moment(row.StartTime);
+        var m2 = this.$moment(row.FinishTime);
+        var m3 = row.TokenMaxTime
+        m3 != null ? m3 = m3.split(':') : m3 = [0, 0]
+        var m3sec = m3[0] * 60 + m3[1]
+        var pre = 1
+        var Negative = m3sec - (m2.valueOf() - m1.valueOf())
+        if (Negative < 0) return `color: #ff0000;`
+        else return ``
+
+      } else if (columnIndex == 16) {
+        if (row.TokenOffset[0] != '-') {
+          return `color: #ff0000;`
+        }
+        return ``
+      } else {
+        return ''
+      }
     },
     TimeTableChange(TimeArr) {
        this.startime= this.getTimeformat(TimeArr[0])
@@ -506,8 +511,8 @@ import      HeaderList                                                          
            EndDateTime:endDateTime,
            OrderID: this.OrderID ? this.OrderID : '',
            AGVID: this.AGVID,
-           StartPlace:'全部',
-           EndPlace:'全部',
+           StartPlace: this.StartPlace,
+           EndPlace: this.EndPlace,
          }  
        } 
          

@@ -1,6 +1,16 @@
 
 import dbHelper from '../dbHelper/DBConnection'
 
+  function getOrStr (arrData, keyName) {
+    if (typeof arrData == 'string' || arrData.length < 1) {
+      arrData = ''
+    } else if (arrData.length == 1) {
+      arrData = `and AGVID='${AGVID[0]}'`
+    } else {
+      arrData = "and (AGVID = '" + arrData.join(`' or ${keyName} = '`) + "') "
+    }
+    return arrData
+  }
   //start 开始日期，end结束日期，type：需要分组的字段,daymon:根据天或月查询
   var queryTasklist =function (ColArr,StartTime,FinishTime,AGVID,StartPlace,EndPlace, OrderID){ 
     let sql =``
@@ -10,18 +20,9 @@ import dbHelper from '../dbHelper/DBConnection'
     });
     CollStr = CollStr.substring(0, CollStr.length - 1);  
     console.log(AGVID)
-    if (AGVID.length == 1) {
-      if (AGVID[0] == "全部") {
-        AGVID = ''
-      } else {
-        AGVID = `and AGVID='${AGVID[0]}'`
-      }
-      
-    } else {
-      AGVID = "and (AGVID = '" + ['C2', 'c1', 'CE'].join("' or AGVID = '") + "') "
-    }
-    StartPlace = StartPlace=="全部"?``:`and StartPlaceDescription='`+StartPlace+`'`
-    EndPlace   = EndPlace=="全部"?``:`and EndPlaceDescription='`+EndPlace+`'`
+    AGVID = getOrStr(AGVID, 'AGVID')
+    StartPlace = getOrStr(AGVID, 'StartPlaceDescription')
+    EndPlace   = getOrStr(AGVID, 'EndPlaceDescription')
     OrderID = OrderID ? `and OrderID='` + OrderID + `'` : ``
     
     let param = AGVID + StartPlace + EndPlace + OrderID
