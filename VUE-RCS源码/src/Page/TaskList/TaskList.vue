@@ -513,6 +513,7 @@ import      HeaderList                                                          
            AGVID: this.AGVID,
            StartPlace: this.StartPlace,
            EndPlace: this.EndPlace,
+           TaskStatusDescription: this.AGVStatus_
          }  
        } 
          
