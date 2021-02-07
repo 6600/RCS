@@ -5,16 +5,16 @@ var router = express.Router();
 //登录时的查询操作
 function queryuser(user){
   // 查询 用户的最后操作时间距离当前时间的小时
-  let sql = ` SELECT user,pass FROM user  WHERE user = ? `;
+  let sql = ` SELECT * FROM user  WHERE user = ? `;
   let param = [user];
   var res = ''
  return dbHelper.execPromiseSelect(sql,param)  
 }
 //注册时的查询操作
-function reguser(user,pass){
+function reguser(user,pass,phone){
   // 查询 用户的最后操作时间距离当前时间的小时
-  let sql = 'INSERT INTO user(user,pass) VALUES(?,?)';
-  let param = [user,pass];  
+  let sql = 'INSERT INTO user(user,pass,phone) VALUES(?,?,?)';
+  let param = [user,pass, phone];  
   return dbHelper.execPromiseSelect(sql,param) 
  
 }

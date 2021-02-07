@@ -14,6 +14,9 @@
            <el-form-item prop="user">
                <el-input type="text" v-model="ruleForm.user" autocomplete="off" placeholder="请输入用户名"></el-input>
            </el-form-item>
+           <el-form-item prop="phone">
+               <el-input type="text" v-model="ruleForm.phone" autocomplete="off" placeholder="请输入联系方式"></el-input>
+           </el-form-item>
            <el-form-item prop="pass">
                <el-input type="password" v-model="ruleForm.pass" autocomplete="off" placeholder="请输入密码"></el-input>
            </el-form-item>
@@ -71,6 +74,14 @@ export default {
           callback();
         }
       };
+
+      var validatePhone = (rule, value, callback) => {
+        if (value === '') {
+          callback(new Error('请输入联系方式'));
+        } else {
+          callback();
+        }
+      };
   // <!--二次验证密码-->
      var validatePass2 = (rule, value, callback) => {
         if (value === '') {
@@ -86,7 +97,8 @@ export default {
        fullscreenLoading: false,
         ruleForm:{
             user: '',
-				  	pass: '', 
+            pass: '', 
+            phone: '',
 				  	checkPass: '',
         },
         rules:{
@@ -99,6 +111,11 @@ export default {
                 { 
                 validator:validatePass,
                 maxlength:20,trigger:"blur"}
+            ],
+            phone:[
+                { 
+                validator:validatePhone,
+                maxlength:40,trigger:"blur"}
             ],
             checkPass:[
                 { 
@@ -127,7 +144,9 @@ export default {
       this.$refs[formName].validate(valid => {
         if (valid) { 
             this.axios.post('/reguser', {
-							user: this.ruleForm.user,pass: this.ruleForm.pass
+              user: this.ruleForm.user,
+              pass: this.ruleForm.pass,
+              phone: this.ruleForm.phone
 						}).then(res=>{
                if(res.data.code == 20000){  
                  
