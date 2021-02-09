@@ -478,18 +478,21 @@ let doudata = {
     },
      // 单元格的 style 的回调方法 
      
-    rowStyle({row, column, rowIndex, columnIndex}) {              //超时标红显示动效
-     if(row.TokenOffset!=null){ 
-     if(row.TokenOffset.indexOf('-')<0&&row.TokenOffset.indexOf(':')>=0){
-       this.$nextTick(() => {  
-      this.tween.fromTo('.tweenrow'+rowIndex,.5,{backgroundColor:'#ffffff',color:'#ff0000'},{backgroundColor:'#ff0000',color:'#ffffff'})  
-     })         
-    }else{
-    this.$nextTick(() => {  
-         this.tween.killTweensOf('.tweenrow'+rowIndex ) 
-     })   
-       return {backgroundColor:'#ffffff',color:'#000000'}
-    }  } 
+    rowStyle({row, column, rowIndex, columnIndex}) { //超时标红显示动效
+      if (row.TokenOffset != null) {
+        console.log(row.TokenOffset)
+        if (row.TokenOffset.indexOf('-') < 0 && row.TokenOffset.indexOf(':') >= 0) {
+          this.$nextTick(() => {
+            this.tween.fromTo('.tweenrow' + rowIndex, .5, {backgroundColor: '#ffffff',color: '#ff0000'},
+            {backgroundColor: '#ff0000', color: '#ffffff'})
+          })
+        } else {
+          this.$nextTick(() => {
+            this.tween.killTweensOf('.tweenrow' + rowIndex)
+          })
+          return {backgroundColor: '#ffffff', color: '#000000'}
+        }
+      }
     },
     // 单元格的 style 的回调方法
     cellStyle({row, column, rowIndex, columnIndex}) {      

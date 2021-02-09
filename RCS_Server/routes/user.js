@@ -57,7 +57,8 @@ router.post('/reguser',function(req,res){
    
   var user=req.body.user;
   var pass=req.body.pass;
-  reguser(user,pass).then(data=>{
+  var phone = req.body.phone;
+  reguser(user, pass, phone).then( data => {
     data!=null?res.send({ok:true,code:20000}):res.send({ok:false,code:500})
   })  
 });
