@@ -82,6 +82,7 @@
        <af-table-column  prop="StartTime"  label="开始时间"   align="center"         width="120"  >                       </af-table-column>
        <af-table-column  prop="FinishTime"  label="完成时间"   align="center"         width="120"  >                       </af-table-column>
        <af-table-column  prop="LabelNumber"        label="资安标签"   align="center" width="50">                     </af-table-column>
+       <af-table-column  prop="PrintNum"  label="打印"   align="center"         width="80"  >                       </af-table-column>
        <af-table-column  prop="TaskTypeName"       label="任务类型" width="120" align="center">                  </af-table-column>
        <af-table-column  prop="TokenStartTime"     label="出岗时间"       align="center"     width="160">        </af-table-column>
        <af-table-column  prop="TokenFinishTime"    label="到岗时间"       align="center"     width="160">        </af-table-column>
@@ -148,7 +149,14 @@ import      mPicker                                                             
     set:function (v){  
       this.$store.state.TaskList.FinishTime = v
     }
+  },
+  PrintNum:{
+    get:function (){   return this.$store.state.TaskList.PrintNum   },
+    set:function (v){  
+      this.$store.state.TaskList.PrintNum = v
+    }
   }, 
+  
     getTimeformat(val){
       return function(val){
         var d = new Date(val);  

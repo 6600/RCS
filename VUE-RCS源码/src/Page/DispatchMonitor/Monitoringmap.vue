@@ -54,6 +54,7 @@ export default {
    returnTask(task,agv){
      let that  = this
      return function(task,agv){
+       console.log(task)
        var str = `<div class="status-${task.MovingStatus || 0}" style="width: 180px; font-size:14px;font-weight:bold;" id="popup">
            <div><span>任务:</span><span>`+ (task.TaskTypeName || '') +`</span></div>
            <div><span>耗时:</span><span>`+ (task.UsedTime || '')+`</span></div>
@@ -270,8 +271,8 @@ export default {
               //https://github.com/bbecquet/Leaflet.RotatedMarker
               let pop = AGV.getPopup()
               pop.setLatLng(pointlatlng)
-              pop._container.setAttribute("status", data['WarningStatus'] || 0)
-              AGV._icon.setAttribute("status", data['WarningStatus'] || 0)
+              pop._container.setAttribute("status", data['MovingStatus'] || 0)
+              AGV._icon.setAttribute("status", data['MovingStatus'] || 0)
               AGV.bindPopup(pop).openPopup()
             } else {
               this.leafmap.markicons.forEach((AGV, idx) => {

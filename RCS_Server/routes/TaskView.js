@@ -49,7 +49,7 @@ router.post('/queryTasklist', function (req, res, next) {
     var TaskStatusDescription    =req.body.TaskStatusDescription; 
     console.log(StarTime,EndTime)
     //promise 执行查询序列：总共9条查询：
-    var  ColArr     = ['TaskID','AGVID', 'TaskStatus','TaskStatusDescription','TaskTypeName','Number', 'OrderID', 'StartTime', 'FinishTime', 'Unit' , 'StartPlaceDescription','EndPlaceDescription','TokenStartTime','TokenFinishTime','LabelNumber','TokenUseTime','TokenOffset','TokenMaxTime','CancelCurrentTask', 'MaterialIDs'] 
+    var  ColArr     = ['TaskID','AGVID', 'TaskStatus','TaskStatusDescription','TaskTypeName','Number', 'OrderID', 'StartTime', 'FinishTime', 'Unit' , 'StartPlaceDescription','EndPlaceDescription','TokenStartTime','TokenFinishTime','LabelNumber','TokenUseTime','TokenOffset','TokenMaxTime','CancelCurrentTask', 'MaterialIDs', 'PrintNum'] 
     Tasklist.queryTasklist(ColArr,StarTime,EndTime,AGVID,StartPlace,EndPlace, OrderID, TaskStatusDescription).then( data=>{
       console.log(`查询到数据条数: ${data.length}`)
       resJson.ReturnData = data 

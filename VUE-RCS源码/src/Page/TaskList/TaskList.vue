@@ -74,6 +74,7 @@
        <af-table-column  prop="OrderID"  label="工单号"   align="center"         width="80"  >                       </af-table-column>
        <af-table-column  prop="StartTime"  label="开始时间"   align="center"         width="120"  >                       </af-table-column>
        <af-table-column  prop="FinishTime"  label="完成时间"   align="center"         width="120"  >                       </af-table-column>
+       <af-table-column  prop="PrintNum"  label="打印"   align="center"         width="80"  >                       </af-table-column>
        <af-table-column  prop="TaskStatusDescription"   label="状态" align="center" width="80">                  </af-table-column>  
        <af-table-column  prop="Number" label="数量"     align="center" width="50">                               </af-table-column> 
        <af-table-column  prop="Unit"   label="单位"     align="center" width="50">                               </af-table-column> 
@@ -152,6 +153,12 @@ import      HeaderList                                                          
     get:function (){   return this.$store.state.TaskList.FinishTime   },
     set:function (v){  
       this.$store.state.TaskList.FinishTime = v
+    }
+  },
+  PrintNum:{
+    get:function (){   return this.$store.state.TaskList.PrintNum   },
+    set:function (v){  
+      this.$store.state.TaskList.PrintNum = v
     }
   },
     StartPlace:{
@@ -451,18 +458,7 @@ import      HeaderList                                                          
     },
        // 单元格的 style 的回调方法
     cellStyle({row, column, rowIndex, columnIndex}) {
-      if (columnIndex == 12) {
-        var m1 = this.$moment(row.StartTime);
-        var m2 = this.$moment(row.FinishTime);
-        var m3 = row.TokenMaxTime
-        m3 != null ? m3 = m3.split(':') : m3 = [0, 0]
-        var m3sec = m3[0] * 60 + m3[1]
-        var pre = 1
-        var Negative = m3sec - (m2.valueOf() - m1.valueOf())
-        if (Negative < 0) return `color: #ff0000;`
-        else return ``
-
-      } else if (columnIndex == 16) {
+      if (columnIndex == 16) {
         if (row.TokenOffset[0] != '-') {
           return `color: #ff0000;`
         }
