@@ -47,12 +47,15 @@ import dbHelper from '../dbHelper/DBConnection'
   //  console.log(sql);
    return dbHelper.execPromiseSelect(sql)
   }
+  var print = function (id) {
+    return dbHelper.execPromiseSelect(`UPDATE taskinfo SET PrintNum = IF(PrintNum, PrintNum + 1, 1) WHERE TaskID = '${id}';`)
+  }
 
  let tasklist = { 
   queryTasklist:queryTasklist,
   QueryTaskID:QueryTaskID,
   DeleteTaskID:DeleteTaskID,
- 
+  print: print
 };
   
  export default tasklist;

@@ -85,7 +85,7 @@
        <af-table-column  prop="TokenUseTime"            label="出入岗时间"    align="center"   width="120">            </af-table-column> 
        <af-table-column  prop="TokenMaxTime"            label="规定时间"      align="center"   width="80" >            </af-table-column>  
        <af-table-column  prop="TokenOffset"             label="差异"          align="center"   width="90" >            </af-table-column>  
-       <af-table-column  prop="CancelCurrentTask"       label="取消"          align="center"   width="90" >            </af-table-column>  
+       <af-table-column  prop="CancelCurrentTask"       label="取消"          align="center"   width="90" >            </af-table-column>
        <!-- <el-table-column  prop="AGVID" :formatter="comment"  label="备注"  align="center" width="100">             </el-table-column>   -->
    </el-table> 
     <el-pagination background layout="prev, pager, next"   

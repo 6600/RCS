@@ -24,6 +24,19 @@ router.post('/QueryTaskID', function (req, res, next) {
 		next(error);
 	}
 });
+
+router.post('/print', function (req, res, next) {
+	try {
+    console.log(`打印: ${req.body.TaskID}`)
+    var TaskID       =req.body.TaskID;
+    
+     Tasklist.print(TaskID)
+	} catch (error) {
+		logger.error(error);
+		next(error);
+	}
+});
+
 router.post('/queryTasklist', function (req, res, next) {
   var resJson = new ResJson() 
 	try {
