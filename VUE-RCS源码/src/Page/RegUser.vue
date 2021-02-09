@@ -188,7 +188,7 @@ export default {
     .reg-form {
       top:140px;
       width:270px;
-      height: 400px;
+      height: 460px;
       position:absolute;
       border: 1px solid #e5e5e5;
       background-color: #fff;
