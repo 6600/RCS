@@ -9,6 +9,7 @@
         <!-- <li v-for="(value,key) in label[0]"><span class='labelname'>{{value}}</span><span class='value'>{{Task[key]}}</span></li> -->
       <!-- </ul> -->
       <div class="paneltop">
+          <div class="section1">  <span class='labelname'>打印任务</span>   <button @click="dayin">打印</button></div>
           <div class="section1">  <span class='labelname'>任务ID</span>   <span class='value'>{{Task['TaskID']}}</span>        </div>
           <div class="section1">  <span class='labelname'>任务类别</span> <span class='value'>{{Task['TaskTypeName']}}</span>  </div> 
           <div class="section1">  <span class='labelname'>任务状态</span> <el-tag size= 'medium ' :type="TypeStatus(Task.TaskStatusDescription)" class='value'>{{Task['TaskStatusDescription']}}</el-tag></div> 
@@ -29,7 +30,7 @@
         <li v-for="(value,key) in label[2]"><span class='labelname'>{{value}}</span><span class='value'>{{Task[key]}}</span></li>
       </ul>
       <ul class='section4'>
-        <li>筐条码</li>
+        <li>筐条码列表</li>
         <li><span v-for="(value2,key2) in (Task['MaterialIDs'] ? Task['MaterialIDs'].split(';') : [])" :key="key2">{{value2}}</span></li>
       </ul>
     </Panel> 
@@ -81,7 +82,9 @@ import      {mapState,mapActions,mapMutations}                                  
   computed:{
        //VueX状态管理Module的使用 mapState:https://www.jianshu.com/p/0b42a876561e 
     ...mapState( {  
-       label:     state      => state.TaskList.label,   
+       label:     state      => state.TaskList.label,
+       username:  state  =>state.user.username,
+       phone:  state  =>state.user.phone,
     }),  
     TypeStatus(val){
     return function(val){ 
@@ -146,7 +149,35 @@ import      {mapState,mapActions,mapMutations}                                  
      Taskreturn(){
        this.$router.back()
      },
-
+     dayin: function () {
+       function fake_click(obj) {
+            var ev = document.createEvent("MouseEvents");
+            ev.initMouseEvent(
+                "click", true, false, window, 0, 0, 0, 0, 0
+                , false, false, false, false, 0, null
+                );
+            obj.dispatchEvent(ev);
+        }
+        function download(name, data) {
+          var urlObject = window.URL || window.webkitURL || window;
+      
+          var downloadData = new Blob([data]);
+      
+          var save_link = document.createElementNS("http://www.w3.org/1999/xhtml", "a")
+          save_link.href = urlObject.createObjectURL(downloadData);
+          save_link.download = name;
+          fake_click(save_link);
+        }
+        download(this.Task['TaskID'] + '.txt', JSON.stringify({
+          username: this.username,
+          phone: this.phone,
+          TaskID: this.Task['TaskID'],
+          TaskTypeName: this.Task['TaskTypeName'],
+          StartPlaceDescription: this.Task['StartPlaceDescription'],
+          EndPlaceDescription: this.Task['EndPlaceDescription']
+        }))
+        this.axios.post('/print', {'TaskID':TaskID})
+     },
      Taskinit(data){
        this.Task = data
       //this.initChart()
