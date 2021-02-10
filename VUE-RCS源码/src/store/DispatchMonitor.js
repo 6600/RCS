@@ -237,17 +237,18 @@ export default {
     },
     setEdgeStatus(state,data){    
       state.EdgeStatus = data 
+      console.log(data)
       data.forEach(path=>{      
-      let idx = infloor(state.mapRang,path.X,path.Y) 
-      state.EdgeCache[idx][path.ID] = path
-      state.floormap[idx]['path'].forEach((item,index)=>{
-        if(item.ID==path.ID){
-          state.floormap[idx]['path'][index].Occupy = path.Occupy  
-          console.log('vuex收到EdgeStatus:',idx,index,state.floormap[idx]['path'][index].Occupy, path.Occupy);  
-        }
-      })
-    }) 
-   },
+        let idx = infloor(state.mapRang,path.X,path.Y) 
+        state.EdgeCache[idx][path.ID] = path
+        state.floormap[idx]['path'].forEach((item,index)=>{
+          if(item.ID==path.ID){
+            state.floormap[idx]['path'][index].Occupy = path.Occupy  
+            console.log('vuex收到EdgeStatus:',idx,index,state.floormap[idx]['path'][index].Occupy, path.Occupy);  
+          }
+        })
+      }) 
+    },
  
     setPlaceStatus(state,data){  
       state.PlaceStatus = data       

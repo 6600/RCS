@@ -63,7 +63,7 @@ export default {
            <div><span>电量:</span><span>`+ ((task.PowerPercent) || '') +`</span></div>
            </div>` 
       if(task.WarningStatus!=''&&agv.warn!=task.WarningStatus){ 
-         that.$emit('warninfo',{info:task.WarningStatus,idx:this.mapIdx}) 
+         that.$emit('warninfo',{info:`小车${task.AGVID} ${task.WarningStatus} ${task.WarningStatus}`,idx:this.mapIdx}) 
           agv.warn = task.WarningStatus
 
       }else{
@@ -210,7 +210,7 @@ export default {
        data.forEach(item=>{
         this.leafmap.placeicons.map((place,index)=>{ 
           if(place.ID==item.Name){       
-             console.log('更新车库',item,place)  
+            //  console.log('更新车库',item,place)  
             this.leafmap.UpdatePlace(item.Locked, place, this.type)  
           } 
          })                                  

@@ -24,7 +24,7 @@ import dbHelper from '../dbHelper/DBConnection'
     StartPlace = getOrStr(StartPlace, 'StartPlaceDescription')
     EndPlace   = getOrStr(EndPlace, 'EndPlaceDescription')
     TaskStatusDescription = getOrStr(TaskStatusDescription, 'TaskStatusDescription')
-    OrderID = OrderID ? `and OrderID='` + OrderID + `'` : ``
+    OrderID = OrderID ? `and OrderID like '%${OrderID}%'` : ``
     
     let param = AGVID + StartPlace + EndPlace + OrderID + TaskStatusDescription
     sql =`select  `+CollStr+` FROM taskinfo WHERE SetTime >='` + StartTime+`' and SetTime<='`+FinishTime+`' and TaskTypeName!='充电任务' `+param+` order by SetTime desc`

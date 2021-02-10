@@ -77,10 +77,11 @@ loadPaths:function(Paths,Map){                      //加载路径
 　　　　"weight": 5,　　　　//线宽
 　　　　"opacity": 0.5,　　//透明度
 　　　　"color": "#BDBDFF",　//颜色
-　　　　"pulseColor":path.Occupy=="TRUE"?'#0A00FF':"#FF0000" 　　//块颜色
+　　　　"pulseColor":"0A00FF" 　　//块颜色
 　　  });
      pathlay.ID = path.ID
-     //console.log("pathid",pathlay.ID)
+     console.log("path",pathlay)
+     pathlay._animatedPathClass = `leaflet-ant-path path-item-${path.ID}`
     layer.addLayer(pathlay).addTo(this.map);  
     this.pathicons.push(pathlay)  
   })    
@@ -130,14 +131,14 @@ UpdatePlace:function(Locked,place,type){
   console.log('更新渲染车库',place.ID, Locked)
   place.setIcon(icon) 
 },
-UpdatePath:function(Occupy,path){ 
-   path.options.pulseColor ="#BDBDFF"
-   path.setStyle({ 
-    　　 "color": "#BDBDFF",　//颜色
-    　　 "pulseColor":Occupy=="TRUE"?'#0A00FF':"#FF0000" 　　//块颜色
-   })
-  // Occupy=="FALSE"?'#0A00FF':"#FF0000"
-   path.redraw() 
+UpdatePath:function(Occupy,path){
+  
+  console.log('尝试更新路径颜色!', path._animatedPathId, Occupy)
+  if (Occupy=="TRUE") {
+    document.querySelector('.thumbContain').querySelector(`.${path._animatedPathId}`).classList.add('active')
+  } else {
+    document.querySelector('.thumbContain').querySelector(`.${path._animatedPathId}`).classList.remove('active')
+  }
 },
 UpdateMark:function(type){             //更新 avg,电梯，升降支架状态，自动门，库位状态，充电桩状态
    

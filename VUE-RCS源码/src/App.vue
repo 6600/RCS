@@ -57,4 +57,7 @@ body {
   height: 100%;
   overflow: auto;
 }
+.leaflet-ant-path.active {
+  stroke: #ff0000;
+}
 </style>

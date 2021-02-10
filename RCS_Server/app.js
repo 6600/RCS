@@ -82,6 +82,6 @@ if(cluster.isMaster){
     });
 }else{
     httpsServer.listen(conf.httpsPort);
-    httpServer.listen(conf.httpPort) 
+    httpServer.listen(conf.httpPort)
 }
  
