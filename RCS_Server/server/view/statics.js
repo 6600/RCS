@@ -5,7 +5,7 @@ var QueryOrderPie = function (start,end,type,obj){
    let sql =`` ,param = [start,end]; 
   if(type!=null){
     type.split(',').forEach(item=>{
-      sql +=  ` SELECT count(TaskID) as 'count',`+item+` FROM taskinfo  WHERE date(SetTime) >='`+start+`'&&date(SetTime)<='`+end+`'&&TaskTypeName!='充电任务' group by `+item+`;`
+      sql +=  ` SELECT count(TaskID) as 'count',`+item+` FROM taskinfo  WHERE date(SetTime) >='`+start+`'&&date(SetTime)<='`+end+`'&&TaskTypeName not like '%充电%' group by `+item+`;`
    })
   } 
 
@@ -20,7 +20,7 @@ var QueryOrder =function (start,end,type,daymon,limit){
     let grouby= item =='mon'?grouby="DATE_FORMAT(SetTime,'%y-%m')":"DATE_FORMAT(SetTime,'%y-%m-%d')"
       sql +=` select `+type+`, group_concat(date) as date, group_concat(count) as count from
              (SELECT `+type+`,`+grouby+` as date,count(TaskTypeName) as 'count' 
-            FROM taskinfo  WHERE date(SetTime) >='`+start+`'&&date(SetTime)<='`+end+`'&&TaskTypeName!='充电任务'
+            FROM taskinfo  WHERE date(SetTime) >='`+start+`'&&date(SetTime)<='`+end+`'&&TaskTypeName not like '%充电%'
             group by `+type+`,`+ grouby+` order by date) temp group by `+type+` order by ANY_VALUE(temp.date);` 
   })
   }  
@@ -42,7 +42,7 @@ var QueryStaticsPie = function (start,end,type){
           FROM 
           taskinfo  a JOIN mysql.help_topic  b
           WHERE 
-          b.help_topic_id < LENGTH(a.MaterialID)-LENGTH(REPLACE(a.MaterialID,';',''))+1&&date(SetTime) >='`+start+`'&&date(SetTime)<='`+end+`'&&TaskTypeName!='充电任务'&&MaterialID!='') temp GROUP BY MaterialID;`
+          b.help_topic_id < LENGTH(a.MaterialID)-LENGTH(REPLACE(a.MaterialID,';',''))+1&&date(SetTime) >='`+start+`'&&date(SetTime)<='`+end+`'&&TaskTypeName not like '%充电%' &&MaterialID!='') temp GROUP BY MaterialID;`
         }
    })
  }

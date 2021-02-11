@@ -356,6 +356,7 @@ import      mPicker                                                             
            }  
        }else{
           param = {
+            name: "now",
            StartDateTime:this.$moment().format("YYYY-MM-DD")+' 00:00:00',
            EndDateTime:this.$moment().format("YYYY-MM-DD")+' 24:00:00',
            AGVID:this.AGVID,
