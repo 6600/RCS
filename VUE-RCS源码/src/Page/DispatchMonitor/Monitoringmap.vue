@@ -62,8 +62,8 @@ export default {
            <div><span>异常:</span><span>`+ (task.WarningStatus || '') +`</span></div>
            <div><span>电量:</span><span>`+ ((task.PowerPercent) || '') +`</span></div>
            </div>` 
-      if(task.WarningStatus!=''&&agv.warn!=task.WarningStatus){ 
-         that.$emit('warninfo',{info:`小车${task.AGVID} ${task.WarningStatus} ${task.WarningStatus}`,idx:this.mapIdx}) 
+      if(task.WarningStatus!=''){ 
+         that.$emit('warninfo',{info:`${task.WarningStatus}， 小车${task.AGVID}`,idx:this.mapIdx}) 
           agv.warn = task.WarningStatus
 
       }else{
@@ -87,7 +87,8 @@ export default {
       })
     },
     Updatetask(newV,oldV){
-      let data = JSON.parse(newV)      
+      let data = JSON.parse(newV)
+      console.log('sdsd')
       data.forEach(item=>{
          this.UpdateTask(item)
       })
@@ -122,7 +123,7 @@ export default {
    mounted() { 
 
     var obj = {
-        minZoom: 5,
+        minZoom: 10,
         maxZoom: 15,
         center: [0, 0], 
         zoomControl:this.type=='Monitor'?true:false,
@@ -132,9 +133,9 @@ export default {
         attributionControl: false, 
         transparent:true
       }
-     this.type=="Monitor"?obj.zoom=12.5:obj.zoomSnap=12.3
+     this.type=="Monitor"?obj.zoom=13.3:obj.zoomSnap=12.6
      var zoom =  12.39
-     this.type=="Monitor"?zoom=12.5:zoom=12.3
+     this.type=="Monitor"?zoom=13.3:zoom=12.6
      this.Lmap = L.map(this.$el,obj).setView([51.495, -0.075],zoom);  
      this.Lmap.stop()
      this.InitMap() 
@@ -313,7 +314,7 @@ export default {
 .map { 
   z-index: 0;
   width: 100%;
-  height: 40rem;
+  height: 100%;
   pointer-events: none;
 }
 

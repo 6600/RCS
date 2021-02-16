@@ -433,9 +433,43 @@ import      mPicker                                                             
       Taskemail(){ 
         this.$router.push({path:'/Taskemail'  })   
       },
-      TaskDetail(row, column, event){ 
+      TaskDetail(row, column, event){
+        if (column.label == '打印') {
+          this.dayin(row)
+          return
+        }
         this.$router.push({path:'/TaskDetail',query:{TaskID: row.TaskID,AGVID:row.AGVID,TaskStatus:row.TaskStatus}})
       },
+      dayin: function (rowData) {
+       function fake_click(obj) {
+            var ev = document.createEvent("MouseEvents");
+            ev.initMouseEvent(
+                "click", true, false, window, 0, 0, 0, 0, 0
+                , false, false, false, false, 0, null
+                );
+            obj.dispatchEvent(ev);
+        }
+        function download(name, data) {
+          var urlObject = window.URL || window.webkitURL || window;
+      
+          var downloadData = new Blob([data]);
+      
+          var save_link = document.createElementNS("http://www.w3.org/1999/xhtml", "a")
+          save_link.href = urlObject.createObjectURL(downloadData);
+          save_link.download = name;
+          fake_click(save_link);
+        }
+        console.log(this.user)
+        download(rowData['TaskID'] + '.txt', JSON.stringify({
+          username: this.user.username,
+          phone: this.user.phone,
+          TaskID: rowData['TaskID'],
+          TaskTypeName: rowData['TaskTypeName'],
+          StartPlaceDescription: rowData['StartPlaceDescription'],
+          EndPlaceDescription: rowData['EndPlaceDescription']
+        }))
+        this.axios.post('/print', {'TaskID':rowData['TaskID']})
+     },
       //自动播放效果
       Picker(val){   this.mpopupVisible = val  },
       confirm(val){   this.mint[this.mpopupVisible]= val  },

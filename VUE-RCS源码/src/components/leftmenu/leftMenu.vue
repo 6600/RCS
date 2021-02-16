@@ -7,32 +7,25 @@
         <!-- <el-menu-item  index="/homepage" class='menuItem'>
             <i class="el-icon-menu"></i>  <span slot="title" >首页</span>
         </el-menu-item> -->
-        <el-menu-item  index="/DispatchMonitor" class='menuItem'     @click.native.prevent="handleback">
+        <el-menu-item  index="/DispatchMonitor" class='menuItem' >
             <i class="iconfont icon-jiankong"></i> <span slot="title" >调度监控</span>
         </el-menu-item>
-        <!-- <el-menu-item  index="/Connections"     class='menuItem'     @click.native.prevent="handleback">
+        <!-- <el-menu-item  index="/Connections"     class='menuItem' >
             <i class="iconfont icon-lianjie"></i> <span slot="title" >连接管理</span>
         </el-menu-item>  -->
         <!-- <el-menu-item  index="/TaskList" class='menuItem'>
             <i class="iconfont icon-task"></i> <span slot="title" >任务列表</span>
         </el-menu-item> -->
      
-        <el-menu-item  index="/DataStatistics" class='menuItem'      @click.native.prevent="handleback">  
+        <el-menu-item  index="/DataStatistics" class='menuItem' >  
             <i class="iconfont icon-kujialeqiyezhan_shujutongji"></i> <span slot="title" >数据统计</span> 
         </el-menu-item>
         <el-menu-item  index="/TaskList"       class='menuItem'>
-            <i class="iconfont icon-task"></i> <span slot="title" >任务列表</span>
+            <i class="iconfont icon-task"></i> <span slot="title" >历史查询</span>
         </el-menu-item>
-        <el-submenu    index='/TaskList' id='elsubmenu'>
-        <template slot="title" >
-          <i class="iconfont icon-task"></i>
-          <span>任务列表</span>
-        </template>
-        <el-menu-item-group>
-          <el-menu-item index="/TaskList"       @click.native.prevent="handleback">> 历史查询</el-menu-item>
-          <el-menu-item index="/ScrollTaskList" @click.native.prevent="handleback">> 实时任务</el-menu-item>
-        </el-menu-item-group>
-      </el-submenu>
+        <el-menu-item  index="/ScrollTaskList"       class='menuItem'>
+            <i class="iconfont icon-task"></i> <span slot="title" >实时任务</span>
+        </el-menu-item>
     </el-menu>
 </div>
 </template>
@@ -52,11 +45,6 @@ export default {
     onLoad(){
     },
     methods: {
-        handleback(key, keyPath) {     
-          this.isCollapse = false
-          this.$('#elsubmenu .el-menu').css({'display':'none','over-flow':'auto'}) 
-          this.$('#elsubmenu .el-menu')
-        }, 
         enter(){
             this.isCollapse=false;
         },
@@ -76,7 +64,6 @@ div .del-menu-vertical-demo{
     font-size: 18px;
 }
 #app .el-menu{
-    border-radius:0 25px 0 0;
     height:100%;
 }
 .el-submenu__title{
@@ -87,6 +74,6 @@ div .del-menu-vertical-demo{
 }
 .el-tooltip{padding:0 10px!important;}
 .menuItem{
-  height:50px;top:40px;padding-left:10px!important;
+  height:50px;top:40px;
 }
 </style>

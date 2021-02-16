@@ -33,7 +33,7 @@ router.post('/login',function(req,res){
         if(users['pass']!=pass){
           res.send({ok:false,msg:"密码错误"});
         }else{
-          res.send({ok:true,msg:"登陆成功"});
+          res.send({ok:true,msg:"登陆成功",phone:users['phone']});
         } } 
    }) 
    

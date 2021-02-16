@@ -228,7 +228,11 @@ export default {
           // console.log('C1.X:',state.AGV1.X,'C1.Y:',state.AGV1.Y,'C2.X',state.AGV2.X,'C2.Y:',state.AGV2.Y)
           // console.log('AGV1.Y:',state.AGV1.Y,'AGV2.Y:',state.AGV2.Y,'AGV3.Y:',state.AGV3.Y,'AGV4.Y:',state.AGV4.Y)
       }else if(data.RequestType == 'UpdateAGVTaskStatus'){          //更新AGV任务状态
-          state.Updatetask = JSON.stringify(data.List)          
+        state.Updatetask = '[]'
+        setTimeout(() => {
+          Vue.set(state, 'Updatetask', JSON.stringify(data.List))  
+        }, 0);
+                
        //   data.List.forEach(item=>{ 
        //     // console.log('接受到 agvtaskinfo',state.Updatetask) 
        //      state.Avgtask[item.AGVID] = item 

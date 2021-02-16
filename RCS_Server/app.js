@@ -68,6 +68,10 @@ app.use(function(err, req, res, next) {
 });
 /***************************cluster -- begin********************************/
 if(cluster.isMaster){
+    console.log('启动WebSocket!')
+    require('babel-register');
+    require('babel-core').transform();
+    require('./websocket/socket/wsocket.js');
     for(let i=0;i<cpuNums;i++){    //根据cpu核数加载线程
         cluster.fork();
     }
@@ -80,7 +84,7 @@ if(cluster.isMaster){
     cluster.on('online',(worker)=>{
          console.log(`线程${worker.id} is online now`)
     });
-}else{
+} else{
     httpsServer.listen(conf.httpsPort);
     httpServer.listen(conf.httpPort)
 }

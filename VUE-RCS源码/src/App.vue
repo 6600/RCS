@@ -33,7 +33,7 @@ body {
   font-family: 'PingFang SC', "Helvetica Neue", Helvetica, "microsoft yahei", arial, STHeiTi, sans-serif;
 }
  .page{
-   width: 94%;
+   width: 100%;
    height:100%;   
    }
    ul{
@@ -57,7 +57,16 @@ body {
   height: 100%;
   overflow: auto;
 }
+.panel .el-col-24 {
+  overflow: auto;
+}
 .leaflet-ant-path.active {
   stroke: #ff0000;
+}
+.Monitor {
+  height: 100%;
+}
+.main .leaflet-container {
+  background: white;
 }
 </style>

@@ -45,7 +45,7 @@
         </el-col>
     </el-col>
     <el-col :span="18" class="panel-center" >
-        <aside class="w-140 ovf-hd">
+        <aside class="w-40 ovf-hd">
             <LeftMenu class="leftmenu" ></LeftMenu>   
         </aside>
         <section class="panel">
@@ -297,20 +297,34 @@ export default {
       cursor:default;
        position:absolute;
        top:20px;  }
-    .leftmenu{ 
-      top:105px;
-      width:120px;
-      left:0px;
+    .leftmenu{
+      width: 40px;
+      left: 0;
       height: 100%;
-      z-index: 999; 
+      z-index: 999;
+      overflow: hidden;
+      position: absolute;
+      transition: width 0.5s;
      }
     .panel{ 
-      width: calc(100% - 120px);
+      width: calc(100% - 40px);
     }
     .foot{
        height:80px; 
        width:100%;
     }
+}
+.leftmenu .el-menu {
+  width: 120px;
+}
+.leftmenu .el-menu-item {
+  padding: 0 !important;
+}
+.w-40.ovf-hd {
+  width: 40px;
+}
+.w-40.ovf-hd:hover .leftmenu {
+  width: 120px;
 }
 .floorGroup{
   width:1000px; 
@@ -368,5 +382,11 @@ export default {
 .mintfloor{
   text-align: center;
   margin-top:20px;
+}
+.menuItem .iconfont {
+  display: inline-block;
+  width: 40px;
+  text-align: center;
+  font-size: 29px;
 }
 </style>

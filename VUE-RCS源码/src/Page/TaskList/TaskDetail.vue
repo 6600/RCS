@@ -9,7 +9,6 @@
         <!-- <li v-for="(value,key) in label[0]"><span class='labelname'>{{value}}</span><span class='value'>{{Task[key]}}</span></li> -->
       <!-- </ul> -->
       <div class="paneltop">
-          <div class="section1">  <span class='labelname'>打印任务</span>   <button @click="dayin">打印</button></div>
           <div class="section1">  <span class='labelname'>任务ID</span>   <span class='value'>{{Task['TaskID']}}</span>        </div>
           <div class="section1">  <span class='labelname'>任务类别</span> <span class='value'>{{Task['TaskTypeName']}}</span>  </div> 
           <div class="section1">  <span class='labelname'>任务状态</span> <el-tag size= 'medium ' :type="TypeStatus(Task.TaskStatusDescription)" class='value'>{{Task['TaskStatusDescription']}}</el-tag></div> 
@@ -148,35 +147,6 @@ import      {mapState,mapActions,mapMutations}                                  
       },
      Taskreturn(){
        this.$router.back()
-     },
-     dayin: function () {
-       function fake_click(obj) {
-            var ev = document.createEvent("MouseEvents");
-            ev.initMouseEvent(
-                "click", true, false, window, 0, 0, 0, 0, 0
-                , false, false, false, false, 0, null
-                );
-            obj.dispatchEvent(ev);
-        }
-        function download(name, data) {
-          var urlObject = window.URL || window.webkitURL || window;
-      
-          var downloadData = new Blob([data]);
-      
-          var save_link = document.createElementNS("http://www.w3.org/1999/xhtml", "a")
-          save_link.href = urlObject.createObjectURL(downloadData);
-          save_link.download = name;
-          fake_click(save_link);
-        }
-        download(this.Task['TaskID'] + '.txt', JSON.stringify({
-          username: this.username,
-          phone: this.phone,
-          TaskID: this.Task['TaskID'],
-          TaskTypeName: this.Task['TaskTypeName'],
-          StartPlaceDescription: this.Task['StartPlaceDescription'],
-          EndPlaceDescription: this.Task['EndPlaceDescription']
-        }))
-        this.axios.post('/print', {'TaskID':TaskID})
      },
      Taskinit(data){
        this.Task = data

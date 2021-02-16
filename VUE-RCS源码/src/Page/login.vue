@@ -118,7 +118,7 @@ export default {
     },
       handleSubmit(formName){                 
             this.loading=true  
-            this.USER_LOGIN(this.ruleForm1.username) 
+            
            this.$refs[formName].validate(valid => {
              let user = this.ruleForm1.username
              let pass = this.ruleForm1.password
@@ -134,7 +134,10 @@ export default {
                  pass:pass
                  }).then((res)=>{
                  if(res.data.ok== true){
-                     
+                     this.USER_LOGIN({
+                       username: this.ruleForm1.username,
+                       phone: res.data.phone
+                     }) 
                   this.loading=false
                   this.$message({
                       message:res.data.msg,

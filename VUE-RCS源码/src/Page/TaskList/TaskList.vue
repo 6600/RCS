@@ -123,7 +123,8 @@ import      HeaderList                                                          
        Start_Option: state      => state.TaskList.Start_Option,    
        End_Option:   state      => state.TaskList.End_Option,   
        label:        state      => state.TaskList.label,   
-       keylabel:     state      => state.TaskList.keylabel
+       keylabel:     state      => state.TaskList.keylabel,
+       user:  state  =>state.user,
   }),  
     TimeRange:{ 
      get:function(){   return this.$store.state.TaskList.TimeRange   },
@@ -570,13 +571,45 @@ import      HeaderList                                                          
        this.$refs[val].open();
        },
      TaskDetail(row, column, event){
-      //let Task = this.TaskList.find(task=>{
-      //  return task.TaskID = row.TaskID
-      //})
+       console.log(row, column)
+       if (column.label == '打印') {
+         this.dayin(row)
+         return
+       }
         this.$router.push({path:'/TaskDetail',query:{TaskID: row.TaskID,AGVID:row.AGVID,TaskStatus:row.TaskStatus}})
       }, 
     formatJson(filterVal,jsonData){
      	return jsonData.map(v=>filterVal.map(j=>v[j]))
+     },
+     dayin: function (rowData) {
+       function fake_click(obj) {
+            var ev = document.createEvent("MouseEvents");
+            ev.initMouseEvent(
+                "click", true, false, window, 0, 0, 0, 0, 0
+                , false, false, false, false, 0, null
+                );
+            obj.dispatchEvent(ev);
+        }
+        function download(name, data) {
+          var urlObject = window.URL || window.webkitURL || window;
+      
+          var downloadData = new Blob([data]);
+      
+          var save_link = document.createElementNS("http://www.w3.org/1999/xhtml", "a")
+          save_link.href = urlObject.createObjectURL(downloadData);
+          save_link.download = name;
+          fake_click(save_link);
+        }
+        console.log(this.user)
+        download(rowData['TaskID'] + '.txt', JSON.stringify({
+          username: this.user.username,
+          phone: this.user.phone,
+          TaskID: rowData['TaskID'],
+          TaskTypeName: rowData['TaskTypeName'],
+          StartPlaceDescription: rowData['StartPlaceDescription'],
+          EndPlaceDescription: rowData['EndPlaceDescription']
+        }))
+        this.axios.post('/print', {'TaskID':rowData['TaskID']})
      },
     exportexcel(){
         let array = this.TaskList

@@ -153,7 +153,10 @@ export default {
                  this.fullscreenLoading = true;
                  setTimeout(() => {
                    this.fullscreenLoading = false;
-                   this.USER_LOGIN(this.ruleForm.user)  
+                   this.USER_LOGIN({
+                       username: this.ruleForm.username,
+                       phone: phone
+                     }) 
                    this.$router.replace({path:'/ScrollTaskList'  }) 
                 }, 2000);
                 

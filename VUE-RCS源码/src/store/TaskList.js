@@ -106,26 +106,8 @@ export default {
     SOCKET_UpdateTask(state,data){              //根据后端传来的rcs数据添加更新即时任务列表 
       data.forEach((item)=>{
       var index = -1
+      state.UpdateTask = ''
       state.UpdateTask = item
-  //    if(item.TokenOffset.indexOf('-')>=0){ 
-  //      window.Notification.requestPermission();                     //弹出https://blog.csdn.net/my_study_everyday/article/details/86530907
-      //  console.log('任务超时',item); 
-//
-  //      if (window.Notification) {
-  //        //	检查通讯许可
-  //        //if (window.Notification.checkPermission() == 0) {
-  //          // 创建通讯 
-  //        console.log(window.Notification);
-  //         var notification = new Notification('任务超时', {
-  //          body: 'TaskID:'+item.TaskID+'超时'+item.TokenOffset,
-  //          requireInteraction:true                           //不自动关闭  https://www.cnblogs.com/zhangycun/p/10410445.html
-  //          });
-  //          notification.onclick = function(event) { 
-  //          window.focus()                                      //页面成为当前窗体
-  //          }  
-  //      }  
-  //    }     
-     // console.log('vuex updatetask',item);
 
       state.ScrollTask.filter((val,idx)=>{                   //查询更新数据
         if(item.TaskID == val.TaskID){

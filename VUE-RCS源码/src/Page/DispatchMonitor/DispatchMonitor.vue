@@ -11,7 +11,7 @@
              :MapIdx='flooridx' 
              type='Monitor'
              width='100%'
-             height="40rem"
+             height="100%"
              v-on:warninfo='updatewarninfo'
              >
              </Monitoringmap>   
@@ -25,7 +25,7 @@
             :MapIdx='idx' 
             type="thumb"
             width='100%'
-            height="26.5rem"
+            height="100%"
             >
             </Monitoringmap>   
            </li>
@@ -139,15 +139,14 @@ import      Monitoringmap                                               from './
 
 <style lang='less' scoped>
  .page{
-   width: 96%;
+   width: 100%;
    height:100%; 
    .leftask{
     width: 30%;
    }
    .main{ 
-     width: 96%;
-     margin-top:12px; 
-     height:auto;  
+     width: 100%;
+     height:100%;  
     
    .info{
     width: 97%;
@@ -158,13 +157,13 @@ import      Monitoringmap                                               from './
    .thumbContain{
      display:flex;
      flex-wrap:wrap; 
-     width:90%;      
+     width:100%;
+     height: 100%;      
      background:#ddd;
      li{                                //地图宽高比2432x1334    
        position:relative; 
-       margin:5px 5px;
-       height:auto;
-       width:49%;
+       width: 50%;
+        height: 50%;
        flex-flow: column; 
        overflow: hidden;
       

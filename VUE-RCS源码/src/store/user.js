@@ -13,13 +13,14 @@ export const USER_LOGOUT='USER_LOGOUT'
   //
 export default {
     state:{
-      username:''
+      username:'',
+      phone: ''
     },
     mutations:{
-        [USER_LOGIN](state,user){
-          console.log(user);
-          state.username = user 
-           
+        [USER_LOGIN](state,userInfo){
+          console.log(userInfo);
+          state.username = userInfo.username 
+          state.phone = userInfo.phone 
         },
         [USER_LOGOUT](state){
            }

@@ -3,7 +3,7 @@
     
     <el-menu  background-color="#003c79"
     text-color="#fff" router 
-    style="border-radius:0 25px 0 0;height:100%;"
+    style="height:100%;"
      :collapse="isCollapse" mode="vertical">
      <div style="top:20px; height:20px;"></div>
         <el-menu-item index="1">
