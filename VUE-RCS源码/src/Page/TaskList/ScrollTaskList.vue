@@ -125,7 +125,8 @@ import      mPicker                                                             
        AGV_Option:state         => state.TaskList.AGV_Option,    
        Status_Option:state      => state.TaskList.Status_Option,    
        Start_Option:state       => state.TaskList.Start_Option,    
-       End_Option:state         => state.TaskList.End_Option,    
+       End_Option:state         => state.TaskList.End_Option,
+       user:state         => state.user,
   }),
    AGVStatus:{
      get:function (){   return this.$store.state.TaskList.AGVStatus   },

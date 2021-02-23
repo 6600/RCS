@@ -62,7 +62,7 @@ var QueryStatics = function (start,end,type,daymon,limit){
               SUBSTRING_INDEX(SUBSTRING_INDEX(task.MaterialNum,';',b.help_topic_id+1),';',-1) AS MaterialNum 
               FROM  taskinfo task JOIN mysql.help_topic b  WHERE
               (help_topic_id < LENGTH(task.`+type+`)-LENGTH(REPLACE(task.`+type+`,';',''))+1)&&(date(task.SetTime)>='`+start+`'&&date(task.SetTime)<='`+end+`'&&task.MaterialID!='') 
-        order by SetTime) temp GROUP BY `+grouby+`,`+type+` order by `+grouby+`) tempd GROUP BY MaterialID;`
+        order by SetTime) temp GROUP BY SetTime,`+type+` order by `+grouby+`) tempd GROUP BY SetTime, MaterialID;`
   }) 
   //console.log('物料趋势查询： ',sql )
   return dbHelper.execPromiseSelect(sql)
@@ -84,8 +84,8 @@ var QueryWork =function (start,end,daymon,id,limit){
        daymon.split(',').forEach(item=>{  
        grouby= item =='mon'?grouby="DATE_FORMAT(WorkDate,'%y-%m')":"DATE_FORMAT(WorkDate,'%y-%m-%d')" 
                          
-   sql += `SELECT AGVID,'稼动率' as name,group_concat(date) as date,group_concat(稼动率) as val FROM (select AGVID,date,concat(round(NormalTime/sum(NormalTime+AbnormalTime)*100),'%') as '稼动率'
-   from (SELECT AGVID,NormalWorkTotal as NormalTime,
+   sql += `SELECT ANY_VALUE(AGVID),'稼动率' as name,group_concat(date) as date,group_concat(稼动率) as val FROM (select AGVID,date,concat(round(NormalTime/sum(NormalTime+AbnormalTime)*100),'%') as '稼动率'
+   from (SELECT AGVID,ANY_VALUE(NormalWorkTotal) as NormalTime,
     AbNormalWorkTotal as AbnormalTime ,`+grouby+` as date 
    FROM agvworktime  WHERE WorkDate >='`+start+`' and WorkDate<='`+end+`') temp GROUP BY AGVID,date order by AGVID,date) temp GROUP BY ANY_VALUE(AGVID);`;
 }) 
@@ -95,15 +95,15 @@ var QueryWork =function (start,end,daymon,id,limit){
 }
 //查询充电状况
 var QueryCharge =function (start,end){ 
-  let sql = ` SELECT ID,count(ID) as '充电次数',SEC_TO_TIME(unix_timestamp(StopChargeTime)-unix_timestamp(StartChargeTime))as '充电时长'
-      FROM agvcharge  WHERE date(StartChargeTime) >=?&&date(StartChargeTime)<=? GROUP BY ID order by StartChargeTime `;
+  let sql = ` SELECT ID,count(ID) as '充电次数',SEC_TO_TIME(unix_timestamp(ANY_VALUE(StopChargeTime))-unix_timestamp(ANY_VALUE(StartChargeTime)))as '充电时长'
+      FROM agvcharge  WHERE date(StartChargeTime) >=?&&date(StartChargeTime)<=? GROUP BY ID order by ANY_VALUE(StartChargeTime) `;
   let param = [start,end];
   
  return dbHelper.execPromiseSelect(sql,param)  
 } 
 var QueryCharCount =function (start,end){ 
-  let sql = ` SELECT ID,count(ID) as '充电次数',SEC_TO_TIME(unix_timestamp(StopChargeTime)-unix_timestamp(StartChargeTime))as '充电时长'
-      FROM agvcharge  WHERE date(StartChargeTime) >=?&&date(StartChargeTime)<=? GROUP BY ID order by StartChargeTime `;
+  let sql = ` SELECT ID,count(ID) as '充电次数',SEC_TO_TIME(unix_timestamp(ANY_VALUE(StopChargeTime))-unix_timestamp(ANY_VALUE(StartChargeTime)))as '充电时长'
+      FROM agvcharge  WHERE date(StartChargeTime) >=?&&date(StartChargeTime)<=? GROUP BY ID order by ANY_VALUE(StartChargeTime) `;
   let param = [start,end];
   
  return dbHelper.execPromiseSelect(sql,param)  
