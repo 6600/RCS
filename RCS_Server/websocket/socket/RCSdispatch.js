@@ -2,6 +2,7 @@
 import  wsTotable                             from '../../server/view/wsTotable' 
 import  tasklist                              from '../../server/view/Tasklist' 
 import  nodemails                             from '../../server/view/nodemails'  
+import  config                                from '../../assets/config/config'
 var logger = require('../../assets/log4js').logger;
 
 let emails = ''
@@ -20,6 +21,19 @@ emails=emails.substring(0,emails.length-1)
  */
 function RCSdispatch(context,data){
   data = JSON.parse(data)   
+  // 特殊位置的小车
+  if (data.RequestType == 'UpdateAGVStatus') {
+    data.List.forEach(element => {
+      if (config.specialArea[element.ID]) {
+        const temp = config.specialArea[element.ID]
+        console.log(temp, parseInt(element.X), parseInt(element.Y))
+        if (((temp[0] < parseInt(element.X)) && (parseInt(element.X) < temp[1])) && ((temp[2] < parseInt(element.Y)) && (parseInt(element.Y) < temp[3]))) {
+          console.log(`特殊位置的小车: ${element}`)
+          element.special = true
+        }
+      }
+    });
+  }
   //转发除了AGVworktime,AGVcharge的其他即时信息到页面端
   if(typeof(data.RequestType)!='undefined'){ 
     if(data.RequestType != 'UpdateAGVWorkTime'&&data.RequestType!='UpdateAGVChargeStatus'){    //这个是不存在下面项的判断，也就是说indexof为-1时可进行socket.brocast类型的传输 // 1,3,4,12,13 //13

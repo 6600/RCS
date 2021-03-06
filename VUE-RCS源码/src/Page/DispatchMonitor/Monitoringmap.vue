@@ -245,7 +245,7 @@ export default {
             let lastAGVstatus = JSON.parse(this.AGVstatus)
               lastAGVstatus.forEach((AGV)=>{          // 每次选择不同地图加载小车上次坐标 
             if(this.infloor(AGV,'update')>=0){
-              console.log('初始化AGV',AGV.ID);
+              console.log('初始化AGV信息',AGV);
                let obj=this.leafmap.loadMarker(parseInt(AGV.X),parseInt(AGV.Y),"AGV",AGV.ID) 
               this.marklayer=obj.marklayer
               this.markicons=obj.markicons 
@@ -273,6 +273,11 @@ export default {
               let pop = AGV.getPopup()
               pop.setLatLng(pointlatlng)
               pop._container.setAttribute("status", data['MovingStatus'] || 0)
+              if (data.special) {
+                pop._container.classList.add('special')
+              } else {
+                pop._container.classList.remove('special')
+              }
               AGV._icon.setAttribute("status", data['MovingStatus'] || 0)
               AGV.bindPopup(pop).openPopup()
             } else {
@@ -288,7 +293,7 @@ export default {
           }
         })
         if (!markerUpdate && this.infloor(data, 'update') >= 0) { //地图上不存在
-          let obj = this.leafmap.loadMarker(parseInt(data.X), parseInt(data.Y), 'AGV', data.ID)
+          let obj = this.leafmap.loadMarker(parseInt(data.X), parseInt(data.Y), 'AGV', data.ID, data.special)
           //  console.log(data.ID,'小车跑到',this.mapIdx);
           this.marklayer = obj.marklayer
         }
@@ -301,8 +306,8 @@ export default {
            if(agv.ID==data.AGVID){    
             console.log('更新小车任务   ');  
             let pop = agv.getPopup()
-              pop.setContent(this.returnTask(data,agv)) 
-              agv.bindPopup(pop).openPopup() 
+            pop.setContent(this.returnTask(data,agv)) 
+            agv.bindPopup(pop).openPopup() 
           } 
         })
      }

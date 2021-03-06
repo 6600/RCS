@@ -84,7 +84,7 @@ var QueryWork =function (start,end,daymon,id,limit){
        daymon.split(',').forEach(item=>{  
        grouby= item =='mon'?grouby="DATE_FORMAT(WorkDate,'%y-%m')":"DATE_FORMAT(WorkDate,'%y-%m-%d')" 
                          
-   sql += `SELECT ANY_VALUE(AGVID),'稼动率' as name,group_concat(date) as date,group_concat(稼动率) as val FROM (select AGVID,date,concat(round(NormalTime/sum(NormalTime+AbnormalTime)*100),'%') as '稼动率'
+   sql += `SELECT ANY_VALUE(AGVID),'稼动率' as name,group_concat(date) as date,group_concat(稼动率) as val FROM (select AGVID,date,ANY_VALUE(concat(round(ANY_VALUE(NormalTime)/sum(ANY_VALUE(NormalTime)+AbnormalTime)*100),'%')) as '稼动率'
    from (SELECT AGVID,ANY_VALUE(NormalWorkTotal) as NormalTime,
     AbNormalWorkTotal as AbnormalTime ,`+grouby+` as date 
    FROM agvworktime  WHERE WorkDate >='`+start+`' and WorkDate<='`+end+`') temp GROUP BY AGVID,date order by AGVID,date) temp GROUP BY ANY_VALUE(AGVID);`;

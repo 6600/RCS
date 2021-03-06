@@ -32,10 +32,11 @@ let processRequest = function( req, res ) {
 //}
 //const server = new WebSocket.Server({ server: app });                  //启用https
  
+
 const server = new WebSocket.Server({ port: '8212' });       
 let ip           
 let port        
-let clientName         
+let clientName
 let Datacacha = {'UpdatePlaceStatus':{"":""},'UpdateEdgeStatus':{"":""}}    
 server.on('connection', function connection(ws, req) {
    ip         = req.connection.remoteAddress;
@@ -50,7 +51,7 @@ server.on('connection', function connection(ws, req) {
      Object.keys(Datacacha[item]).forEach(val=>{
        List.push(Datacacha[item][val])
      })
-      ws.send(JSON.stringify({RequestType:item,List:List}));
+      ws.send(JSON.stringify({RequestType:item, List:List}));
    //  logger.info('[socket][connection]发送数据给:'+clientName+'');
 
    })

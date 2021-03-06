@@ -16,7 +16,9 @@ const conf = Object.freeze({
     httpsPort:8211,
     httpPort:8210,
     socketPort:8212,
-   
+    specialArea: {
+        C1: [2550,2650,2450,2550]
+    }
 });
 
 export default conf;
