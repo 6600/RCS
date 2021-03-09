@@ -56,12 +56,13 @@ export default {
      return function(task,agv){
        console.log(task)
        var str = `<div class="status-${task.MovingStatus || 0}" style="width: 180px; font-size:14px;font-weight:bold;" id="popup">
-           <div><span>任务:</span><span>`+ (task.TaskTypeName || '') +`</span></div>
-           <div><span>耗时:</span><span>`+ (task.UsedTime || '')+`</span></div>
-           <div><span>状态:</span><span>`+ (task.CurrentOperateDescription || '') + `</span></div>
-           <div><span>异常:</span><span>`+ (task.WarningStatus || '') +`</span></div>
-           <div><span>电量:</span><span>`+ ((task.PowerPercent) || '') +`</span></div>
-           </div>` 
+          <div class="xiaoche-id"><span>小车ID:</span><span>`+ (task.AGVID) +`</span></div>
+          <div><span>任务:</span><span>`+ (task.TaskTypeName || '') +`</span></div>
+          <div><span>耗时:</span><span>`+ (task.UsedTime || '')+`</span></div>
+          <div><span>状态:</span><span>`+ (task.CurrentOperateDescription || '') + `</span></div>
+          <div><span>异常:</span><span>`+ (task.WarningStatus || '') +`</span></div>
+          <div><span>电量:</span><span>`+ ((task.PowerPercent) || '') +`</span></div>
+        </div>` 
       if(task.WarningStatus!=''){ 
          that.$emit('warninfo',{info:`${task.WarningStatus}， 小车${task.AGVID}`,idx:this.mapIdx}) 
           agv.warn = task.WarningStatus
