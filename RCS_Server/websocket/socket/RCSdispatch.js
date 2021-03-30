@@ -26,10 +26,11 @@ function RCSdispatch(context,data){
     data.List.forEach(element => {
       if (config.specialArea[element.ID]) {
         const temp = config.specialArea[element.ID]
-        console.log(temp, parseInt(element.X), parseInt(element.Y))
+        // console.log(temp, parseInt(element.X), parseInt(element.Y))
         if (((temp[0] < parseInt(element.X)) && (parseInt(element.X) < temp[1])) && ((temp[2] < parseInt(element.Y)) && (parseInt(element.Y) < temp[3]))) {
           console.log(`特殊位置的小车: ${element}`)
           element.special = true
+          element.specialValue = [temp[4], temp[5]]
         }
       }
     });

@@ -17,7 +17,7 @@ const conf = Object.freeze({
     httpPort:8210,
     socketPort:8212,
     specialArea: {
-        C1: [2550,2650,2450,2550]
+        C1: [2550,2650,2450,2850,0,0]
     }
 });
 

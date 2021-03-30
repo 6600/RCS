@@ -152,7 +152,6 @@ export default {
         //} 
           })         
        })
-     
      },    
      methods:{
        ...mapMutations(['setAvgtask','setAvg','setfloormark','setPathOccupy','setPile','setAutoDoor','setPlaceLocked']),  
@@ -275,7 +274,12 @@ export default {
               pop.setLatLng(pointlatlng)
               pop._container.setAttribute("status", data['MovingStatus'] || 0)
               if (data.special) {
+                console.log(pop._container)
                 pop._container.classList.add('special')
+                setTimeout(() => {
+                  pop._container.style.left = data.specialValue[0] + 'px'
+                  pop._container.style.bottom = data.specialValue[1] + 'px'
+                }, 500);
               } else {
                 pop._container.classList.remove('special')
               }
