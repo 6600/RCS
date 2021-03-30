@@ -276,12 +276,17 @@ export default {
               if (data.special) {
                 console.log(pop._container)
                 pop._container.classList.add('special')
+                pop._container.classList.remove('no-special')
                 setTimeout(() => {
                   pop._container.style.left = data.specialValue[0] + 'px'
                   pop._container.style.bottom = data.specialValue[1] + 'px'
                 }, 500);
               } else {
+                setTimeout(() => {
+                  pop._container.style.bottom = '100%'
+                }, 0);
                 pop._container.classList.remove('special')
+                pop._container.classList.add('no-special')
               }
               AGV._icon.setAttribute("status", data['MovingStatus'] || 0)
               AGV.bindPopup(pop).openPopup()
