@@ -612,12 +612,11 @@ import      HeaderList                                                          
         this.axios.post('/print', {'TaskID':rowData['TaskID']})
      },
     exportexcel(){
-        let array = this.TaskList
+      let array = this.TaskList.slice((this.currentPage-1) * this.PageSize, this.currentPage * this.PageSize)
        import ('../../assets/js/excelOut.js').then(excel=>{
-        const tHeader=['任务ID','任务类别','任务状态','小车ID','资安数量','数量','单位','开始位置','结束位置','出岗时间','入岗时间','任务用时','最大用时'
-                     ,'差异任务','取消'];//表头
+        const tHeader=['任务号','编号', '工单号', '开始时间', '结束时间','状态', '数量', '单位', '资安标签', '起终位置','任务类型','出岗时间','到岗时间','出入岗时间','规定时间','差异','取消'];//表头
 				const title=['任务列表',''];//标题(要和表头列数相等)
-        const filterVal=['TaskID','TaskTypeName','TaskStatusDescription','AGVID','LabelNumber','Number','Unit','StartPlaceDescription','EndPlaceDescription','TokenStartTime','TokenFinishTime','TokenUseTime','TokenMaxTime',
+        const filterVal=['TaskID','AGVID', 'OrderID', 'StartTime', 'FinishTime', 'TaskStatusDescription', 'Number', 'Unit', 'LabelNumber','StartPlaceDescription','TaskTypeName','TokenStartTime','TokenFinishTime','TokenUseTime','TokenMaxTime',
         'TokenOffset','CancelCurrentTask'];//表头对应字段
 				const list =array;
         const data = this.formatJson(filterVal,list);
@@ -629,7 +628,7 @@ import      HeaderList                                                          
         })
         let that = this
         let filename = this.$moment(this.TimeRange[0]).format('YYYY/MM/DD')+"-"+ this.$moment(this.TimeRange[1]).format('YYYY/MM/DD')
-				const merges=['A1:E1'];//合并单元格
+				const merges=['A1:Q1'];//合并单元格
 				excel.export_json_to_excel({
 					title:title,
 					header:tHeader,
