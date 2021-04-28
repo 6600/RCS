@@ -79,7 +79,8 @@
        <af-table-column  prop="Number" label="数量"     align="center" width="50">                               </af-table-column> 
        <af-table-column  prop="Unit"   label="单位"     align="center" width="50">                               </af-table-column> 
        <af-table-column  prop="LabelNumber"             label="资安标签"          align="center  " width="50">   </af-table-column> 
-       <af-table-column  prop="StartPlaceDescription"  :formatter="StartEndPlace"  label="起终位置"      align="center"   width="175">    </af-table-column> 
+       <af-table-column  prop="StartPlaceDescription"   label="起始位置"      align="center"   width="175">    </af-table-column>
+       <af-table-column  prop="EndPlaceDescription"   label="中止位置"      align="center"   width="175">    </af-table-column> 
        <af-table-column  prop="TaskTypeName"            label="任务类型"      align="center"   width="120" >           </af-table-column> 
        <af-table-column  prop="TokenStartTime"          label="出岗时间"      align="center"   width="160">            </af-table-column> 
        <af-table-column  prop="TokenFinishTime"         label="到岗时间"      align="center"   width="160">            </af-table-column> 
@@ -444,23 +445,33 @@ import      HeaderList                                                          
         return 'tweenrow'+rowIndex
       },
     rowStyle({row, column, rowIndex, columnIndex}) {              //超时标红显示动效
-     if(row.TokenOffset!=null){ 
-       if(row.TokenOffset.indexOf('-')<0&&row.TokenOffset.indexOf(':')>=0){
-         this.$nextTick(() => {  
-        this.tween.fromTo('.tweenrow'+rowIndex,.5,{backgroundColor:'#ffffff',color:'#ff0000'},{backgroundColor:'#ff0000',color:'#ffffff'})  
-       })         
-      }else{
-      this.$nextTick(() => {  
-           this.tween.killTweensOf('.tweenrow'+rowIndex ) 
-       })   
-         return {backgroundColor:'#ffffff',color:'#000000'}
-      } 
-     } 
+      if (row.TokenOffset != null) {
+        if (row.TokenOffset.indexOf('-') < 0 && row.TokenOffset.indexOf(':') >= 0) {
+          this.$nextTick(() => {
+            this.tween.killTweensOf('.tweenrow' + rowIndex)
+          })
+          return {
+            backgroundColor: '#ffffff',
+            color: '#000000'
+          }
+        } else {
+          this.$nextTick(() => {
+            this.tween.fromTo('.tweenrow' + rowIndex, .5, {
+              backgroundColor: '#ffffff',
+              color: '#ff0000'
+            },
+            {
+              backgroundColor: '#ff0000',
+              color: '#ffffff'
+            })
+          })
+        }
+      }
     },
        // 单元格的 style 的回调方法
     cellStyle({row, column, rowIndex, columnIndex}) {
       if (columnIndex == 16) {
-        if (row.TokenOffset[0] != '-') {
+        if (row.TokenOffset[0] == '-') {
           return `color: #ff0000;`
         }
         return ``
@@ -614,9 +625,9 @@ import      HeaderList                                                          
     exportexcel(){
       let array = this.TaskList.slice((this.currentPage-1) * this.PageSize, this.currentPage * this.PageSize)
        import ('../../assets/js/excelOut.js').then(excel=>{
-        const tHeader=['任务号','编号', '工单号', '开始时间', '结束时间','状态', '数量', '单位', '资安标签', '起终位置','任务类型','出岗时间','到岗时间','出入岗时间','规定时间','差异','取消'];//表头
+        const tHeader=['任务号','编号', '工单号', '开始时间', '结束时间','状态', '数量', '单位', '资安标签', '起始位置', '中止位置', '任务类型','出岗时间','到岗时间','出入岗时间','规定时间','差异','取消'];//表头
 				const title=['任务列表',''];//标题(要和表头列数相等)
-        const filterVal=['TaskID','AGVID', 'OrderID', 'StartTime', 'FinishTime', 'TaskStatusDescription', 'Number', 'Unit', 'LabelNumber','StartPlaceDescription','TaskTypeName','TokenStartTime','TokenFinishTime','TokenUseTime','TokenMaxTime',
+        const filterVal=['TaskID','AGVID', 'OrderID', 'StartTime', 'FinishTime', 'TaskStatusDescription', 'Number', 'Unit', 'LabelNumber','StartPlaceDescription', 'EndPlaceDescription', 'TaskTypeName','TokenStartTime','TokenFinishTime','TokenUseTime','TokenMaxTime',
         'TokenOffset','CancelCurrentTask'];//表头对应字段
 				const list =array;
         const data = this.formatJson(filterVal,list);
