@@ -446,7 +446,7 @@ import      HeaderList                                                          
       },
     rowStyle({row, column, rowIndex, columnIndex}) {              //超时标红显示动效
       if (row.TokenOffset != null) {
-        if (row.TokenOffset.indexOf('-') >= 0) {
+        if (row.TokenOffset[0] == '-' || row.TokenOffset == '') {
           this.$nextTick(() => {
             this.tween.killTweensOf('.tweenrow' + rowIndex)
           })
