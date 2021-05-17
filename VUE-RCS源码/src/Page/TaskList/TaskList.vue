@@ -623,7 +623,7 @@ import      HeaderList                                                          
         this.axios.post('/print', {'TaskID':rowData['TaskID']})
      },
     exportexcel(){
-      let array = this.TaskList.slice((this.currentPage-1) * this.PageSize, this.currentPage * this.PageSize)
+      let array = this.TaskList
        import ('../../assets/js/excelOut.js').then(excel=>{
         const tHeader=['任务号','编号', '工单号', '开始时间', '结束时间','状态', '数量', '单位', '资安标签', '起始位置', '中止位置', '任务类型','出岗时间','到岗时间','出入岗时间','规定时间','差异','取消'];//表头
 				const title=['任务列表',''];//标题(要和表头列数相等)
