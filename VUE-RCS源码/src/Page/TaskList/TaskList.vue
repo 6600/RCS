@@ -446,7 +446,7 @@ import      HeaderList                                                          
       },
     rowStyle({row, column, rowIndex, columnIndex}) {              //超时标红显示动效
       if (row.TokenOffset != null) {
-        if (row.TokenOffset.indexOf('-') < 0 && row.TokenOffset.indexOf(':') >= 0) {
+        if (row.TokenOffset.indexOf('-') >= 0) {
           this.$nextTick(() => {
             this.tween.killTweensOf('.tweenrow' + rowIndex)
           })
@@ -633,9 +633,9 @@ import      HeaderList                                                          
         const data = this.formatJson(filterVal,list);
          
 				data.map((i,index)=>{
-					if(!i){
-							data[index]=''
-						}
+					if(!i) {
+            data[index]=''
+          }
         })
         let that = this
         let filename = this.$moment(this.TimeRange[0]).format('YYYY/MM/DD')+"-"+ this.$moment(this.TimeRange[1]).format('YYYY/MM/DD')
