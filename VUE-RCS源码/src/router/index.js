@@ -33,28 +33,54 @@ export default new Router({
 
       component: Index,
       children:[
-        {path:'/DispatchMonitor',
-         name:'DispatchMonitor'
-         ,component:() => import('@/Page/DispatchMonitor/DispatchMonitor.vue')},                   //我写的页面
-        {path:'/Connections',
-         name:'Connection',
-         component:() => import('@/Page/Connections/Connection.vue')},     
-        {path:'/TaskList',
-         name:'TaskList',
-         component:() => import('@/Page/TaskList/TaskList.vue')},     
-         {path:'/TaskDetail',
-         name:'TaskDetail',
-         component:() => import('@/Page/TaskList/TaskDetail.vue')},                      
-        {path:'/ScrollTaskList',
-         name:'ScrollTaskList',
-         component:() => import('@/Page/TaskList/ScrollTaskList.vue')},       
-         {path:'/Taskemail',
-         name:'Taskemail',
-         component:() => import('@/Page/TaskList/Taskemail.vue')},      
-        {path:'/DataStatistics',
-         name:'DataStatistics',
-         component:() => import('@/Page/DataStatistics/DataStatistics.vue')},               
-        // {path:'/homepage',name:'homepage',component:() => import('@/view/homepage/homepage')}, 
+        {
+          "path": "/DispatchMonitor", 
+          "name": "DispatchMonitor", 
+          "component": () => import('@/Page/DispatchMonitor/DispatchMonitor.vue')
+      
+        },
+        {
+          "path": "/showPage", 
+          "name": "showPage", 
+          "component": () => import('@/Page/ShowPage/DispatchMonitor.vue')
+      
+        }, 
+        {
+          "path": "/Connections", 
+          "name": "Connection", 
+          "component": () => import('@/Page/Connections/Connection.vue')
+      
+        }, 
+        {
+          "path": "/TaskList", 
+          "name": "TaskList", 
+          "component": () => import('@/Page/TaskList/TaskList.vue')
+      
+        }, 
+        {
+          "path": "/TaskDetail", 
+          "name": "TaskDetail", 
+          "component": () => import('@/Page/TaskList/TaskDetail.vue')
+      
+        }, 
+        {
+          "path": "/ScrollTaskList", 
+          "name": "ScrollTaskList", 
+          "component": () => import('@/Page/TaskList/ScrollTaskList.vue')
+      
+        }, 
+        {
+          "path": "/Taskemail", 
+          "name": "Taskemail", 
+          "component": () => import('@/Page/TaskList/Taskemail.vue')
+      
+        }, 
+        {
+          "path": "/DataStatistics", 
+          "name": "DataStatistics", 
+          "component": () => import('@/Page/DataStatistics/DataStatistics.vue')
+      
+        }
       ]
     }
   ]

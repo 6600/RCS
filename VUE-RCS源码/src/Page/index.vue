@@ -121,11 +121,12 @@ export default {
       } 
     },
     watch:{
-       $route(to,from){  this.isMoniter = to.path =='/DispatchMonitor'?true:false
+       $route(to,from){  this.isMoniter = to.path =='/showPage'?true:false
   },
   selected(newV,oldV){
+    console.log('---------------')
     console.log(newV);
-       if(newV=='DispatchMonitor'){
+       if(newV=='showPage'){
          this.isMoniter = true
        }else{
         this.isMoniter = false 
@@ -194,7 +195,10 @@ export default {
            },
         ScrollTaskList(){
            this.$router.push('/ScrollTaskList')  
-           },
+        },
+        showPage(){
+           this.$router.push('/showPage')  
+        },
         datachart(){
            this.$router.push('/DataStatistics')
              },
@@ -266,12 +270,8 @@ export default {
        } 
     }
     .btngroup{ 
-      display: flex; 
-      margin-top:15px; 
+      display: flex;
     }
-    .wel { 
-      margin-top:30px; 
-      }
     .right{  
       position: absolute;
       left:90%;

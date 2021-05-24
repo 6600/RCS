@@ -80,7 +80,7 @@ loadPaths:function(Paths,Map){                      //加载路径
 　　　　"pulseColor":"0A00FF" 　　//块颜色
 　　  });
      pathlay.ID = path.ID
-     console.log("path",pathlay)
+    //  console.log("path",pathlay)
      pathlay._animatedPathClass = `leaflet-ant-path path-item-${path.ID}`
     layer.addLayer(pathlay).addTo(this.map);  
     this.pathicons.push(pathlay)  

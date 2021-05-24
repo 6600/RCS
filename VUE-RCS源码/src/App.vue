@@ -54,8 +54,10 @@ body {
   display: flex;
 }
 .el-col-24 {
-  height: 100%;
+  height: auto;
   overflow: auto;
+  display: flex;
+  align-items: center;
 }
 .panel .el-col-24 {
   overflow: auto;

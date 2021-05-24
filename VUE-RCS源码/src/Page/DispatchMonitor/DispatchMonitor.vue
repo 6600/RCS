@@ -140,7 +140,7 @@ import      Monitoringmap                                               from './
 <style lang='less' scoped>
  .page{
    width: 100%;
-   height:100%; 
+   height: calc(100vh - 120px); 
    .leftask{
     width: 30%;
    }
