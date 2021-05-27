@@ -88,6 +88,11 @@
         <div class="show-box-bottom">
           <div class="rate border">
             <h2>稼动率情况</h2>
+            <div class="chart-panel">
+              <div class="chart-box" v-for="(item,idx) in StaticsData.slice(0,6)" :key="idx">  
+                <PieChart v-if="!item.hide" :ID='item.ID' :title='item.title' :index="idx"  :Piedata='item.pie' :type='item.type'></PieChart>   
+              </div>
+            </div>
           </div>
           <div class="order border">
             <h2>订单柱状图</h2>
@@ -103,14 +108,17 @@
 import      TaskControl                                                 from './TaskControl' 
 import      ControlBoard                                                from './ControlBoard' 
 import      Monitoringmap                                               from './Monitoringmap' 
- import      {mapState,mapActions,mapMutations}                          from 'vuex'
+import      {mapState,mapActions,mapMutations}                          from 'vuex'
+import   PieChart                                               from './PieChart'
+import      moment                                                                 from 'moment'
 //  import { log } from 'i:/www/swap/src/js/utils/humane'
  
  export default { 
    components:{
      TaskControl,
      Monitoringmap,
-     ControlBoard
+     ControlBoard,
+     PieChart
    },
    data(){
      return{   
@@ -135,20 +143,34 @@ import      Monitoringmap                                               from './
       currentid: state  => state.task.currentid,   
       flooridx:  state  => state.map.flooridx,                  
       mapRang:   state  => state.map.mapRang,             
-      floormap:  state  => state.map.floormap, 
+      floormap:  state  => state.map.floormap,
+      StaticsData:  state => state.DataStatistics.StaticsData
      }), 
      warninfo(){
        if(this.flooridx>-1){
           return this.alertinfo[this.flooridx] 
        }
      }
-   },  
-   mounted(){  
-     var height =this.$('.page').height();  
-        this.tween.to('.foot',.5,{top:height+200})  
    },
+  created() {
+    // 获取数据
+    var  param ={"startime": this.$moment().subtract(100, 'd').format('YYYY-MM-DD'),"endtime": this.$moment().add(1, 'd').format('YYYY-MM-DD')} 
+    this.axios.post('/querystatics', param).then(data=>{ 
+      console.log('返回统计数据',data.data.ReturnData);
+        if (data.data.ReturnData==[]) {
+          // this.$('.PieChart,.LineChart').hide()
+        } else{
+          this.setStatics(data.data.ReturnData) 
+          // this.SetPieIDX(data.data.ReturnData.length-1) 
+        }
+    })
+  },
+  mounted(){  
+    var height =this.$('.page').height();  
+    this.tween.to('.foot',.5,{top:height+200})
+  },
    methods:{
-     ...mapMutations(['remove','InitFloormap']),
+     ...mapMutations(['remove','InitFloormap', 'setStatics']),
     WarnClass(idx,index){
       return 'f'+idx+index
     },
@@ -312,5 +334,12 @@ import      Monitoringmap                                               from './
   height: calc(100% - 30px);
   overflow: auto;
   padding: 0 5px;
+}
+.chart-box {
+  width: 100%;
+  height: 100%;
+}
+.chart-panel {
+  height: 160px;
 }
 </style>
