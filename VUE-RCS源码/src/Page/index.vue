@@ -10,14 +10,9 @@
             <div class="wel">欢迎你，{{username}}</div>
         </el-col>
         <el-col :span="6" class = 'btngroup'>
-          <div v-show='!isMoniter'>
-            <el-button type="primary" class="storage"  @click="diaodu" plain>             调度监控  </el-button>
-            <el-button  type="primary" class="basic-info" @click="ScrollTaskList" plain > 实时列表  </el-button>
-            <el-button type="primary" class="excel" @click="datachart" plain>             数据统计  </el-button>
-          </div>  
-          <div v-show="isMoniter" class = 'floorGroup'>
+          <div class = 'floorGroup'>
              <ul class='floorbtn' >
-              <li v-for='item in 4' @click='SelectFloor(item)'>
+              <li v-for='item in floormap.length' @click='SelectFloor(item)'>
                 <div :class="tweenClass(item)" >
                 <div class="floor"><span>{{item}}F</span></div></div></li>  
             </ul>
@@ -28,7 +23,7 @@
            
         </el-col> 
         <!-- mint选择楼层组件 -->
-        <div class="mintfloor" v-show='isMoniter'>
+        <div class="mintfloor">
             <mPicker type="floor"    title= '楼层' :data = 'mintfloor'  :Visible="mpopupVisible" @cancel="cancel" @confirm="confirm"></mPicker>
             <mt-button type="default" @click = "Picker('floor')">选择楼层</mt-button>
 
@@ -81,173 +76,207 @@
 </template>
 
 <script>
-import LeftMenu                            from '../components/leftmenu/leftMenu' 
-import myFooter                            from '../components/footer' 
-import logoutDialog                        from '../components/logout-dialog'
-import {mapState,mapMutations}             from 'vuex'
-import         $                           from 'webpack-zepto'
-import { Tabbar, TabItem }                 from 'mint-ui';
-import      mPicker                        from './TaskList/Picker'
-import    config                           from '../assets/config/config'
-import    Mythod                           from '../assets/js/Mythod'
-
-export default {
-    data(){
-    return{
-        iflogout:false,
-        showware:false,
-        isMoniter:true, 
-        value1:'',
-        value2:'', 
-        mintfloor: [ {  values: ['1楼','2楼', '3楼', '4楼']  } ], 
-        mpopupVisible:'',
-        selected:'',
-        preselect:''                   //上一次点击的按钮index
-    }
-    },
-    computed:{
-      ...mapState({
-        username:  state  =>state.user.username,
-        flooridx:  state  =>state.map.flooridx,
-        EdgeCache: state  =>state.map.EdgeCache,
-        PlaceCache:state  =>state.map.PlaceCache,
-        floormap:  state  =>state.map.floormap
-        
-        }),
-      tweenClass(idx){
-        return function(idx){ 
-        return 'tweenFloor'+idx
-        }
-      } 
-    },
-    watch:{
-       $route(to,from){  this.isMoniter = to.path =='/showPage'?true:false
-  },
-  selected(newV,oldV){
-    console.log('---------------')
-    console.log(newV);
-       if(newV=='showPage'){
-         this.isMoniter = true
-       }else{
-        this.isMoniter = false 
-       } 
-      this.$router.push({path:'/'+newV, query:{path: 'mint'}})                    //mintUI  页面跳转 
-
-       this.setFloorIdx(1) 
-  }
-    },
-    components:{
-      LeftMenu,
-      myFooter,
-      logoutDialog,
-      mPicker,
-      Tabbar, 
-      TabItem
-     },
-    mounted(){
-      var path =this.$route.path
-      let that = this
-     // let devOrpub = {dev:'http://192.168.43.119:8083/static/map/map.json',pub:'/static/map/map.json'}
-      let url      = 'http://'+Mythod.gethost()+"/static/json/"                                //适配开发和部署的图片路径
-      let mapRang    = new Array()
-      console.log(url);
-      this.axios.get(url+'map.json').then(res=>{    
-       let data = res.data 
-       that.InitFloormap(res.data)  
-
-       data.forEach((item,index)=>{
-        let mapRangObj ={x1:item.x, x2:item.x+item.w, y1:item.y,y2:item.y+item.h,x:item.x ,y:item.y}
-
-        item.place.forEach((place,idx)=>{
-          if(typeof(that.PlaceCache[index][place.PlaceID])!='undefined'){
-            that.floormap[index].place[idx].Locked = that.PlaceCache[index][place.PlaceID].Locked   
-             console.log('载入缓存车库',that.PlaceCache[index][place.PlaceID]);  
-          }            
- 
-        })
-        item.path.forEach((path,idx)=>{
-           if(typeof(that.EdgeCache[index][path.ID])!='undefined'){
-            that.floormap[index].path[idx].Occupy = that.EdgeCache[index][path.ID].Occupy
-              console.log('载入缓存路径', that.EdgeCache[index][path.ID].Occupy);   
-          }
-        })
-        mapRang.push(mapRangObj)
-       })     
-        that.setMapRang(mapRang) 
-     })
-     this.axios.get(url+'TaskList.json').then(res=>{    
-       let data = res.data 
-       this.setAGV_Option(data.AGV_Option)
-       this.setStatus_Option(data.Status_Option)
-       this.setStart_Option(data.Start_Option)
-       this.setEnd_Option(data.End_Option)
-        console.log(data)
-     })
-
-      if(path!='/DispatchMonitor')
-        this.isMoniter = false
-      },
-    methods:{
-        ...mapMutations(['setFloorIdx','InitFloormap','setMapRang','setAGV_Option','setStatus_Option','setStart_Option','setEnd_Option']),
- 
-        diaodu(){ 
-           this.$router.push('/DispatchMonitor') 
-           },
-        ScrollTaskList(){
-           this.$router.push('/ScrollTaskList')  
-        },
-        showPage(){
-           this.$router.push('/showPage')  
-        },
-        datachart(){
-           this.$router.push('/DataStatistics')
-             },
-        info(){
-           this.$router.push('/basic/account')  
-          },
-        Taskmail(){
-           this.$router.push('/Taskemail')  
-        },
-        showlogout(){
-          this.iflogout=true 
-           },
-        closedialog(){ 
-          this.iflogout=false 
-           },
-        tweenBtn(idx){                                        //切换楼层的缓动动画 
-           this.tween.to('.tweenFloor'+this.preselect+' .floor',{backgroundColor:'#049de4',color:"#ffffff"})
-           this.tween.to('.tweenFloor'+this.preselect,{scaleX:1,scaleY:1})
-           this.tween.to('.tweenFloor'+idx+' .floor',{backgroundColor:'#ffffff',color:"#049de4"})
-           this.tween.to('.tweenFloor'+idx,{scaleX:1.05,scaleY:1.05})
-           this.preselect = idx
-
-         if(idx == 'thumb'){                                //切换到缩略图效果
-
-           this.tween.to('.thumb',{backgroundColor:'#049de4',color:"#ffffff"}) 
-           this.tween.to('.thumb i',{color:"#ffffff"}) 
-         }else{
-            this.tween.to('.thumb',{backgroundColor:'#ffffff',color:"#049de4"}) 
-            this.tween.to('.thumb i',{color:"#049de4"})  
-         }
-        },
-        SelectFloor(idx){                    //楼层选择
-          this.tweenBtn(idx)
-          this.setFloorIdx(idx)
-         // this.$router.push({ name: 'diaodu', params: { floor: 123 }})
-         },                     
-     //mint组件     
-      Picker(val){ 
-        this.mpopupVisible = val 
-      },
-      confirm(val){
-        var cov = {'1楼':1,'2楼':2,'3楼':3,'4楼':4}
-        this.setFloorIdx(cov[val]) 
-      },
-      cancel(val){
-        this.mpopupVisible = val  
-      }, 
-    }
+import LeftMenu from '../components/leftmenu/leftMenu'
+import myFooter from '../components/footer'
+import logoutDialog from '../components/logout-dialog'
+import {
+	mapState,
+	mapMutations
 }
+from 'vuex'
+import $ from 'webpack-zepto'
+import {
+	Tabbar,
+	TabItem
+}
+from 'mint-ui';
+import mPicker from './TaskList/Picker'
+import config from '../assets/config/config'
+import Mythod from '../assets/js/Mythod'
+
+export
+default {
+		data() {
+			return {
+				iflogout:
+				false,
+				showware: false,
+				value1: '',
+				value2: '',
+				mintfloor: [{
+					values: ['1楼', '2楼', '3楼', '4楼']
+				}],
+				mpopupVisible: '',
+				selected: '',
+				preselect: '' //上一次点击的按钮index
+			}
+		},
+		computed: {...mapState({
+				username: state => state.user.username,
+				flooridx: state => state.map.flooridx,
+				EdgeCache: state => state.map.EdgeCache,
+				PlaceCache: state => state.map.PlaceCache,
+				floormap: state => state.map.floormap
+
+			}),
+			tweenClass(idx) {
+				return function(idx) {
+					return 'tweenFloor' + idx
+				}
+			}
+		},
+		watch: {
+			selected(newV, oldV) {
+				this.$router.push({
+					path: '/' + newV,
+					query: {
+						path: 'mint'
+					}
+				}) //mintUI  页面跳转 
+				this.setFloorIdx(1)
+			}
+		},
+		components: {
+			LeftMenu,
+			myFooter,
+			logoutDialog,
+			mPicker,
+			Tabbar,
+			TabItem
+		},
+		mounted() {
+			var path = this.$route.path
+      let that = this
+			// let devOrpub = {dev:'http://192.168.43.119:8083/static/map/map.json',pub:'/static/map/map.json'}
+			let url = 'http://' + Mythod.gethost() + "/static/json/" //适配开发和部署的图片路径
+			let mapRang = new Array()
+      console.log(url);
+			this.axios.get('/config').then(res => {
+				let data = res.data.map
+        console.log('ssssssssssssssssssssssssssssssssssssssss')
+        console.log(data)
+        that.InitFloormap(res.data.map)
+
+				data.forEach((item, index) => {
+					let mapRangObj = {
+						x1: item.x,
+						x2: item.x + item.w,
+						y1: item.y,
+						y2: item.y + item.h,
+						x: item.x,
+						y: item.y
+					}
+
+					item.place.forEach((place, idx) => {
+						if (typeof(that.PlaceCache[index][place.PlaceID]) != 'undefined') {
+							that.floormap[index].place[idx].Locked = that.PlaceCache[index][place.PlaceID].Locked
+              console.log('载入缓存车库', that.PlaceCache[index][place.PlaceID]);
+						}
+					})
+          item.path.forEach((path, idx) => {
+						if (typeof(that.EdgeCache[index][path.ID]) != 'undefined') {
+							that.floormap[index].path[idx].Occupy = that.EdgeCache[index][path.ID].Occupy
+              console.log('载入缓存路径', that.EdgeCache[index][path.ID].Occupy);
+						}
+					})
+          mapRang.push(mapRangObj)
+				})
+        that.setMapRang(mapRang)
+			})
+      this.axios.get(url + 'TaskList.json').then(res => {
+				let data = res.data
+        this.setAGV_Option(data.AGV_Option)
+        this.setStatus_Option(data.Status_Option)
+        this.setStart_Option(data.Start_Option)
+        this.setEnd_Option(data.End_Option)
+			})
+		},
+		methods: {...mapMutations(['setFloorIdx', 'InitFloormap', 'setMapRang', 'setAGV_Option', 'setStatus_Option', 'setStart_Option', 'setEnd_Option']),
+
+			diaodu() {
+				this.$router.push('/DispatchMonitor')
+			},
+			ScrollTaskList() {
+				this.$router.push('/ScrollTaskList')
+			},
+			showPage() {
+				this.$router.push('/showPage')
+			},
+			datachart() {
+				this.$router.push('/DataStatistics')
+			},
+			info() {
+				this.$router.push('/basic/account')
+			},
+			Taskmail() {
+				this.$router.push('/Taskemail')
+			},
+			showlogout() {
+				this.iflogout = true
+			},
+			closedialog() {
+				this.iflogout = false
+			},
+			tweenBtn(idx) { //切换楼层的缓动动画 
+				this.tween.to('.tweenFloor' + this.preselect + ' .floor', {
+					backgroundColor: '#049de4',
+					color: "#ffffff"
+				})
+        this.tween.to('.tweenFloor' + this.preselect, {
+					scaleX: 1,
+					scaleY: 1
+				})
+        this.tween.to('.tweenFloor' + idx + ' .floor', {
+					backgroundColor: '#ffffff',
+					color: "#049de4"
+				})
+        this.tween.to('.tweenFloor' + idx, {
+					scaleX: 1.05,
+					scaleY: 1.05
+				})
+        this.preselect = idx
+
+				if (idx == 'thumb') { //切换到缩略图效果
+					this.tween.to('.thumb', {
+						backgroundColor: '#049de4',
+						color: "#ffffff"
+					})
+          this.tween.to('.thumb i', {
+						color: "#ffffff"
+					})
+				} else {
+					this.tween.to('.thumb', {
+						backgroundColor: '#ffffff',
+						color: "#049de4"
+					})
+          this.tween.to('.thumb i', {
+						color: "#049de4"
+					})
+				}
+			},
+			SelectFloor(idx) { //楼层选择
+				this.tweenBtn(idx)
+        this.setFloorIdx(idx)
+				// this.$router.push({ name: 'diaodu', params: { floor: 123 }})
+			},
+			//mint组件     
+			Picker(val) {
+				this.mpopupVisible = val
+			},
+			confirm(val) {
+				var cov = {
+					'1楼': 1,
+					'2楼': 2,
+					'3楼': 3,
+					'4楼': 4
+				}
+				this.setFloorIdx(cov[val])
+			},
+			cancel(val) {
+				this.mpopupVisible = val
+			},
+		}
+	}
 </script>
 
 <style lang="less">
