@@ -11,44 +11,24 @@
             <div class="now border">
               <h2>实时任务列表</h2>
               <div class="panel-item">
-                <ul>
-                  <li>列表数据信息</li>
-                  <li>列表数据信息</li>
-                  <li>列表数据信息</li>
-                  <li>列表数据信息</li>
-                  <li>列表数据信息</li>
-                  <li>列表数据信息</li>
-                  <li>列表数据信息</li>
-                  <li>列表数据信息</li>
-                  <li>列表数据信息</li>
-                  <li>列表数据信息</li>
-                  <li>列表数据信息</li>
-                  <li>列表数据信息</li>
-                  <li>列表数据信息</li>
-                  <li>列表数据信息</li>
-                  <li>列表数据信息</li>
-                  <li>列表数据信息</li>
-                  <li>列表数据信息</li>
-                  <li>列表数据信息</li>
-                  <li>列表数据信息</li>
-                  <li>列表数据信息</li>
-                </ul>
+                <table border="0">
+                  <tr>
+                    <th>任务ID</th>
+                    <th width="80">小车ID</th>
+                    <th width="80">当前状态</th>
+                  </tr>
+                  <tr v-for="item in taskList">
+                    <td>{{item.TaskID}}</td>
+                    <td>{{item.AGVID}}</td>
+                    <td>{{item.TaskStatusDescription}}</td>
+                  </tr>
+                </table>
               </div>
             </div>
             <div class="car border">
               <h2>小车状况列表</h2>
               <div class="panel-item">
                 <ul>
-                  <li>列表数据信息</li>
-                  <li>列表数据信息</li>
-                  <li>列表数据信息</li>
-                  <li>列表数据信息</li>
-                  <li>列表数据信息</li>
-                  <li>列表数据信息</li>
-                  <li>列表数据信息</li>
-                  <li>列表数据信息</li>
-                  <li>列表数据信息</li>
-                  <li>列表数据信息</li>
                 </ul>
               </div>
             </div>
@@ -56,16 +36,6 @@
               <h2>充电桩状况列表</h2>
               <div class="panel-item">
                 <ul>
-                  <li>列表数据信息</li>
-                  <li>列表数据信息</li>
-                  <li>列表数据信息</li>
-                  <li>列表数据信息</li>
-                  <li>列表数据信息</li>
-                  <li>列表数据信息</li>
-                  <li>列表数据信息</li>
-                  <li>列表数据信息</li>
-                  <li>列表数据信息</li>
-                  <li>列表数据信息</li>
                 </ul>
               </div>
             </div>
@@ -96,6 +66,7 @@
           </div>
           <div class="order border">
             <h2>订单柱状图</h2>
+            <div class="chart-box" id="chartBox"></div>
           </div>
         </div>
       </div>
@@ -124,8 +95,9 @@ import      moment                                                              
      return{   
         alertinfo:[[],[],[],[]], 
         ani:'',
-        ani2:''
-         }
+        ani2:'',
+        taskList: ['sd']
+    }
    }, 
    watch:{
      flooridx(newV,oldV){ 
@@ -164,10 +136,45 @@ import      moment                                                              
           // this.SetPieIDX(data.data.ReturnData.length-1) 
         }
     })
+    let param2 = {
+      name: "now",
+      StartDateTime: this.$moment().subtract(100, 'd').format('YYYY-MM-DD'),
+      EndDateTime: this.$moment().add(1, 'd').format('YYYY-MM-DD'),
+      AGVID:this.AGVID,
+      StartPlace: this.StartPlace,
+      EndPlace: this.EndPlace,
+      OrderID: this.OrderID ? this.OrderID : '',
+    }   
+    this.axios.post('/queryTasklist', param2).then(res => {
+      console.log('--------------------- 数据列表2 ---------------------')
+      console.log(res)
+      const data = res.data
+      
+      console.log(data)
+      this.taskList = data.ReturnData
+    })
   },
   mounted(){  
     var height =this.$('.page').height();  
     this.tween.to('.foot',.5,{top:height+200})
+    var myChart = this.$echarts.init(document.getElementById('chartBox'))
+    var option;
+
+    option = {
+        xAxis: {
+            type: 'category',
+            data: ['7天前', '6天前', '5天前', '4天前', '3天前', '2天前', '1天前']
+        },
+        yAxis: {
+            type: 'value'
+        },
+        series: [{
+            data: [120, 200, 150, 80, 70, 110, 130],
+            type: 'bar'
+        }]
+    };
+
+    option && myChart.setOption(option);
   },
    methods:{
      ...mapMutations(['remove','InitFloormap', 'setStatics']),
@@ -334,6 +341,15 @@ import      moment                                                              
   height: calc(100% - 30px);
   overflow: auto;
   padding: 0 5px;
+  th,td {
+    border-bottom: 1px solid #ccc;
+    border-right: 1px solid #ccc;
+    line-height: 30px;
+  }
+  table {
+    border-left: 1px solid #ccc;
+    border-top: 1px solid #ccc;
+  }
 }
 .chart-box {
   width: 100%;

@@ -493,13 +493,14 @@ export default {
     height: 100%;
     align-items:center;
     display: flex;
+    position: relative;
    .Charge{
-     position:absolute;
-     top:2.8rem;
-     right:1rem; 
-     width:10rem;
-     height:auto;
-     font-size: 1rem;
+      position: absolute;
+      top: 10px;
+      right: 0;
+      width: 170px;
+      height: auto;
+      font-size: 1rem;
      span{
        margin-left:1px;
        margin-top:1px;
@@ -507,7 +508,7 @@ export default {
        text-align: center;  
        width: 4.8rem;   
        display: inline-block;
-       }
+      }
      .header{
          span{ 
            height:  1.5rem; 
