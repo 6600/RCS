@@ -6,7 +6,13 @@
 
 <script>
 export default {
-  name: 'App'
+  name: 'App',
+  created () {
+    console.log('程序初始化!')
+    this.axios.get('/config').then(config=>{ 
+      console.log(config); 
+    })
+  }
 }
 </script>
 
