@@ -55,6 +55,7 @@ body {
   height: calc(100% - 120px);
   width: 100%;
   display: flex;
+  overflow: auto;
 }
 .el-col-24 {
   height: auto;

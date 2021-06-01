@@ -22,8 +22,7 @@
 </template>
 
 <script>
-import    Lradio                     from  '../DataStatistics/Lradio' 
-import    piePatternSrc              from  '@/assets/js/base64.js'
+import    Lradio                     from  '../DataStatistics/Lradio'
 import                                'echarts-liquidfill'
 // import { log } from 'i:/www/swap/src/js/utils/humane'
 import { mapMutations, mapState } from 'vuex'
@@ -153,8 +152,7 @@ export default {
       if (this.type == 'AGVStyle') { //画四辆小车的稼动率饼图 
         ConvData = this.PieCovertOption(this.Piedata); //获取返回setOption的：formatter,serise
         Option = this.PieOption(this.Pierefs(0), ConvData)
-        this.drawPieChart(this.Pierefs(0), this.Piedata, Option); //画饼图  
-        this.drawPieChart(this.Pierefs(1), this.Piedata, this.MeterOption(this.Piedata)); //画稼动率仪表盘
+        this.drawPieChart(this.Pierefs(0), this.Piedata, Option); //画饼图 
       } else { //画订单和物料的趋线图 
         this.Piedata.forEach((Piedata, idx) => {
           if ((idx <= 1 && this.type == 'OrderStyle')) {
@@ -403,77 +401,6 @@ export default {
         })
 
   }, 
-  MeterOption(data){                         //稼动率仪表盘Option  样式参考 https://blog.csdn.net/csm17805987903/article/details/85046355
-  console.log('饼图数据', data);
-  let rate = Math.floor(data['稼动率'])
-  let option = {
-    tooltip: {
-      formatter: '{a} <br/>{b} : {c}%'
-    },
-    //toolbox: {
-    //    feature: {
-    //        restore: {},
-    //        saveAsImage: {}
-    //    }
-    //},
-    series: [{
-      name: '业务指标',
-      type: 'gauge',
-      detail: {
-        formatter: '{value}%'
-      },
-      // 仪表位置
-      radius: "90%",
-      //仪表大小，
-      axisLabel: { //文字样式（及“10”、“20”等文字样式）
-        color: "black",
-        distance: 0 //文字离表盘的距离
-      },
-      title: {
-        show: true,
-        offsetCenter: [0, '110%'],
-        // x, y，单位px
-        textStyle: { // 其余属性默认使用全局文本样式，详见TEXTSTYLE
-          fontWeight: 'bolder'
-        }
-      },
-
-      data: [{
-        label: {
-          textStyle: {
-            fontSize: 12
-          },
-          position: 'insideBottom'
-        },
-        value: rate,
-        //barchart https://blog.csdn.net/qq_34908167/article/details/78500921
-        name: '稼动率'
-      }],
-      textStyle: {
-        fontWeight: 300,
-        fontSize: 12
-      },
-      //文字的字体大小
-    }]
-  };
-  return option
-  },
-  chartssize(container, charts) {            //图表自适应宽高
-      function getStyle(el, name)
-      {
-        if (window.getComputedStyle) {
-          return window.getComputedStyle(el, null);
-        } else {
-          return el.currentStyle;
-        }
-      }
-      let wi = getStyle(container, 'width').width;
-      let hi = getStyle(container, 'height').height;
-      charts.style.height = hi;
-    },
-  selectPie(val){ 
-    this.SetChartType(val)  
-  }
   }
 }
 </script>
