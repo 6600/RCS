@@ -17,7 +17,7 @@
                     <th width="80">小车ID</th>
                     <th width="80">当前状态</th>
                   </tr>
-                  <tr v-for="item in taskList">
+                  <tr v-for="(item, ind) in taskList" :key="ind">
                     <td>{{item.TaskID}}</td>
                     <td>{{item.AGVID}}</td>
                     <td>{{item.TaskStatusDescription}}</td>
@@ -28,15 +28,41 @@
             <div class="car border">
               <h2>小车状况列表</h2>
               <div class="panel-item">
-                <ul>
-                </ul>
+                <table border="0">
+                  <tr>
+                    <th>小车ID</th>
+                    <th width="80">连接状态</th>
+                    <th width="80">当前状态</th>
+                    <th width="80">当前位置</th>
+                  </tr>
+                  <tr v-for="(item, ind) in agvtaskList" :key="ind">
+                    <td>{{item.ID}}</td>
+                    <td>{{item.RemainTime}}</td>
+                    <td>{{item.CurrentOperate}}</td>
+                    <td>{{item.CurrentPos}}</td>
+                  </tr>
+                </table>
               </div>
             </div>
             <div class="charge border">
               <h2>充电桩状况列表</h2>
               <div class="panel-item">
-                <ul>
-                </ul>
+                <table border="0">
+                  <tr>
+                    <th>充电桩ID</th>
+                    <th>小车ID</th>
+                    <th width="80">连接状态</th>
+                    <th width="80">电压信息</th>
+                    <th width="80">电流信息</th>
+                  </tr>
+                  <tr v-for="(item, ind) in chargepileList" :key="ind">
+                    <td>{{item.ChargePileI}}</td>
+                    <td>{{item.AGVID}}</td>
+                    <td>{{item.ConnectStat}}</td>
+                    <td>{{item.PowerVoltag}}</td>
+                    <td>{{item.PowerCurren}}</td>
+                  </tr>
+                </table>
               </div>
             </div>
           </div>
@@ -96,7 +122,9 @@ import      moment                                                              
         alertinfo:[[],[],[],[]], 
         ani:'',
         ani2:'',
-        taskList: ['sd']
+        taskList: [],
+        agvtaskList: [],
+        chargepileList: []
     }
    }, 
    watch:{
@@ -149,9 +177,19 @@ import      moment                                                              
       console.log('--------------------- 数据列表2 ---------------------')
       console.log(res)
       const data = res.data
-      
-      console.log(data)
       this.taskList = data.ReturnData
+    })
+    this.axios.get('/queryAgvtask').then(res => {
+      console.log('--------------------- 数据列表2 ---------------------')
+      console.log(res)
+      const data = res.data
+      this.agvtaskList = data.ReturnData
+    })
+    this.axios.get('/queryChargepile').then(res => {
+      console.log('--------------------- 数据列表2 ---------------------')
+      console.log(res)
+      const data = res.data
+      this.chargepileList = data.ReturnData
     })
   },
   mounted(){  
@@ -349,6 +387,7 @@ import      moment                                                              
   table {
     border-left: 1px solid #ccc;
     border-top: 1px solid #ccc;
+    width: 100%;
   }
 }
 .chart-box {

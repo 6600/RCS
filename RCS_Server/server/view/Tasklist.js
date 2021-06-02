@@ -47,6 +47,18 @@ import dbHelper from '../dbHelper/DBConnection'
   //  console.log(sql);
    return dbHelper.execPromiseSelect(sql)
   }
+  var queryAgvtask = function () { 
+    let sql =``
+  
+    sql =`select  * FROM agvtask`
+    return dbHelper.execPromiseSelect(sql)
+  }
+  var queryChargepile = function () { 
+    let sql =``
+  
+    sql =`select  * FROM chargepile`
+    return dbHelper.execPromiseSelect(sql)
+  }
   var print = function (id) {
     return dbHelper.execPromiseSelect(`UPDATE taskinfo SET PrintNum = IF(PrintNum, PrintNum + 1, 1) WHERE TaskID = '${id}';`)
   }
@@ -55,7 +67,9 @@ import dbHelper from '../dbHelper/DBConnection'
   queryTasklist:queryTasklist,
   QueryTaskID:QueryTaskID,
   DeleteTaskID:DeleteTaskID,
-  print: print
+  print: print,
+  queryAgvtask: queryAgvtask,
+  queryChargepile: queryChargepile
 };
   
  export default tasklist;

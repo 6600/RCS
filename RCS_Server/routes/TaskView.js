@@ -62,4 +62,33 @@ router.post('/queryTasklist', function (req, res, next) {
 	}
 });
 
+router.get('/queryAgvtask', function (req, res, next) {
+  var resJson = new ResJson() 
+	try {
+    Tasklist.queryAgvtask().then( data=> {
+      resJson.ReturnData = data 
+      logger.info('queryAgvtask ')
+      res.json(resJson); 
+    }) 
+	} catch (error) {
+		logger.error(error);
+		next(error);
+	}
+});
+
+router.get('/queryChargepile', function (req, res, next) {
+  var resJson = new ResJson() 
+	try {
+    Tasklist.queryChargepile().then( data=> {
+      resJson.ReturnData = data 
+      logger.info('queryChargepile ')
+      res.json(resJson); 
+    }) 
+	} catch (error) {
+		logger.error(error);
+		next(error);
+	}
+});
+
+
 module.exports = router;
