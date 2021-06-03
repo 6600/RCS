@@ -14,12 +14,14 @@
                 <table border="0">
                   <tr>
                     <th>任务ID</th>
-                    <th width="80">小车ID</th>
+                    <th width="60">小车ID</th>
+                    <th width="110">任务类型</th>
                     <th width="80">当前状态</th>
                   </tr>
                   <tr v-for="(item, ind) in taskList" :key="ind">
                     <td>{{item.TaskID}}</td>
                     <td>{{item.AGVID}}</td>
+                    <td>{{item.TaskTypeName}}</td>
                     <td>{{item.TaskStatusDescription}}</td>
                   </tr>
                 </table>
