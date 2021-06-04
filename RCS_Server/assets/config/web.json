@@ -1,6 +1,7 @@
 {
   "map": [
     {
+      "name": "1",
       "url": "static/img/map/1floor.png", 
       "w": 2432, 
       "h": 1334, 
@@ -561,6 +562,7 @@
       "mark": { }
     }, 
     {
+      "name": "2",
       "url": "static/img/map/2floor.png", 
       "w": 2432, 
       "h": 1334, 
@@ -886,6 +888,7 @@
       "mark": { }
     }, 
     {
+      "name": "3",
       "url": "static/img/map/3floor.png", 
       "w": 2432, 
       "h": 1334, 
@@ -896,6 +899,7 @@
       "mark": { }
     }, 
     {
+      "name": "4",
       "url": "static/img/map/4floor.png", 
       "w": 2432, 
       "h": 1334, 

@@ -32,13 +32,15 @@
               <div class="panel-item">
                 <table border="0">
                   <tr>
-                    <th>小车ID</th>
+                    <th>ID</th>
+                    <th width="60">电量</th>
                     <th width="80">连接状态</th>
                     <th width="80">当前状态</th>
                     <th width="80">当前位置</th>
                   </tr>
                   <tr v-for="(item, ind) in agvtaskList" :key="ind">
                     <td>{{item.ID}}</td>
+                    <td>{{item.PowerPercent}}</td>
                     <td>{{item.RemainTime}}</td>
                     <td>{{item.CurrentOperate}}</td>
                     <td>{{item.CurrentPos}}</td>
@@ -203,7 +205,7 @@ import      moment                                                              
     option = {
         xAxis: {
             type: 'category',
-            data: ['7天前', '6天前', '5天前', '4天前', '3天前', '2天前', '1天前']
+            data: [this.$moment().subtract(6, 'd').format('MM-DD'), this.$moment().subtract(5, 'd').format('MM-DD'), this.$moment().subtract(4, 'd').format('MM-DD'), this.$moment().subtract(3, 'd').format('MM-DD'), this.$moment().subtract(2, 'd').format('MM-DD'), this.$moment().subtract(1, 'd').format('MM-DD'), this.$moment().format('MM-DD')]
         },
         yAxis: {
             type: 'value'
