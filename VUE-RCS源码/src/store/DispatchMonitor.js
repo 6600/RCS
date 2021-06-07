@@ -53,8 +53,8 @@ export default {
             data.List[idx].length = length
             state.AGVArr[item.ID] = item  
            } 
-          }) 
-          state.AGVstatus = JSON.stringify(data.List)
+          })
+          Vue.set(state, 'AGVstatus', JSON.stringify(data.List))
           console.log('vuex收到AGVstatus:'); 
           // console.log('C1.X:',state.AGV1.X,'C1.Y:',state.AGV1.Y,'C2.X',state.AGV2.X,'C2.Y:',state.AGV2.Y)
           // console.log('AGV1.Y:',state.AGV1.Y,'AGV2.Y:',state.AGV2.Y,'AGV3.Y:',state.AGV3.Y,'AGV4.Y:',state.AGV4.Y)

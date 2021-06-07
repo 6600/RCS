@@ -76,12 +76,8 @@ export default {
   
   },     
   watch:{                                                                   //（1）immediate和handler  这样使用watch时有一个特点，就是当值第一次绑定时，不会执行监听函数，只有值发生改变时才会执行。如果我们需要在最初绑定值的时候也执行函数，则就需要用到immediate属性。
-  //  Agvstaus(newV,oldV){   this.UpdateAGV(newV) },  
-  //  C1(newV,oldV){    this.UpdateAGV(newV)  },    
-  //  C2(newV,oldV){    this.UpdateAGV(newV)  },  
-  //  C3(newV,oldV){    this.UpdateAGV(newV)  },  
-  //  C4(newV,oldV){    this.UpdateAGV(newV)  },  
     AGVstatus(newV,oldV){
+      console.log(newV)
       let data = JSON.parse(newV)      
       data.forEach(item=>{
          this.UpdateAGV(item) 

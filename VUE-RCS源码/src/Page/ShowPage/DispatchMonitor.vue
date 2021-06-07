@@ -73,14 +73,15 @@
           <div class="show-box-right border">
             <!--地图显示插件-->
             <div class="Monitor" v-if="parseInt(flooridx)!=-1">
-              <monitoringmap class="map" :map="floormap[flooridx]" :mapidx="flooridx" type="Monitor" width="100%" height="100%" v-on:warninfo="updatewarninfo"></monitoringmap>
+              <Monitoringmap class="map" :map="floormap[flooridx]" :mapidx="flooridx" type="Monitor" width="100%" height="100%" v-on:warninfo="updatewarninfo"></Monitoringmap>
             </div>
             <!-- 缩略地图 -->
             <ul class="thumbContain" v-else>
               <li v-for="(item,idx) in floormap" :key="idx">
                 <div class="WarningStatus">
-                  <div :class="WarnClass(idx,index)" v-for="(val,index) in alertinfo[idx]" :key="index">{{val}}</div></div>
-                <monitoringmap class="map" v-on:warninfo="updatewarninfo" :map="item" :mapidx="idx" type="thumb" width="100%" height="100%"></monitoringmap>
+                  <div :class="WarnClass(idx,index)" v-for="(val,index) in alertinfo[idx]" :key="index">{{val}}</div>
+                </div>
+                <Monitoringmap class="map" v-on:warninfo="updatewarninfo" :map="item" :mapidx="idx" type="thumb" width="100%" height="100%"></Monitoringmap>
               </li>
             </ul>
           </div>
