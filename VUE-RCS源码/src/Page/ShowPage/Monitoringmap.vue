@@ -13,7 +13,7 @@ import {point, circle, segment }                                        from '@f
 import Flatten                                                          from '@flatten-js/core'
  
 export default {
-  name: 'Monitoringmap',
+  name: 'Monitoringmap2',
   components: {},
   props:{map:Object,MapIdx:Number,type:String,width:String,height:String},
   data () {
