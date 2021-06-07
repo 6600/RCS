@@ -56,8 +56,8 @@
                     <th>充电桩ID</th>
                     <th>小车ID</th>
                     <th width="80">连接状态</th>
-                    <th width="80">电压信息</th>
-                    <th width="80">电流信息</th>
+                    <th width="40">电压</th>
+                    <th width="40">电流</th>
                   </tr>
                   <tr v-for="(item, ind) in chargepileList" :key="ind">
                     <td>{{item.ChargePileI}}</td>
@@ -183,6 +183,34 @@ import      moment                                                              
       console.log(res)
       const data = res.data
       this.taskList = data.ReturnData
+      let list = [0, 0, 0, 0, 0, 0, 0]
+      data.ReturnData.forEach(element => {
+        console.log(element)
+        if (element.FinishTime) {
+          const finistTime = this.$moment(element.FinishTime).startOf('day').fromNow().split(' ')
+          if (finistTime[0] && parseInt(finistTime[0]) < 7) {
+            list[parseInt(finistTime[0])]++
+          }
+        }
+      });
+      var myChart = this.$echarts.init(document.getElementById('chartBox'))
+      var option;
+
+      option = {
+          xAxis: {
+              type: 'category',
+              data: [this.$moment().subtract(6, 'd').format('MM-DD'), this.$moment().subtract(5, 'd').format('MM-DD'), this.$moment().subtract(4, 'd').format('MM-DD'), this.$moment().subtract(3, 'd').format('MM-DD'), this.$moment().subtract(2, 'd').format('MM-DD'), this.$moment().subtract(1, 'd').format('MM-DD'), this.$moment().format('MM-DD')]
+          },
+          yAxis: {
+              type: 'value'
+          },
+          series: [{
+              data: list,
+              type: 'bar'
+          }]
+      };
+
+      option && myChart.setOption(option);
     })
     this.axios.get('/queryAgvtask').then(res => {
       console.log('--------------------- 数据列表2 ---------------------')
@@ -200,24 +228,6 @@ import      moment                                                              
   mounted(){  
     var height =this.$('.page').height();  
     this.tween.to('.foot',.5,{top:height+200})
-    var myChart = this.$echarts.init(document.getElementById('chartBox'))
-    var option;
-
-    option = {
-        xAxis: {
-            type: 'category',
-            data: [this.$moment().subtract(6, 'd').format('MM-DD'), this.$moment().subtract(5, 'd').format('MM-DD'), this.$moment().subtract(4, 'd').format('MM-DD'), this.$moment().subtract(3, 'd').format('MM-DD'), this.$moment().subtract(2, 'd').format('MM-DD'), this.$moment().subtract(1, 'd').format('MM-DD'), this.$moment().format('MM-DD')]
-        },
-        yAxis: {
-            type: 'value'
-        },
-        series: [{
-            data: [120, 200, 150, 80, 70, 110, 130],
-            type: 'bar'
-        }]
-    };
-
-    option && myChart.setOption(option);
   },
    methods:{
      ...mapMutations(['remove','InitFloormap', 'setStatics']),
