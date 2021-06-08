@@ -13,7 +13,11 @@ Vue.use(Vuex);
 export default new Vuex.Store({
     modules:{ 
         user,
-        TaskList,Taskemail,marker ,map,DataStatistics
+        TaskList,
+        Taskemail,
+        marker,
+        map,
+        DataStatistics
     },
     plugins: [persistedState()]
 })

@@ -128,8 +128,7 @@ export default {
     // echarts 无法获取属性“getAttribute” :https://www.cnblogs.com/eternityz/p/12272490.html 
      this.init() 
   }, 
-  methods:{   
-    ...mapMutations(['SetChartType']),
+  methods:{
   getNameVal(data){                                      //{key:value}转{name:value}
   //  let finalArr = [];
     let obj = {} 

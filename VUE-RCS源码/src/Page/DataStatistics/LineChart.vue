@@ -37,8 +37,7 @@ export default {
        StaticsData:  state=> state.DataStatistics.StaticsData,
        PieSelectIDX: state=> state.DataStatistics.PieSelectIDX,    
        dayOrmon:     state=> state.DataStatistics.dayOrmon,    
-       ChartType:    state=> state.DataStatistics.ChartType,    
-       PieClick:     state=> state.DataStatistics.PieClick    
+       ChartType:    state=> state.DataStatistics.ChartType
        
     }),
     ...mapGetters(['getDayMonLine']),

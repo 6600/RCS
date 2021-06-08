@@ -132,12 +132,16 @@ UpdatePlace:function(Locked,place,type){
   place.setIcon(icon) 
 },
 UpdatePath:function(Occupy,path){
-  
   console.log('尝试更新路径颜色!', path._animatedPathId, Occupy)
+  const box = document.querySelector('.thumbContain')
+  if (!box) {
+    console.error('没有盒子')
+    return
+  }
   if (Occupy=="TRUE") {
-    document.querySelector('.thumbContain').querySelector(`.${path._animatedPathId}`).classList.add('active')
+    box.querySelector(`.${path._animatedPathId}`).classList.add('active')
   } else {
-    document.querySelector('.thumbContain').querySelector(`.${path._animatedPathId}`).classList.remove('active')
+    box.querySelector(`.${path._animatedPathId}`).classList.remove('active')
   }
 },
 UpdateMark:function(type){             //更新 avg,电梯，升降支架状态，自动门，库位状态，充电桩状态

@@ -84,14 +84,12 @@ import {
 	mapMutations
 }
 from 'vuex'
-import $ from 'webpack-zepto'
 import {
 	Tabbar,
 	TabItem
 }
 from 'mint-ui';
 import mPicker from './TaskList/Picker'
-import config from '../assets/config/config'
 import Mythod from '../assets/js/Mythod'
 
 export
@@ -116,8 +114,8 @@ default {
 				flooridx: state => state.map.flooridx,
 				EdgeCache: state => state.map.EdgeCache,
 				PlaceCache: state => state.map.PlaceCache,
-				floormap: state => state.map.floormap
-
+				floormap: state => state.map.floormap,
+        webConfig: state => state.DataStatistics.webConfig
 			}),
 			tweenClass(idx) {
 				return function(idx) {
@@ -153,7 +151,8 @@ default {
       console.log(url);
 			this.axios.get('/config').then(res => {
 				let data = res.data.map
-        console.log('ssssssssssssssssssssssssssssssssssssssss')
+        that.setWebConfig(data)
+        console.log('配置信息')
         console.log(data)
         that.InitFloormap(res.data.map)
 
@@ -191,7 +190,7 @@ default {
         this.setEnd_Option(data.End_Option)
 			})
 		},
-		methods: {...mapMutations(['setFloorIdx', 'InitFloormap', 'setMapRang', 'setAGV_Option', 'setStatus_Option', 'setStart_Option', 'setEnd_Option']),
+		methods: {...mapMutations(['setFloorIdx', 'InitFloormap', 'setMapRang', 'setAGV_Option', 'setStatus_Option', 'setStart_Option', 'setEnd_Option', 'setWebConfig']),
 
 			diaodu() {
 				this.$router.push('/DispatchMonitor')

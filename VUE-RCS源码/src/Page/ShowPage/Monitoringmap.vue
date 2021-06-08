@@ -1,6 +1,5 @@
 <template>
-    <div class="map" :style="{width:width,height:height}" >
-      </div> 
+    <div class="map" :style="{width:width,height:height}" ></div> 
 </template>
 
 <script>
@@ -47,22 +46,22 @@ export default {
      AGVstatus: state => state.map.AGVstatus,                   //即时更新的边信息
 
      Updatetask:state => state.map.Updatetask,                 //即时更新的小车任务状态
-     mapRang:state    => state.map.mapRang,   
+     mapRang:state    => state.map.mapRang,
+     webConfig: state => state.DataStatistics.webConfig
    }), 
    ...mapGetters(['EdgeStatus_get','PlaceStatus_get']),
 
    returnTask(task,agv){
      let that  = this
      return function(task,agv){
-       console.log(task)
-       var str = `<div class="status-${task.MovingStatus || 0}" style="width: 180px; font-size:14px;font-weight:bold;" id="popup">
-          <div class="xiaoche-id"><span>小车ID:</span><span>`+ (task.AGVID) +`</span></div>
-          <div><span>任务:</span><span>`+ (task.TaskTypeName || '') +`</span></div>
-          <div><span>耗时:</span><span>`+ (task.UsedTime || '')+`</span></div>
-          <div><span>状态:</span><span>`+ (task.CurrentOperateDescription || '') + `</span></div>
-          <div><span>异常:</span><span>`+ (task.WarningStatus || '') +`</span></div>
-          <div><span>电量:</span><span>`+ ((task.PowerPercent) || '') +`</span></div>
-        </div>` 
+       console.log(that.webConfig)
+       var str = that.webConfig
+      for (const key in task) {
+        if (Object.hasOwnProperty.call(task, key)) {
+          const element = task[key];
+          str = str.replace(`{{${key}}}`, element)
+        }
+      }
       if(task.WarningStatus!=''){ 
          that.$emit('warninfo',{info:`${task.WarningStatus}， 小车${task.AGVID}`,idx:this.mapIdx}) 
           agv.warn = task.WarningStatus
@@ -96,7 +95,8 @@ export default {
     PlaceStatus_get(val){                           //vuex state中的数组变化监听方法https://blog.csdn.net/qq997843911/article/details/85055993 
         this.Updateplace(val)  
     },
-    flooridx(newV,oldV){  
+    flooridx(newV,oldV){
+      console.log('地图切换!')
      // if(parseInt(this.Montype)!=-1){ 
        this.bgimg.remove();  
       this.mapIdx = newV
@@ -221,7 +221,7 @@ export default {
        
        this.leafmap = new LeafMap(this.Lmap) 
         let devOrpub = {   dev:'../../../',   pub:'./'  }
-        let layer =  this.Map==undefined?{w:5000,h:3500,url:' '}:this.Map    //加载背景图版
+        let layer =  this.Map==undefined?{w:this.webConfig.mapw,h:this.webConfig.maph,url:' '}:this.Map    //加载背景图版
         let url = devOrpub[config.env]+layer.url                                 //适配开发和部署的图片路径
           
           console.log('layer图片路径',url)

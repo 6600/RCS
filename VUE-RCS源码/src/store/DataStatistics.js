@@ -6,29 +6,11 @@ export default {
     startTime:'',
     endTime: '',
     StaticsData:'',
-    EchartData:[
-      {ID:'AGV1统计',type:'AGVStyle',
-      chart:{
-        pie:{'使用时间':22,'故障时间':167},
-        dayline:[
-          {name:'稼动率', val:[0.6,0.4,0.3,0.8,0.9,0.52,0.48] }  ]
-    }
-  },
-     // {ID:'AGV2统计',type:'AGVStyle',chart:{pie:{'使用时间':33,'故障时间':2}  ,dayline:[{name:'稼动率',val:[0.6,0.4,0.3,0.8,0.9,0.52,0.48]}]}},
-     // {ID:'AGV3统计',type:'AGVStyle',chart:{pie:{'使用时间':44,'故障时间':6}  ,dayline:[{name:'稼动率',val:[0.6,0.4,0.3,0.8,0.9,0.52,0.48]}]}},
-     // {ID:'AGV4统计',type:'AGVStyle',chart:{pie:{'使用时间':22,'故障时间':33} ,dayline:[{name:'稼动率',val:[0.6,0.4,0.3,0.8,0.9,0.52,0.48]}]}},
-     //                                         
-     // {ID:'订单统计',type:'OrderStyle', 
-     // chart:{pie:[{name:'任务状态',val:{'执行中':33,'暂停':671}},{name:'任务类别',val:[0.6,0.4,0.3,0.8,0.9,0.52,0.48]}],
-     //     line:[{name:'任务状态',val:[0.6,0.4,0.3,0.8,0.9,0.52,0.48]},{name:'任务类别',val:[0.6,0.4,0.3,0.8,0.9,0.52,0.48]}]}},                                              
-     //    {ID:'物料统计',type:'matterStyle', 
-     // chart:{pie:[{name:'工单号',val:{'工单1':33,'工单2':671,'工单3':671}}, {name:'物料号',val:{'物料1':33,'物料2':67,'物料3':67}},{name:'产线号',val:{'产线1':33,'产线1':67,'产线1':67}}],
-     // line:[{name:'工单号',val:[0.6,0.4,0.3,0.8,0.9,0.52,0.48]},{name:'产线号',val:[0.6,0.4,0.3,0.8,0.9,0.52,0.48]}]}},
-  ],     //从后台获取的统计数据
+    //从后台获取的统计数据
     dayOrmon:'dayline',                            //选择饼图控制日线图显示对应日表
     PieSelectIDX:2,
     ChartType:'matterStyle',
-    PieClick:'AGV'
+    webConfig: {}
 },
   mutations:{
  
@@ -56,7 +38,10 @@ export default {
     },
     setPieClick(state,val){  
       state.PieClick=val      
-    }
+    },
+    setWebConfig(state,val) {  
+      state.webConfig = val      
+    },
   },
   actions:{
     //  [USER_LOGIN]({commit},user){
