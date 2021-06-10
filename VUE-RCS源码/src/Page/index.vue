@@ -151,7 +151,7 @@ default {
       console.log(url);
 			this.axios.get('/config').then(res => {
 				let data = res.data.map
-        that.setWebConfig(data)
+        that.setWebConfig(res.data)
         console.log('配置信息')
         console.log(data)
         that.InitFloormap(res.data.map)

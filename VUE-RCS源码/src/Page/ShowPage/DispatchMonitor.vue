@@ -77,11 +77,13 @@
             </div>
             <!-- 缩略地图 -->
             <ul class="thumbContain" v-else>
-              <li v-for="(item,idx) in floormap" :key="idx">
-                <div class="WarningStatus">
-                  <div :class="WarnClass(idx,index)" v-for="(val,index) in alertinfo[idx]" :key="index">{{val}}</div>
-                </div>
-                <Monitoringmap class="map" v-on:warninfo="updatewarninfo" :map="item" :mapidx="idx" type="thumb" width="100%" height="100%"></Monitoringmap>
+              <li v-for="(item,idx) in (webConfig.mapRowNum * webConfig.mapColumnNum)" :key="idx" :style="{width: (100 / webConfig.mapRowNum).toFixed(2) + '%', height: (100 / webConfig.mapColumnNum).toFixed(2) + '%'}">
+                <template v-if="floormap[item] && floormap[item].url">
+                  <div class="WarningStatus">
+                    <div :class="WarnClass(idx2,index)" v-for="(val,index) in alertinfo[idx2]" :key="index">{{val}}</div>
+                  </div>
+                  <Monitoringmap class="map" v-on:warninfo="updatewarninfo" :map="floormap[item]" :mapidx="idx" type="thumb" width="100%" height="100%"></Monitoringmap>
+                </template>
               </li>
             </ul>
           </div>
@@ -149,7 +151,8 @@ import      moment                                                              
       flooridx:  state  => state.map.flooridx,                  
       mapRang:   state  => state.map.mapRang,             
       floormap:  state  => state.map.floormap,
-      StaticsData:  state => state.DataStatistics.StaticsData
+      StaticsData:  state => state.DataStatistics.StaticsData,
+      webConfig: state => state.DataStatistics.webConfig
      }), 
      warninfo(){
        if(this.flooridx>-1){

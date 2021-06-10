@@ -55,7 +55,7 @@ export default {
      let that  = this
      return function(task,agv){
        console.log(that.webConfig)
-       var str = that.webConfig
+       var str = that.webConfig.map
       for (const key in task) {
         if (Object.hasOwnProperty.call(task, key)) {
           const element = task[key];
@@ -221,7 +221,7 @@ export default {
        
        this.leafmap = new LeafMap(this.Lmap) 
         let devOrpub = {   dev:'../../../',   pub:'./'  }
-        let layer =  this.Map==undefined?{w:this.webConfig.mapw,h:this.webConfig.maph,url:' '}:this.Map    //加载背景图版
+        let layer =  this.Map==undefined?{w:this.webConfig.map.mapw,h:this.webConfig.map.maph,url:' '}:this.Map    //加载背景图版
         let url = devOrpub[config.env]+layer.url                                 //适配开发和部署的图片路径
           
           console.log('layer图片路径',url)
