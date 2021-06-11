@@ -141,11 +141,7 @@ export default {
       this.Lmap.on("zoom", e => { var rate = this.Lmap.getZoomScale(this.Lmap.getZoom(), 14) 
       this.leafmap.markicons.forEach((mark,idx)=>{
          var options =this.leafmap.markicons[idx].getIcon().options; 
-        
-        //if(typeof(options.iconUrl)!= 'undefined'){ 
-        //   options.iconSize=[rate*45,rate*45] 
-        //  this.leafmap.markicons[idx].setIcon(L.icon(options))
-        //} 
+
           })         
        })
      },    
@@ -244,6 +240,7 @@ export default {
               console.log('初始化AGV信息',AGV);
                let obj=this.leafmap.loadMarker(parseInt(AGV.X),parseInt(AGV.Y),"AGV",AGV.ID) 
               this.marklayer=obj.marklayer
+              console.log(obj.markicons)
               this.markicons=obj.markicons 
                } 
             })
