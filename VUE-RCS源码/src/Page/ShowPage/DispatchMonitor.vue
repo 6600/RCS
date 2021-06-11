@@ -78,11 +78,11 @@
             <!-- 缩略地图 -->
             <ul class="thumbContain" v-else>
               <li v-for="(item,idx) in (webConfig.mapRowNum * webConfig.mapColumnNum)" :key="idx" :style="{width: (100 / webConfig.mapRowNum).toFixed(2) + '%', height: (100 / webConfig.mapColumnNum).toFixed(2) + '%'}">
-                <template v-if="floormap[item] && floormap[item].url">
+                <template v-if="floormap[idx] && floormap[idx].url">
                   <div class="WarningStatus">
-                    <div :class="WarnClass(idx2,index)" v-for="(val,index) in alertinfo[idx2]" :key="index">{{val}}</div>
+                    <div :class="WarnClass(idx,index)" v-for="(val,index) in alertinfo[idx]" :key="index">{{val}}</div>
                   </div>
-                  <Monitoringmap class="map" v-on:warninfo="updatewarninfo" :map="floormap[item]" :mapidx="idx" type="thumb" width="100%" height="100%"></Monitoringmap>
+                  <Monitoringmap class="map" v-on:warninfo="updatewarninfo" :map="floormap[idx]" :mapidx="idx" type="thumb" width="100%" height="100%"></Monitoringmap>
                 </template>
               </li>
             </ul>

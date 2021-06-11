@@ -41,7 +41,7 @@ export default {
  
   mutations:{
     SOCKET_AGVandTask(state,data){                                // E:\VUE_RCS监控\VUE-RCS监控\RCS_Server
-      if(data.RequestType=='UpdateAGVStatus'){                     
+      if(data.RequestType=='UpdateAGVStatus') {                     
         data.List.forEach((item,idx)=>{
           //  console.log('接受的小车status',item);   
            let id = item.ID 

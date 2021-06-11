@@ -1,6 +1,6 @@
 {
-  "map": {
-    "1-1":{
+  "map": [
+    {
       "name": "1",
       "url": "static/img/map/1floor.png", 
       "w": 2432, 
@@ -561,7 +561,7 @@
       ], 
       "mark": { }
     }, 
-    "1-2":{
+    {
       "name": "2",
       "url": "static/img/map/2floor.png", 
       "w": 2432, 
@@ -887,7 +887,7 @@
       ], 
       "mark": { }
     }, 
-    "2-1":{
+    {
       "name": "3",
       "url": "static/img/map/3floor.png", 
       "w": 2432, 
@@ -898,18 +898,18 @@
       "place": [ ], 
       "mark": { }
     }, 
-    "2-2":{
+    {
       "name": "4",
       "url": "static/img/map/4floor.png", 
       "w": 2432, 
       "h": 1334, 
       "x": 4443, 
       "y": 4516, 
-      "path": [ ], 
-      "place": [ ], 
-      "mark": { }
+      "path": [], 
+      "place": [], 
+      "mark": {}
     }
-  },
+  ],
   "mapRowNum": 2,
   "mapColumnNum": 2,
   "mapw": 5000,
