@@ -259,7 +259,9 @@ export default {
           if (AGV.ID == data.ID) {
             if (this.infloor(data, 'update') >= 0) { //遍历此地图的小车，判断小车坐标是否在此地图内
               let pointXY = L.point(parseInt(data.X), parseInt(data.Y)); ///将像素坐标转成lanlng坐标
+              console.log(pointXY)
               let pointlatlng = this.Lmap.unproject(pointXY, this.Lmap.getMaxZoom() - 1);
+              console.log(pointlatlng)
               AGV.setLatLng(pointlatlng);
               AGV.setRotationAngle(-parseInt(data.Th))
               //https://github.com/bbecquet/Leaflet.RotatedMarker

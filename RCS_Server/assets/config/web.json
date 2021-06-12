@@ -5,8 +5,8 @@
       "url": "static/img/map/1floor.png", 
       "w": 2432, 
       "h": 1334, 
-      "x": 976, 
-      "y": 2201, 
+      "x": 0, 
+      "y": 0, 
       "path": [
         {
           "ID": "0", 
@@ -566,8 +566,8 @@
       "url": "static/img/map/2floor.png", 
       "w": 2432, 
       "h": 1334, 
-      "x": 4478, 
-      "y": 2252, 
+      "x": 0, 
+      "y": 0, 
       "path": [
         {
           "ID": "39", 
@@ -892,8 +892,8 @@
       "url": "static/img/map/3floor.png", 
       "w": 2432, 
       "h": 1334, 
-      "x": 968, 
-      "y": 4517, 
+      "x": 0, 
+      "y": 0, 
       "path": [ ], 
       "place": [ ], 
       "mark": { }
@@ -903,8 +903,8 @@
       "url": "static/img/map/4floor.png", 
       "w": 2432, 
       "h": 1334, 
-      "x": 4443, 
-      "y": 4516, 
+      "x": 0, 
+      "y": 0, 
       "path": [], 
       "place": [], 
       "mark": {}
