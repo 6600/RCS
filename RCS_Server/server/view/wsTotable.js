@@ -1,8 +1,12 @@
 import dbHelper from '../dbHelper/DBConnection'
+import webConfig from '../../assets/config/web.json'
 
 //更新taskinfo数据到数据库：在socket端调用
 var UpdateTaskinfo = function(table, obj, id) {
    let ColArr = ['TaskID', 'AGVID', 'AGVIP', 'StartPlaceDescription', 'EndPlaceDescription', 'TaskTypeName', 'TaskType', 'TaskStatus', 'TaskStatusDescription', 'StartTime', 'FinishTime', 'SetTime', 'TokenFinishTime', 'TokenStartTime', 'TokenUseTime', 'TokenMaxTime', 'TokenOffset', 'Sender', 'MaterialNum', 'MaterialID', 'Number', 'Unit', 'LabelNumber', 'LineID', 'OrderID', 'CancelCurrentTask']
+	if (webConfig && webConfig['UpdateTaskinfo']) {
+		ColArr = webConfig['UpdateTaskinfo']
+	}
    let CollStr = new Array();
    let valStr = new Array()
    ColArr.forEach(item=> { //遍历取列名拼接
@@ -21,6 +25,9 @@ var UpdateTaskinfo = function(table, obj, id) {
 var InsertTaskinfo = function(table, obj) {
 
    let ColArr = ['TaskID', 'AGVID', 'AGVIP', 'StartPlaceDescription', 'EndPlaceDescription', 'TaskTypeName', 'TaskType', 'TaskStatus', 'TaskStatusDescription', 'StartTime', 'FinishTime', 'SetTime', 'TokenFinishTime', 'TokenStartTime', 'TokenUseTime', 'TokenMaxTime', 'TokenOffset', 'Sender', 'MaterialNum', 'MaterialID', 'Number', 'Unit', 'LabelNumber', 'LineID', 'OrderID', 'CancelCurrentTask', 'MaterialIDs']
+   if (webConfig && webConfig['InsertTaskinfo']) {
+		ColArr = webConfig['InsertTaskinfo']
+	}
    let CollStr = new Array();
    let valStr = new Array()
    ColArr.forEach(item=> {
