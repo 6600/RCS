@@ -55,15 +55,22 @@ export default {
      let that  = this
      return function(task,agv){
        console.log(that.webConfig)
-       var str = that.webConfig.map
+       var str = that.webConfig.avgText
       for (const key in task) {
         if (Object.hasOwnProperty.call(task, key)) {
           const element = task[key];
           str = str.replace(`{{${key}}}`, element)
         }
       }
-      if(task.WarningStatus!=''){ 
-         that.$emit('warninfo',{info:`${task.WarningStatus}， 小车${task.AGVID}`,idx:this.mapIdx}) 
+      if(task.WarningStatus!=''){
+        let warninfo = that.webConfig.warninfo
+        for (const key in task) {
+          if (Object.hasOwnProperty.call(object, key)) {
+            const element = task[key];
+            warninfo = warninfo.replace(`{{${key}}}`, element)
+          }
+        }
+         that.$emit('warninfo',{info:warninfo, idx:this.mapIdx}) 
           agv.warn = task.WarningStatus
 
       }else{
