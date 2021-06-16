@@ -1,6 +1,8 @@
 {
   "map": [
     {
+      "row": 1,
+      "column": 1,
       "name": "1",
       "url": "static/img/map/1floor.png", 
       "w": 2432, 
@@ -562,6 +564,8 @@
       "mark": { }
     }, 
     {
+      "row": 1,
+      "column": 2,
       "name": "2",
       "url": "static/img/map/2floor.png", 
       "w": 2432, 
@@ -888,6 +892,8 @@
       "mark": { }
     }, 
     {
+      "row": 2,
+      "column": 1,
       "name": "3",
       "url": "static/img/map/3floor.png", 
       "w": 2432, 
@@ -899,6 +905,8 @@
       "mark": { }
     }, 
     {
+      "row": 2,
+      "column": 2,
       "name": "4",
       "url": "static/img/map/4floor.png", 
       "w": 2432, 

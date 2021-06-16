@@ -154,7 +154,16 @@ default {
         that.setWebConfig(res.data)
         console.log('配置信息')
         console.log(data)
-        that.InitFloormap(res.data.map)
+        let mapList = []
+        res.data.map.forEach(element => {
+          if (element) {
+            element.row = element.row || 1
+            element.column = element.column || 1
+            mapList[(element.row * element.column) - 1] = element
+          }
+          
+        });
+        that.InitFloormap(mapList)
 
 				data.forEach((item, index) => {
 					let mapRangObj = {
