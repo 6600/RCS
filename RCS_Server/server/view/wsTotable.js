@@ -1,5 +1,5 @@
 import dbHelper from '../dbHelper/DBConnection'
-import webConfig from '../../assets/config/web.json'
+import webConfig from '../../assets/config/web.js'
 
 //更新taskinfo数据到数据库：在socket端调用
 var UpdateTaskinfo = function(table, obj, id) {

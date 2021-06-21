@@ -3,6 +3,7 @@ import staticsview from './Staticsview'
 import TaskView from './TaskView'
 import nodemail from './nodemail'
 import user from './user'
+import webConfig from '../assets/config/web.js'
 
 
 /**
@@ -11,12 +12,7 @@ import user from './user'
  */
 const routerDispatcher = function(app) {
   app.use('/config', function (req, res) {
-    fs.readFile('./assets/config/web.json', function(err,data){
-      if(err) {
-        console.log(err);
-      }
-      res.end(data);
-    });
+    res.end(JSON.stringify(webConfig));
     
   }); 
   app.use('/', user);

@@ -12,9 +12,13 @@
         <el-col :span="6" class = 'btngroup'>
           <div class = 'floorGroup'>
              <ul class='floorbtn' >
-              <li v-for='(item, ind) in floormap' @click='SelectFloor(ind)' :key="ind">
-                <div :class="tweenClass(ind)" >
-                <div class="floor"><span>{{item.name}}</span></div></div></li>  
+              <li v-for='(item, ind) in floormap' @click='SelectFloor(ind + 1)' :key="ind">
+                <template v-if="item">
+                  <div :class="tweenClass(ind + 1)" >
+                  <div class="floor"><span>{{item.name}}</span></div></div>
+                </template>
+                
+              </li>  
             </ul>
             <div class='thumb' :class="{thumbborder:flooridx==-1}"> 
                <i @click="SelectFloor('thumb')" class = 'iconfont icon-suolvetuxianshi' :class="{color:flooridx==-1?'#ffffff':'#049de4'}"></i> 
@@ -159,7 +163,7 @@ default {
           if (element) {
             element.row = element.row || 1
             element.column = element.column || 1
-            mapList[(element.row * element.column) - 1] = element
+            mapList[(((element.column - 1) * that.webConfig.mapRowNum) + (element.row - 1))] = element
           }
           
         });
@@ -263,6 +267,7 @@ default {
 				}
 			},
 			SelectFloor(idx) { //楼层选择
+      console.log(`楼层选择: ${idx}`)
 				this.tweenBtn(idx)
         this.setFloorIdx(idx)
 				// this.$router.push({ name: 'diaodu', params: { floor: 123 }})

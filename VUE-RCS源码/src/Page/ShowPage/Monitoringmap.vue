@@ -137,9 +137,8 @@ export default {
         attributionControl: false, 
         transparent:true
       }
-     this.type=="Monitor"?obj.zoom=13.3:obj.zoomSnap=12.6
-     var zoom =  12.39
-     this.type=="Monitor"?zoom=13.3:zoom=12.6
+     var zoom = this.type=="Monitor"?zoom=13.3:zoom=11 + (((window.innerHeight - 320) / 649) * 0.6)
+     obj.zoom = zoom
      this.Lmap = L.map(this.$el,obj).setView([51.495, -0.075],zoom);  
      this.Lmap.stop()
      this.InitMap() 
@@ -224,8 +223,10 @@ export default {
        
        this.leafmap = new LeafMap(this.Lmap) 
         let devOrpub = {   dev:'../../../',   pub:'./'  }
-        let layer =  this.Map==undefined?{w:this.webConfig.map.mapw,h:this.webConfig.map.maph,url:' '}:this.Map    //加载背景图版
-        let url = devOrpub[config.env]+layer.url                                 //适配开发和部署的图片路径
+        console.log('----------------------')
+        console.info(this.Map)
+        let layer =  this.Map==undefined ? {w:this.webConfig.map.mapw, h:this.webConfig.map.maph,url:' '}: this.Map    //加载背景图版
+        let url = devOrpub[config.env] + layer.url                                 //适配开发和部署的图片路径
           
           console.log('layer图片路径',url)
           this.bgimg  = this.leafmap.loadlayer(layer,url)     //背景图片  
@@ -237,7 +238,7 @@ export default {
          let placeo = this.leafmap.loadPlace(this.place,this.Map,this.type)      //车库图层,每次flooridx时clearlayer 
             this.placelayer = placeo.placelayer
             this.placeicons = placeo.placeicons
-             this.leafmap.scrollWheelZoom = false           
+             this.leafmap.scrollWheelZoom = true           
                console.log('pathlayer',obj.pathlayer); 
           
           if(this.AGVstatus!=''){
@@ -263,44 +264,37 @@ export default {
         console.log(data)
         let markerUpdate = false
         this.leafmap.markicons.forEach((AGV, idx) => {
+          console.log(AGV.ID, data.ID)
           if (AGV.ID == data.ID) {
-            if (this.infloor(data, 'update') >= 0) { //遍历此地图的小车，判断小车坐标是否在此地图内
-              let pointXY = L.point(parseInt(data.X), parseInt(data.Y)); ///将像素坐标转成lanlng坐标
-              console.log(pointXY)
-              let pointlatlng = this.Lmap.unproject(pointXY, this.Lmap.getMaxZoom() - 1);
-              console.log(pointlatlng)
-              AGV.setLatLng(pointlatlng);
-              AGV.setRotationAngle(-parseInt(data.Th))
-              //https://github.com/bbecquet/Leaflet.RotatedMarker
-              let pop = AGV.getPopup()
-              pop.setLatLng(pointlatlng)
-              pop._container.setAttribute("status", data['MovingStatus'] || 0)
-              if (data.special) {
-                console.log(pop._container)
-                pop._container.classList.add('special')
-                pop._container.classList.remove('no-special')
-                setTimeout(() => {
-                  pop._container.style.left = data.specialValue[0] + 'px'
-                  pop._container.style.bottom = data.specialValue[1] + 'px'
-                }, 500);
-              } else {
-                setTimeout(() => {
-                  pop._container.style.bottom = '100%'
-                }, 0);
-                pop._container.classList.remove('special')
-                pop._container.classList.add('no-special')
-              }
-              AGV._icon.setAttribute("status", data['MovingStatus'] || 0)
-              AGV.bindPopup(pop).openPopup()
+            console.error(this.infloor(data, 'update'))
+            this.infloor(data, 'update')
+            let pointXY = L.point(parseInt(data.X), parseInt(data.Y)); ///将像素坐标转成lanlng坐标
+            console.log(pointXY)
+            let pointlatlng = this.Lmap.unproject(pointXY, this.Lmap.getMaxZoom() - 1);
+            console.log(pointlatlng)
+            AGV.setLatLng(pointlatlng);
+            AGV.setRotationAngle(-parseInt(data.Th))
+            //https://github.com/bbecquet/Leaflet.RotatedMarker
+            let pop = AGV.getPopup()
+            pop.setLatLng(pointlatlng)
+            pop._container.setAttribute("status", data['MovingStatus'] || 0)
+            if (data.special) {
+              console.log(pop._container)
+              pop._container.classList.add('special')
+              pop._container.classList.remove('no-special')
+              setTimeout(() => {
+                pop._container.style.left = data.specialValue[0] + 'px'
+                pop._container.style.bottom = data.specialValue[1] + 'px'
+              }, 500);
             } else {
-              this.leafmap.markicons.forEach((AGV, idx) => {
-                if (AGV.ID == data.ID) {
-                  this.leafmap.markicons.splice(idx, 1)
-                }
-              })
-              // console.log(this.mapIdx,'楼的',AGV.ID,'小车','跑到其他楼层');                 //如果跑到其他楼层时，删除此楼层的小车图标
-              AGV.remove()
+              setTimeout(() => {
+                pop._container.style.bottom = '100%'
+              }, 0);
+              pop._container.classList.remove('special')
+              pop._container.classList.add('no-special')
             }
+            AGV._icon.setAttribute("status", data['MovingStatus'] || 0)
+            AGV.bindPopup(pop).openPopup()
             markerUpdate = true
           }
         })
@@ -334,5 +328,9 @@ export default {
   height: 100%;
   pointer-events: none;
 }
-
+// .leaflet-overlay-pane {
+//   position: relative;
+//   width: 100%;
+//   height: 100%;
+// }
 </style>
