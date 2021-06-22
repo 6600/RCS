@@ -65,6 +65,7 @@ body {
 }
 .panel .el-col-24 {
   overflow: auto;
+  height: 100%;
 }
 .leaflet-ant-path.active {
   stroke: #ff0000;

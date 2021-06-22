@@ -106,6 +106,7 @@ import      mPicker                                                             
        Start_Option:state       => state.TaskList.Start_Option,    
        End_Option:state         => state.TaskList.End_Option,
        user:state         => state.user,
+       webConfig:    state      => state.DataStatistics.webConfig
   }),
    AGVStatus:{
      get:function (){   return this.$store.state.TaskList.AGVStatus   },
