@@ -65,32 +65,11 @@
  <div class="tableContain"> 
   <el-table ref="table" :data="TaskList.slice((currentPage-1)*PageSize,currentPage*PageSize)"  :row-style='rowStyle' :row-class-name='rowname'
    :header-cell-style="{background:'rgb(80, 118, 241)',color:'white'}" @row-click="TaskDetail" >
-
-       <af-table-column  prop="FireTokenID"  type="index"  align="center"  label="序号"      width="50">   </af-table-column>   <!--table-column 表格数据格式化formatter属性： https://blog.csdn.net/yytoo2/article/details/83992175?utm_medium=distribute.pc_relevant_t0.none-task-blog-blogcommendfrommachinelearnpai2-1.edu_weight&depth_1-utm_source=distribute.pc_relevant_t0.none-task-blog-blogcommendfrommachinelearnpai2-1.edu_weight                                                                                                       http://www.caotama.com/341423.html -->
-       <af-table-column  column prop="TaskID"              align="center"  label="任务号"    width="175" >   </af-table-column>    
-       <af-table-column  prop="AGVID" label="编号"         align="center"                   width="50"
-         >   </af-table-column> 
-        <!-- :filters="[{text: 'C1', value: 'C1'}, {text: 'C2', value: 'C2'}, {text: 'C3', value: 'C3'}, {text: 'C4', value: 'C4'}]"
-       :filter-method="AGVIDfilter"
-       :filter-method="Statusfilter":filters="[{text: '已完成', value: '已完成'}, {text: '待执行', value: '待执行'}, {text: '任务异常', value: '任务异常'}, {text: '正在执行', value: '正在执行'}]" -->
-       <af-table-column  prop="TaskStatusDescription"  label="状态" align="center"  
-       >   </af-table-column> 
-       <af-table-column  prop="Number" label="数量"    align="center"  width="50">    </af-table-column>
-       <af-table-column  prop="Unit"   label="单位"    align="center"  width="50">    </af-table-column>
-       <af-table-column  prop="StartPlaceDescription" :formatter="StartEndPlace"  label="起终位置"   align="center" width="270">    </af-table-column>
-      <af-table-column  prop="OrderID"  label="工单号"   align="center"         width="80"  >                       </af-table-column>
-       <af-table-column  prop="StartTime"  label="开始时间"   align="center"         width="120"  >                       </af-table-column>
-       <af-table-column  prop="FinishTime"  label="完成时间"   align="center"         width="120"  >                       </af-table-column>
-       <af-table-column  prop="LabelNumber"        label="资安标签"   align="center" width="50">                     </af-table-column>
-       <af-table-column  prop="PrintNum"  label="打印"   align="center"         width="80"  >                       </af-table-column>
-       <af-table-column  prop="TaskTypeName"       label="任务类型" width="120" align="center">                  </af-table-column>
-       <af-table-column  prop="TokenStartTime"     label="出岗时间"       align="center"     width="160">        </af-table-column>
-       <af-table-column  prop="TokenFinishTime"    label="到岗时间"       align="center"     width="160">        </af-table-column>
-       <af-table-column  prop="TokenUseTime"       label="出入岗时间"     align="center"     width="120">        </af-table-column>
-       <af-table-column  prop="TokenMaxTime"       label="规定时间"       align="center"     width="80" >        </af-table-column> 
-       <af-table-column  prop="TokenOffset"        label="差异"           align="center"     width="90" >        </af-table-column>                    
-       <af-table-column  prop="CancelCurrentTask"        label="取消"           align="center"     width="90" >        </af-table-column>                    
-       <!-- <el-table-column  prop="AGVID" :formatter="comment"  label="备注"  align="center" width="100">          </el-table-column>  -->
+      <af-table-column v-for="item in webConfig.scrollTaskList" :key="item.prop"  :prop="item.prop"  :align="item.align" type="index" :label="item.label" :width="item.width">
+        <template slot-scope="scope">
+          <div>{{scope.row[item.prop]}}</div>
+        </template>
+      </af-table-column> 
    </el-table>
    <el-pagination background layout="prev, pager, next"  
        @size-change="handleSizeChange" 

@@ -67,28 +67,11 @@
   :row-style='rowStyle'
    :row-class-name='rowname'
   :header-cell-style="{background:'rgb(80, 118, 241)',color:'white'}"  border  @row-click="TaskDetail">
-       <af-table-column  prop="FireTokenID"  align="center" type="index" label="序号" width="50">                </af-table-column> 
-       <!--知识点table-column 表格数据格式化formatter属性： https://blog.csdn.net/yytoo2/article/details/83992175?utm_medium=distribute.pc_relevant_t0.none-task-blog-blogcommendfrommachinelearnpai2-1.edu_weight&depth_1-utm_source=distribute.pc_relevant_t0.none-task-blog-blogcommendfrommachinelearnpai2-1.edu_weight                                                                                                       http://www.caotama.com/341423.html --> -->
-       <af-table-column  column prop="TaskID" align="center"   label="任务号"   width="180" >                    </af-table-column>     
-       <af-table-column  prop="AGVID"  label="编号"   align="center"         width="50"  >                       </af-table-column>
-       <af-table-column  prop="OrderID"  label="工单号"   align="center"         width="80"  >                       </af-table-column>
-       <af-table-column  prop="StartTime"  label="开始时间"   align="center"         width="120"  >                       </af-table-column>
-       <af-table-column  prop="FinishTime"  label="完成时间"   align="center"         width="120"  >                       </af-table-column>
-       <af-table-column  prop="PrintNum"  label="打印"   align="center"         width="80"  >                       </af-table-column>
-       <af-table-column  prop="TaskStatusDescription"   label="状态" align="center" width="80">                  </af-table-column>  
-       <af-table-column  prop="Number" label="数量"     align="center" width="50">                               </af-table-column> 
-       <af-table-column  prop="Unit"   label="单位"     align="center" width="50">                               </af-table-column> 
-       <af-table-column  prop="LabelNumber"             label="资安标签"          align="center  " width="50">   </af-table-column> 
-       <af-table-column  prop="StartPlaceDescription"   label="起始位置"      align="center"   width="175">    </af-table-column>
-       <af-table-column  prop="EndPlaceDescription"   label="中止位置"      align="center"   width="175">    </af-table-column> 
-       <af-table-column  prop="TaskTypeName"            label="任务类型"      align="center"   width="120" >           </af-table-column> 
-       <af-table-column  prop="TokenStartTime"          label="出岗时间"      align="center"   width="160">            </af-table-column> 
-       <af-table-column  prop="TokenFinishTime"         label="到岗时间"      align="center"   width="160">            </af-table-column> 
-       <af-table-column  prop="TokenUseTime"            label="出入岗时间"    align="center"   width="120">            </af-table-column> 
-       <af-table-column  prop="TokenMaxTime"            label="规定时间"      align="center"   width="80" >            </af-table-column>  
-       <af-table-column  prop="TokenOffset"             label="差异"          align="center"   width="90" >            </af-table-column>  
-       <af-table-column  prop="CancelCurrentTask"       label="取消"          align="center"   width="90" >            </af-table-column>
-       <!-- <el-table-column  prop="AGVID" :formatter="comment"  label="备注"  align="center" width="100">             </el-table-column>   -->
+      <af-table-column v-for="item in webConfig.taskList" :key="item.prop"  :prop="item.prop"  :align="item.align" type="index" :label="item.label" :width="item.width">
+        <template slot-scope="scope">
+          <div>{{scope.row[item.prop]}}</div>
+        </template>
+      </af-table-column> 
    </el-table> 
     <el-pagination background layout="prev, pager, next"   
      @size-change="handleSizeChange"  
@@ -114,19 +97,20 @@ import      HeaderList                                                          
   export default {
   components:{Button,DatetimePicker,mPicker,HeaderList},
   computed:{
-       //VueX状态管理Module的使用 mapState:https://www.jianshu.com/p/0b42a876561e
-     ...mapState( {  
-       TaskList:     state      => state.TaskList.TaskList,  
-       totalCount:   state      => state.TaskList.totalCount,  
-       currentPage:  state      => state.TaskList.currentPage,   
-       AGV_Option:   state      => state.TaskList.AGV_Option,    
-       Status_Option:state      => state.TaskList.Status_Option,    
-       Start_Option: state      => state.TaskList.Start_Option,    
-       End_Option:   state      => state.TaskList.End_Option,   
-       label:        state      => state.TaskList.label,   
-       keylabel:     state      => state.TaskList.keylabel,
-       user:  state  =>state.user,
-  }),  
+    //VueX状态管理Module的使用 mapState:https://www.jianshu.com/p/0b42a876561e
+    ...mapState( {  
+      TaskList:     state      => state.TaskList.TaskList,  
+      totalCount:   state      => state.TaskList.totalCount,  
+      currentPage:  state      => state.TaskList.currentPage,   
+      AGV_Option:   state      => state.TaskList.AGV_Option,    
+      Status_Option:state      => state.TaskList.Status_Option,    
+      Start_Option: state      => state.TaskList.Start_Option,    
+      End_Option:   state      => state.TaskList.End_Option,   
+      label:        state      => state.TaskList.label,   
+      keylabel:     state      => state.TaskList.keylabel,
+      user:         state      => state.user,
+      webConfig:    state      => state.DataStatistics.webConfig
+    }),  
     TimeRange:{ 
      get:function(){   return this.$store.state.TaskList.TimeRange   },
      set:function (v){  
