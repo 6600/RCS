@@ -21,27 +21,34 @@
        <!-- <el-button type="primary" size='small' @click='exportexcel'>导出</el-button> -->
   </div>
       <!--报错 component lists rendered with v-for should have explicit key  v-show = 'isFirstShow' -->
-     <ul class="PieChart">  
-         <li v-for="(item,idx) in StaticsData.slice(0,6)"  @click="PieSelect(item,idx)"  >  
-         <PieChart v-if="!item.hide" :ID='item.ID' :title='item.title' :index="idx"  :Piedata='item.pie' :type='item.type' @pageresponse='Pageonresize'>   </PieChart>   
-        </li>    
-     </ul>   
-      <div class="LineChart">
+    <ul class="PieChart">  
+      <li v-for="(item,idx) in StaticsData.slice(0,4)"  @click="PieSelect(item,idx)"  >  
+        <PieChart v-if="!item.hide" :ID='item.ID' :title='item.title' :index="idx"  :Piedata='item.pie' :type='item.type' @pageresponse='Pageonresize'>   </PieChart>   
+      </li> 
+    </ul>   
+    <div class="LineChart">
       <LineChart :select = 'PieSelectIDX' ChartType='稼动率' @pageresponse='Pageonresize'></LineChart>
-     </div>
-   
+    </div>
+    <ul class="rwzt">
+      <li v-for="(item,idx) in StaticsData.slice(4,5)"  @click="PieSelect(item,idx)"  >  
+        <PieChart2 v-if="!item.hide" :ID='item.ID' :title='item.title' :index="idx"  :Piedata='item.pie' :type='item.type' @pageresponse='Pageonresize'>   </PieChart2>   
+      </li> 
+    </ul>
+    <div class="clear"></div>
   </div>
 </template>
 
 <script>
 import   LineChart                                              from './LineChart'
 import   PieChart                                               from './PieChart'
+import   PieChart2                                               from './PieChart2'
 import      {mapState,mapActions,mapMutations}                  from 'vuex'
 //import      moment                                              from 'moment'
 
 export default {
   components:{
     PieChart,
+    PieChart2,
     LineChart
   },
   data() {
@@ -187,9 +194,9 @@ ul{
   display:flex;
   flex-wrap:wrap;
   li{ 
-    flex-flow: column; 
-    margin-left:15px;
+    flex-flow: column;
     float:left;
+    width: 50%;
   }
 }
   .chartList{
@@ -222,12 +229,31 @@ ul{
 } 
  
 .PieChart,.LineChart{
-    width: 95%;
-//     border: 1px solid #000;
-    height: auto;
-    margin: 0;
+  width: 50%;
+  height: auto;
+  margin: 0;
+  overflow: auto;
+  height: 40vh;
+  float: left;
+  overflow-x: hidden;
+}
+.PieChart {
+  li {
+    height: 20vh;
+  }
 }
 li {
   width: 100%;
+}
+.clear {
+  clear: all;
+}
+.rwzt {
+  width: 100%;
+  height: 43vh;
+  li {
+    width: 100%;
+    height: 100%;
+  }
 }
 </style>

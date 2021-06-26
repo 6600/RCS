@@ -918,7 +918,7 @@ export default {
       "mark": {}
     }
   ],
-  "mapRowNum": 1,
+  "mapRowNum": 2,
   "mapColumnNum": 2,
   "mapw": 5000,
   "maph": 3500,

@@ -45,9 +45,6 @@ export default {
 
 .Panelborder{
      position:relative;   margin-top: 8px; margin-bottom:1.5rem; 
-     box-shadow: 0 2px 4px rgba(0, 0, 0, .6), 0 0 6px rgba(43, 42, 42, 0.04); //背景阴影
-     background-color: #fff;
-      padding:0px  10px 0px 0px;
       height:25rem; 
       border-radius: 0px; 
        span{

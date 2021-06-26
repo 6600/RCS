@@ -13,9 +13,7 @@
 </template>
 
 <script> 
-import    Lradio                     from  './Lradio' 
-//import    echarts                    from  'echarts/lib/echarts'
-import    piePatternSrc              from  '@/assets/js/base64.js' 
+import    Lradio                     from  './Lradio'
 import    {mapState,mapActions,mapMutations,mapGetters}                  from 'vuex'
 
 import 'echarts-liquidfill'
@@ -424,10 +422,7 @@ return option
     text-align: center;
    // margin:0 auto;
     height: 100%;
-    width:95%; 
-    
-    margin-left: 15px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, .6), 0 0 6px rgba(43, 42, 42, 0.04); //背景阴影
+    width:100%; 
 
     .top{ 
       margin-top:1rem;

@@ -3,27 +3,17 @@
 <div class="test"> 
    <panelborder :title="title" width="100%" height="100%" :chartype="type" :index="index"> 
     <div class="contain"> 
-     <div class="avg canvcon" v-if="type == 'AGVStyle'"> 
-      <ul class="Charge"> 
-       <!-- <li class="header"><span>充电次数</span><span>充电时长</span></li>  -->
-       <li><span v-for="(value,key,index) in Charge">{{value}}</span></li> 
-      </ul> 
-      <div ref="Pie" style="width:50%;height:100%;"></div> 
-      <div ref="meterRate" :style="RatechargeSty"></div> 
-     </div> 
-     <!-- 订单统计 饼图 趋势图---> 
-     <div class="order canvcon" v-if="type == 'OrderStyle'"> 
-      <div class="pie" v-show="radio=='1'"> 
-       <div @click="selectPie('Status')" style="width:30%;">
-        <div ref="OTaskStatus" style="width:100%;height:100%;"></div> 
-       </div> 
-       <div @click="selectPie('TaskName')" style="width:70%;"> 
-        <div ref="OTaskName" style="width:100%;height:100%;"></div> 
-       </div> 
-       <!-- <div ref='OOrderID' style="top:-1rem;"  :style="StaticPieStyle"></div>      --> 
-      </div> 
-     </div> 
-     <!-- 物料统计 饼图 趋势图--> 
+      <div class="order canvcon" v-if="type == 'OrderStyle'"> 
+        <div class="pie" v-show="radio=='1'"> 
+        <div @click="selectPie('Status')" style="width:30%;height:100%;">
+          <div ref="OTaskStatus" style="width:100%;height:100%;"></div> 
+        </div> 
+        <div @click="selectPie('TaskName')" style="width:70%;height:100%;"> 
+          <div ref="OTaskName" style="width:100%;height:100%;"></div> 
+        </div> 
+        <!-- <div ref='OOrderID' style="top:-1rem;"  :style="StaticPieStyle"></div>      --> 
+        </div> 
+      </div>
 
     </div> 
    </panelborder> 
@@ -38,7 +28,7 @@ import                                'echarts-liquidfill'
 import { mapMutations, mapState } from 'vuex'
 
 export default {
-  name:'PieChart',
+  name:'PieChart2',
   props:['title','ID','index','Piedata','type','width'],
   components:{
     Panelborder,
