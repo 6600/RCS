@@ -5,10 +5,10 @@
     <div class="contain"> 
       <div class="order canvcon" v-if="type == 'OrderStyle'"> 
         <div class="pie" v-show="radio=='1'"> 
-        <div @click="selectPie('Status')" style="width:30%;height:100%;">
+        <div class="chart-item" @click="selectPie('Status')" style="width:30%;height:100%;">
           <div ref="OTaskStatus" style="width:100%;height:100%;"></div> 
         </div> 
-        <div @click="selectPie('TaskName')" style="width:70%;height:100%;"> 
+        <div class="chart-item" @click="selectPie('TaskName')" style="width:70%;height:100%;"> 
           <div ref="OTaskName" style="width:100%;height:100%;"></div> 
         </div> 
         <!-- <div ref='OOrderID' style="top:-1rem;"  :style="StaticPieStyle"></div>      --> 
@@ -85,8 +85,8 @@ export default {
                             {text:"仪表盘",ref:that.$refs.meterRate}
                             ],
                    OrderStyle:[
-                            {text:"任务类别",ref:that.$refs.OTaskName},
-                            {text:"任务状态",ref:that.$refs.OTaskStatus},
+                            {text:"任务类别饼图",ref:that.$refs.OTaskName},
+                            {text:"任务状态饼图",ref:that.$refs.OTaskStatus},
                             {text:"工单号",ref:that.$refs.OOrderID}
                               ]
                    } 
@@ -216,6 +216,7 @@ export default {
                                                                  //['正常时间','异常时间']   
                                                                  //[{name:'正常时间',value:5},{name:'异常时间',value:11}] 
      calculable: true,
+     legend: {},
      series: [ {
          name: '稼动率',    
          type: 'pie',  
@@ -511,11 +512,15 @@ export default {
   }
   .pie{
     margin:0 auto;
-    height:90%;
+    height:100%;
     display: flex;
     justify-content: space-around;
     align-items:center;
     width: 100%;
     flex-wrap: wrap;     //超出换行 flex ,元素两边空格
+  }
+  .chart-item {
+    border: 1px solid #ccc;
+    box-sizing: border-box;
   }
 </style>

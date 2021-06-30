@@ -10,7 +10,7 @@
 <div class="contain"> 
   
   <div   :class="panelclass" class="Panelborder"  :style="{width:width,height:height}"  >
-   <span>{{title}}</span>
+   <!-- <span>{{title}}</span> -->
    <slot></slot>
  </div>
 </div>

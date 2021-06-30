@@ -4,9 +4,9 @@
   <div class="contain" :style={opacity:show?1:0}>
     <Lradio @Radchange='EXdayOrmon'> </Lradio>  
        <!--   -->
-    <div ref='BarChart'  v-if = "ChartType=='AGVStyle'"                            :style='lineStyle'></div>  
-    <div ref='BarsChart' v-else-if = "ChartType=='TaskName'||ChartType=='Status'"  :style='lineStyle'></div>   
-    <div ref='LineChart' v-else-if = "ChartType=='matterStyle'"                    :style='lineStyle'></div>    
+    <div ref='BarChart'  v-if = "ChartType=='AGVStyle'"                            style='top:1.5rem;width:100%;height:100%;marin-top:2rem;margin:0 auto'></div>  
+    <div ref='BarsChart' v-else-if = "ChartType=='TaskName'||ChartType=='Status'"  style='top:1.5rem;width:100%;height:100%;marin-top:2rem;margin:0 auto'></div>   
+    <div ref='LineChart' v-else-if = "ChartType=='matterStyle'"                    style='top:1.5rem;width:100%;height:100%;marin-top:2rem;margin:0 auto'></div>    
     <!-- avg统计 饼图 趋势图---> 
    </div>    
  
@@ -39,9 +39,6 @@ export default {
        
     }),
     ...mapGetters(['getDayMonLine']),
-    lineStyle(){
-      return "top:1.5rem;width:100%;height:25rem;marin-top:2rem;margin:0 auto";
-      }, 
   },
   watch:{
     PieSelectIDX(newV,oldV){
@@ -153,7 +150,7 @@ export default {
     var that = this ;
     var barOption = {
       title: {
-          text: '小车稼动率趋线图',
+          text: '稼动率变化折线图',
           //subtext: BarOption.rate
       },
     xAxis: {
@@ -192,7 +189,7 @@ export default {
     ],
     series: [
         { // For shadow
-            type: 'bar',
+            type: 'line',
             itemStyle: {
                 color: 'rgba(0,0,0,0.05)'
             },
@@ -202,7 +199,7 @@ export default {
             animation: false
         },
         {
-            type: 'bar',
+            type: 'line',
             itemStyle: {
                  normal: {
 							},
@@ -332,7 +329,7 @@ app.config = {
 }; 
    
    BarOption.series.forEach(item=>{
-       item.type='bar'
+       item.type='line'
        item.barGap= 0
     })
 
@@ -355,7 +352,7 @@ var option = {
         feature: {
           mark: {show: true},
           dataView: {show: true, readOnly: false},
-          magicType: {show: true, type: ['line', 'bar', 'stack', 'tiled']},
+          magicType: {show: true, type: ['line', 'line', 'stack', 'tiled']},
           restore: {show: true},
           saveAsImage: {show: true}
         }

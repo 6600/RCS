@@ -21,7 +21,8 @@
        <!-- <el-button type="primary" size='small' @click='exportexcel'>导出</el-button> -->
   </div>
       <!--报错 component lists rendered with v-for should have explicit key  v-show = 'isFirstShow' -->
-    <ul class="PieChart">  
+    <ul class="PieChart">
+      <div class="title-bar">稼动率和机损率饼图</div>
       <li v-for="(item,idx) in StaticsData.slice(0,4)"  @click="PieSelect(item,idx)"  >  
         <PieChart v-if="!item.hide" :ID='item.ID' :title='item.title' :index="idx"  :Piedata='item.pie' :type='item.type' @pageresponse='Pageonresize'>   </PieChart>   
       </li> 
@@ -30,7 +31,7 @@
       <LineChart :select = 'PieSelectIDX' ChartType='稼动率' @pageresponse='Pageonresize'></LineChart>
     </div>
     <ul class="rwzt">
-      <li v-for="(item,idx) in StaticsData.slice(4,5)"  @click="PieSelect(item,idx)"  >  
+      <li v-for="(item,idx) in StaticsData.slice(4,5)"  @click="PieSelect(item, 4 + idx)" :key="idx" >  
         <PieChart2 v-if="!item.hide" :ID='item.ID' :title='item.title' :index="idx"  :Piedata='item.pie' :type='item.type' @pageresponse='Pageonresize'>   </PieChart2>   
       </li> 
     </ul>
@@ -150,21 +151,7 @@ export default {
     },
     PieSelect(item,idx){
       console.log('选择了  ',item.type+'饼图',idx,this.PieSelectIDX); 
-      for(let i =0;i<=5;i++){                                              //点击放大的缓动动画 
-        this.tween.to('.tweenPie'+i,{scaleX:1,scaleY:1}) 
-        this.$('.tweenPie'+i).css({zIndex:0})
-      } 
-      if(idx!=this.PieSelectIDX){ 
-         var zIndex = this.$('.tweenPie'+idx).css('zIndex')
-        if(zIndex=='2'){
-          this.tween.to('.tweenPie'+i,{scaleX:1,scaleY:1}) 
-          this.$('.tweenPie'+i).css({zIndex:0}) 
-        }else{
-          this.tween.to('.tweenPie'+idx,{scaleX:1.09,scaleY:1.09})
-          this.$('.tweenPie'+idx).css({zIndex:2}) 
-        }
-      }
-        this.SetPieIDX(idx)
+      this.SetPieIDX(idx)
       if(item.type!='OrderStyle'){
         this.SetChartType(item.type) 
       } 
@@ -236,6 +223,9 @@ ul{
   height: 40vh;
   float: left;
   overflow-x: hidden;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+  position: relative;
 }
 .PieChart {
   li {
@@ -255,5 +245,13 @@ li {
     width: 100%;
     height: 100%;
   }
+}
+.title-bar {
+  font-weight: bold;
+  font-size: 18px;
+  position: absolute;
+  top: 0px;
+  z-index: 9;
+  left: 5px;
 }
 </style>
