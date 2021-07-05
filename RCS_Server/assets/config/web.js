@@ -968,5 +968,50 @@ export default {
     {"prop": "TokenMaxTime", "align": "center", "label": "规定时间", "width": 80},
     {"prop": "TokenOffset", "align": "center", "label": "差异", "width": 90},
     {"prop": "CancelCurrentTask", "align": "center", "label": "取消", "width": 90}
+  ],
+  // 设备状态
+  "systemInfo": [
+    {
+      "name": "系统1",
+      "icon": "http://cunchu.site/upload/b69a0128bde75fdd.png",
+      "info": "",
+      "width": "240px",
+      "height": "80px"
+    },
+    {
+      "name": "系统2",
+      "icon": "http://cunchu.site/upload/b69a0128bde75fdd.png",
+      "info": "",
+      "width": "240px",
+      "height": "80px"
+    },
+    {
+      "name": "系统3",
+      "icon": "http://cunchu.site/upload/b69a0128bde75fdd.png",
+      "info": "",
+      "width": "240px",
+      "height": "80px"
+    },
+    {
+      "name": "系统4",
+      "icon": "http://cunchu.site/upload/b69a0128bde75fdd.png",
+      "info": "",
+      "width": "240px",
+      "height": "80px"
+    },
+    {
+      "name": "系统5",
+      "icon": "http://cunchu.site/upload/b69a0128bde75fdd.png",
+      "info": "",
+      "width": "240px",
+      "height": "80px"
+    },
+    {
+      "name": "系统6",
+      "icon": "http://cunchu.site/upload/b69a0128bde75fdd.png",
+      "info": "",
+      "width": "240px",
+      "height": "80px"
+    },
   ]
 }

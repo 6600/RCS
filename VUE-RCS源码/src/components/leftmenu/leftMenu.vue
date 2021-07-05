@@ -29,6 +29,9 @@
         <el-menu-item  index="/showPage"       class='menuItem'>
             <i class="iconfont icon-task"></i> <span slot="title" >新的界面</span>
         </el-menu-item>
+        <el-menu-item  index="/systemInfo"       class='menuItem'>
+            <i class="iconfont icon-task"></i> <span slot="title" >设备状态</span>
+        </el-menu-item>
     </el-menu>
 </div>
 </template>

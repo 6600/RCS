@@ -44,6 +44,12 @@ export default new Router({
           "name": "showPage", 
           "component": () => import('@/Page/ShowPage/DispatchMonitor.vue')
       
+        },
+        {
+          "path": "/systemInfo", 
+          "name": "systemInfo", 
+          "component": () => import('@/Page/SystemInfo/index.vue')
+      
         }, 
         {
           "path": "/Connections", 
