@@ -970,48 +970,118 @@ export default {
     {"prop": "CancelCurrentTask", "align": "center", "label": "取消", "width": 90}
   ],
   // 设备状态
-  "systemInfo": [
-    {
-      "name": "系统1",
-      "icon": "http://cunchu.site/upload/b69a0128bde75fdd.png",
-      "info": "",
-      "width": "240px",
-      "height": "80px"
-    },
-    {
-      "name": "系统2",
-      "icon": "http://cunchu.site/upload/b69a0128bde75fdd.png",
-      "info": "",
-      "width": "240px",
-      "height": "80px"
-    },
-    {
-      "name": "系统3",
-      "icon": "http://cunchu.site/upload/b69a0128bde75fdd.png",
-      "info": "",
-      "width": "240px",
-      "height": "80px"
-    },
-    {
-      "name": "系统4",
-      "icon": "http://cunchu.site/upload/b69a0128bde75fdd.png",
-      "info": "",
-      "width": "240px",
-      "height": "80px"
-    },
-    {
-      "name": "系统5",
-      "icon": "http://cunchu.site/upload/b69a0128bde75fdd.png",
-      "info": "",
-      "width": "240px",
-      "height": "80px"
-    },
-    {
-      "name": "系统6",
-      "icon": "http://cunchu.site/upload/b69a0128bde75fdd.png",
-      "info": "",
-      "width": "240px",
-      "height": "80px"
-    },
-  ]
+  "systemInfo": {
+    "设备类型1": [
+      {
+        "name": "系统1",
+        "icon": "http://cunchu.site/upload/b69a0128bde75fdd.png",
+        "state": "normal",
+        "info": "",
+        "width": "240px",
+        "height": "80px",
+        "ip": "112.26.54.42"
+      },
+      {
+        "name": "系统2",
+        "icon": "http://cunchu.site/upload/b69a0128bde75fdd.png",
+        "info": "",
+        "state": "warn",
+        "width": "240px",
+        "height": "80px",
+        "ip": "112.26.54.42"
+      },
+      {
+        "name": "系统3",
+        "icon": "http://cunchu.site/upload/b69a0128bde75fdd.png",
+        "info": "",
+        "state": "error",
+        "width": "240px",
+        "height": "80px",
+        "ip": "112.26.54.42"
+      },
+      {
+        "name": "系统4",
+        "icon": "http://cunchu.site/upload/b69a0128bde75fdd.png",
+        "info": "",
+        "state": "warn",
+        "width": "240px",
+        "height": "80px",
+        "ip": "112.26.54.42"
+      },
+      {
+        "name": "系统5",
+        "icon": "http://cunchu.site/upload/b69a0128bde75fdd.png",
+        "info": "",
+        "state": "normal",
+        "width": "240px",
+        "height": "80px",
+        "ip": "112.26.54.42"
+      },
+      {
+        "name": "系统6",
+        "icon": "http://cunchu.site/upload/b69a0128bde75fdd.png",
+        "info": "",
+        "state": "error",
+        "width": "240px",
+        "height": "80px",
+        "ip": "112.26.54.42"
+      },
+    ],
+    "设备类型2": [
+      {
+        "name": "系统1",
+        "icon": "http://cunchu.site/upload/026ec73e5092fad2.png",
+        "state": "normal",
+        "info": "",
+        "width": "360px",
+        "height": "100px",
+        "ip": "112.26.54.42"
+      },
+      {
+        "name": "系统2",
+        "icon": "http://cunchu.site/upload/026ec73e5092fad2.png",
+        "info": "",
+        "state": "warn",
+        "width": "360px",
+        "height": "100px",
+        "ip": "112.26.54.42"
+      },
+      {
+        "name": "系统3",
+        "icon": "http://cunchu.site/upload/026ec73e5092fad2.png",
+        "info": "",
+        "state": "error",
+        "width": "360px",
+        "height": "100px",
+        "ip": "112.26.54.42"
+      },
+      {
+        "name": "系统4",
+        "icon": "http://cunchu.site/upload/026ec73e5092fad2.png",
+        "info": "",
+        "state": "warn",
+        "width": "360px",
+        "height": "100px",
+        "ip": "112.26.54.42"
+      },
+      {
+        "name": "系统5",
+        "icon": "http://cunchu.site/upload/026ec73e5092fad2.png",
+        "info": "",
+        "state": "normal",
+        "width": "360px",
+        "height": "100px",
+        "ip": "112.26.54.42"
+      },
+      {
+        "name": "系统6",
+        "icon": "http://cunchu.site/upload/026ec73e5092fad2.png",
+        "info": "",
+        "state": "error",
+        "width": "360px",
+        "height": "100px",
+        "ip": "112.26.54.42"
+      },
+    ]
+  }
 }
