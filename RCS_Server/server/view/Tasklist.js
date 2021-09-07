@@ -14,12 +14,6 @@ import dbHelper from '../dbHelper/DBConnection'
   //start 开始日期，end结束日期，type：需要分组的字段,daymon:根据天或月查询
   var queryTasklist =function (ColArr,StartTime,FinishTime,AGVID,StartPlace,EndPlace, OrderID, TaskStatusDescription, name){ 
     let sql =``
-    let CollStr = new Array();
-    ColArr.forEach(item => {                     //遍历取列名拼接
-        CollStr+=item+','
-    });
-    CollStr = CollStr.substring(0, CollStr.length - 1);  
-    console.log(AGVID)
     AGVID = getOrStr(AGVID, 'AGVID')
     StartPlace = getOrStr(StartPlace, 'StartPlaceDescription')
     EndPlace   = getOrStr(EndPlace, 'EndPlaceDescription')
@@ -27,7 +21,7 @@ import dbHelper from '../dbHelper/DBConnection'
     OrderID = OrderID ? `and OrderID like '%${OrderID}%'` : ``
     const runStr = name == 'now'? ` and (TaskStatusDescription != '已完成' and TaskStatusDescription != '异常')`: ''
     let param = AGVID + StartPlace + EndPlace + OrderID + TaskStatusDescription + runStr
-    sql =`select  `+CollStr+` FROM taskinfo WHERE SetTime >='` + StartTime+`' and SetTime<='`+FinishTime+`' and TaskTypeName not like '%充电%' `+param+` order by SetTime desc`
+    sql =`select  * FROM taskinfo WHERE SetTime >='` + StartTime+`' and SetTime<='`+FinishTime+`' and TaskTypeName not like '%充电%' `+param+` order by SetTime desc`
     console.log(sql)
     //  console.log('返回查询列表',sql);
     return dbHelper.execPromiseSelect(sql)
