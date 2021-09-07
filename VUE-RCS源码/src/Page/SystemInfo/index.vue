@@ -1,15 +1,18 @@
 <template>
 <div class="system-info">
-  <h3>设备状态列表</h3>
-  <ul class="card-box clear">
-    <li v-for="(item, idx) in webConfig.systemInfo" :key="idx" class="normal" :style="{width: item.width || '240px', height: item.height || '80px'}">
-      <img :src="item.icon">
-      <div class="system-info-card-right">
-        <h4>{{item.name}}</h4>
-        <h4>IP: 114.2.42.23</h4>
-      </div>
-    </li>
-  </ul>
+  <div class="info-item" v-for="(infoItem, infoInd) in webConfig.systemInfo" :key="infoInd">
+    <h3>{{infoInd}}</h3>
+    <ul class="card-box clear">
+      <li v-for="(item, idx) in infoItem" :key="idx" :class="item.state || 'normal'" :style="{width: item.width || '240px', height: item.height || '80px'}">
+        <img :src="item.icon">
+        <div class="system-info-card-right">
+          <h4>{{item.name}}</h4>
+          <h4>{{item.ip}}</h4>
+        </div>
+      </li>
+    </ul>
+    <div class="clear"></div>
+  </div>
 </div>
   
 </template>
@@ -73,5 +76,10 @@ h3 {
   h4 {
     color: white;
   }
+}
+.info-item {
+  padding-bottom: 20px;
+  border-bottom: 1px solid #ccc;
+  margin-bottom: 10px;
 }
 </style>

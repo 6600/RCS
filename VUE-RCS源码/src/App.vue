@@ -76,4 +76,7 @@ body {
 .main .leaflet-container {
   background: white;
 }
+.clear {
+  clear: both;
+}
 </style>
