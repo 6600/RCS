@@ -1083,5 +1083,15 @@ export default {
         "ip": "112.26.54.42"
       },
     ]
-  }
+  },
+  "taskInfo": `
+    <div class="status-{{MovingStatus}}" style="width: 180px; font-size:14px;font-weight:bold;" id="popup">
+      <div class="xiaoche-id"><span>小车ID:</span><span>{{AGVID}}</span></div>
+      <div><span>任务:</span><span>{{TaskTypeName}}</span></div>
+      <div><span>耗时:</span><span>{{UsedTime}}</span></div>
+      <div><span>状态:</span><span>{{CurrentOperateDescription}}</span></div>
+      <div><span>异常:</span><span>{{WarningStatus}}</span></div>
+      <div><span>电量:</span><span>{{PowerPercent}}</span></div>
+    </div>
+  `,
 }

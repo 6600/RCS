@@ -47,7 +47,8 @@ export default {
      AGVstatus: state => state.map.AGVstatus,                   //即时更新的边信息
 
      Updatetask:state => state.map.Updatetask,                 //即时更新的小车任务状态
-     mapRang:state    => state.map.mapRang,   
+     mapRang:state    => state.map.mapRang,
+     webConfig: state => state.DataStatistics.webConfig   
    }), 
    ...mapGetters(['EdgeStatus_get','PlaceStatus_get']),
 
@@ -55,14 +56,14 @@ export default {
      let that  = this
      return function(task,agv){
        console.log(task)
-       var str = `<div class="status-${task.MovingStatus || 0}" style="width: 180px; font-size:14px;font-weight:bold;" id="popup">
-          <div class="xiaoche-id"><span>小车ID:</span><span>`+ (task.AGVID) +`</span></div>
-          <div><span>任务:</span><span>`+ (task.TaskTypeName || '') +`</span></div>
-          <div><span>耗时:</span><span>`+ (task.UsedTime || '')+`</span></div>
-          <div><span>状态:</span><span>`+ (task.CurrentOperateDescription || '') + `</span></div>
-          <div><span>异常:</span><span>`+ (task.WarningStatus || '') +`</span></div>
-          <div><span>电量:</span><span>`+ ((task.PowerPercent) || '') +`</span></div>
-        </div>` 
+       var str = webConfig.taskInfo
+       for (const key in task) {
+         if (Object.hasOwnProperty.call(task, key)) {
+           const element = task[key];
+           str = str.replace(`{{${key}}}`, element)
+         }
+       }
+      console.log(str)
       if(task.WarningStatus!=''){ 
          that.$emit('warninfo',{info:`${task.WarningStatus}， 小车${task.AGVID}`,idx:this.mapIdx}) 
           agv.warn = task.WarningStatus

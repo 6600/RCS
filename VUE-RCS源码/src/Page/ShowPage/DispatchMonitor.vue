@@ -286,6 +286,7 @@ import      moment                                                              
  .page{
    width: 100%;
    height: calc(100vh - 120px);
+  position: relative;
    .leftask{
     width: 30%;
    }
@@ -330,7 +331,7 @@ import      moment                                                              
    }
  .top{
    position: absolute;
-   top:-1.5rem;
+   top:0px;
    height: 2rem;
    color:red;
    font-size: 1rem; 

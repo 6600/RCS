@@ -65,7 +65,7 @@ export default {
       if(task.WarningStatus!=''){
         let warninfo = that.webConfig.warninfo
         for (const key in task) {
-          if (Object.hasOwnProperty.call(object, key)) {
+          if (Object.hasOwnProperty.call(task, key)) {
             const element = task[key];
             warninfo = warninfo.replace(`{{${key}}}`, element)
           }
