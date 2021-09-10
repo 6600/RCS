@@ -330,7 +330,7 @@ import      moment                                                              
    }
  .top{
    position: absolute;
-   top:-1.5rem;
+   top:0rem;
    height: 2rem;
    color:red;
    font-size: 1rem; 

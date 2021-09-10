@@ -171,12 +171,13 @@ loadMarker:function(x, y, type, id) {
     }
      ).addTo(this.map);
   marker.bindTooltip(id,  { direction: 'top', permanent:true});
-  var content = `<div style=" width:120px;height:80px;font-size:14px;font-weight:bold;" id="popup">
-                 <div><span>任务:</span><span></span></div>
-                 <div><span>耗时:</span><span></span></div>
-                 <div><span>状态:</span><span></span></div>
-                 <div><span>异常:</span><span></span></div>
-                 </div>`;
+  // var content = `<div style=" width:120px;height:80px;font-size:14px;font-weight:bold;" id="popup">
+  //                <div><span>任务:</span><span></span></div>
+  //                <div><span>耗时:</span><span></span></div>
+  //                <div><span>状态:</span><span></span></div>
+  //                <div><span>异常:</span><span></span></div>
+  //                </div>`;
+  var content = '' 
  var popup =  marker.bindPopup(content, {className:'popup',autoClose:false})
      popup.openPopup()  
      marker.Type = 'AGV';

@@ -65,7 +65,7 @@ export default {
       if(task.WarningStatus!=''){
         let warninfo = that.webConfig.warninfo
         for (const key in task) {
-          if (Object.hasOwnProperty.call(object, key)) {
+          if (Object.hasOwnProperty.call(task, key)) {
             const element = task[key];
             warninfo = warninfo.replace(`{{${key}}}`, element)
           }
@@ -266,7 +266,7 @@ export default {
         this.leafmap.markicons.forEach((AGV, idx) => {
           console.log(AGV.ID, data.ID)
           if (AGV.ID == data.ID) {
-            console.error(this.infloor(data, 'update'))
+            // console.error(this.infloor(data, 'update'))
             this.infloor(data, 'update')
             let pointXY = L.point(parseInt(data.X), parseInt(data.Y)); ///将像素坐标转成lanlng坐标
             console.log(pointXY)
@@ -328,9 +328,9 @@ export default {
   height: 100%;
   pointer-events: none;
 }
-// .leaflet-overlay-pane {
-//   position: relative;
-//   width: 100%;
-//   height: 100%;
-// }
+.leaflet-overlay-pane {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
 </style>

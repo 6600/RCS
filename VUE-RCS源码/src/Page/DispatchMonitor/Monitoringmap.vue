@@ -56,7 +56,7 @@ export default {
      return function(task,agv){
        console.log(task)
        var str = `<div class="status-${task.MovingStatus || 0}" style="width: 180px; font-size:14px;font-weight:bold;" id="popup">
-          <div class="xiaoche-id"><span>小车ID:</span><span>`+ (task.AGVID) +`</span></div>
+          <div class="xiaoche-id"><span>小车33333ID:</span><span>`+ (task.AGVID) +`</span></div>
           <div><span>任务:</span><span>`+ (task.TaskTypeName || '') +`</span></div>
           <div><span>耗时:</span><span>`+ (task.UsedTime || '')+`</span></div>
           <div><span>状态:</span><span>`+ (task.CurrentOperateDescription || '') + `</span></div>

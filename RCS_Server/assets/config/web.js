@@ -922,7 +922,7 @@ export default {
   "mapColumnNum": 2,
   "mapw": 5000,
   "maph": 3500,
-  "avgText": `<div class='status-{{MovingStatus}}' style='width: 180px; font-size:14px;font-weight:bold;' id='popup'><div class='xiaoche-id'><span>小车ID:</span><span>{{AGVID}}</span></div><div><span>任务:</span><span>{{TaskTypeName}}</span></div><div><span>耗时:</span><span>{{UsedTime}}</span></div><div><span>状态:</span><span>{{CurrentOperateDescription}}</span></div><div><span>异常:</span><span>{{WarningStatus}}</span></div><div><span>电量:</span><span>{{PowerPercent}}</span></div></div>`,
+  "avgText": `<div class='status-{{MovingStatus}}' style='width: 180px; font-size:14px;font-weight:bold;' id='popup'><div class='xiaoche-id'><span>小车ID:</span><span>{{AGVID}}</span></div><div><span>任务:</span><span>{{TaskTypeName}}</span></div><div><span>耗时:</span><span>{{UsedTime}}</span></div><div><span>状态:</span><span>{{CurrentOperateDescription}}</span></div><div><span>异常:</span><span>{{WarningStatus}}</span></div><div><span>电量:</span><span>{{PowerPercent}}</span><span>测试:</span><span>{{test}}</span></div></div>`,
   "taskinfoTable": ["TaskID", "AGVID", "AGVIP", "StartPlaceDescription", "EndPlaceDescription", "TaskTypeName", "TaskType", "TaskStatus", "TaskStatusDescription", "StartTime", "FinishTime", "SetTime", "TokenFinishTime", "TokenStartTime", "TokenUseTime", "TokenMaxTime", "TokenOffset", "Sender", "MaterialNum", "MaterialID", "Number", "Unit", "LabelNumber", "LineID", "OrderID", "CancelCurrentTask"],
   "warninfo": "{{WarningStatus}}， 小车{{AGVID}}",
   // 自定义taskList列表
