@@ -429,8 +429,8 @@ import      HeaderList                                                          
         return 'tweenrow'+rowIndex
       },
     rowStyle({row, column, rowIndex, columnIndex}) {              //超时标红显示动效
-      if (row.TokenOffset != null) {
-        if (row.TokenOffset[0] == '-' || row.TokenOffset == '') {
+      if (row.TokenOffSet != null) {
+        if (row.TokenOffSet[0] == '-' || row.TokenOffSet == '') {
           this.$nextTick(() => {
             this.tween.killTweensOf('.tweenrow' + rowIndex)
           })
@@ -455,7 +455,7 @@ import      HeaderList                                                          
        // 单元格的 style 的回调方法
     cellStyle({row, column, rowIndex, columnIndex}) {
       if (columnIndex == 16) {
-        if (row.TokenOffset[0] == '-') {
+        if (row.TokenOffSet[0] == '-') {
           return `color: #ff0000;`
         }
         return ``

@@ -946,7 +946,8 @@ export default {
     {"prop": "TokenUseTime", "align": "center", "label": "出入岗时间", "width": 120},
     {"prop": "TokenMaxTime", "align": "center", "label": "规定时间", "width": 80},
     {"prop": "TokenOffset", "align": "center", "label": "差异", "width": 90},
-    {"prop": "CancelCurrentTask", "align": "center", "label": "取消", "width": 90}
+    {"prop": "CancelCurrentTask", "align": "center", "label": "取消", "width": 90},
+    {"prop": "test", "align": "center", "label": "测试", "width": 90}
   ],
   "scrollTaskList": [
     {"prop": "FireTokenID", "align": "center", "label": "序号", "width": 50},
