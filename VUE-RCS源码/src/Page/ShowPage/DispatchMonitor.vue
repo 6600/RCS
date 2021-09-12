@@ -33,17 +33,17 @@
                 <table border="0">
                   <tr>
                     <th>ID</th>
-                    <th width="60">电量</th>
-                    <th width="80">连接状态</th>
-                    <th width="80">当前状态</th>
-                    <th width="80">当前位置</th>
+                    
+                    <th width="80">使用时间</th>
+                    <th width="120">当前位置</th>
+                    <th width="80">报警状态</th>
                   </tr>
                   <tr v-for="(item, ind) in agvtaskList" :key="ind">
-                    <td>{{item.ID}}</td>
-                    <td>{{item.PowerPercent}}</td>
-                    <td>{{item.RemainTime}}</td>
-                    <td>{{item.CurrentOperate}}</td>
-                    <td>{{item.CurrentPos}}</td>
+                    <td>{{item.AGVID}}</td>
+                    
+                    <td>{{item.UsedTime}}</td>
+                    <td>{{item.CurrentPosDescription}}</td>
+                    <td>{{item.WarningStatus}}</td>
                   </tr>
                 </table>
               </div>
@@ -134,16 +134,6 @@ import      moment                                                              
         chargepileList: []
     }
    }, 
-   watch:{
-     flooridx(newV,oldV){ 
-      var height
-      newV==-1?height = 1116:height = 769 
-        this.tween.to('.foot',.5,{top:height+200})  
-
-      this.ani  = ''
-      this.ani2 = ''
-     }, 
-   },
    computed:{
      //VueX状态管理Module的使用 mapState:https://www.jianshu.com/p/0b42a876561e
      ...mapState( { 
@@ -152,7 +142,8 @@ import      moment                                                              
       mapRang:   state  => state.map.mapRang,             
       floormap:  state  => state.map.floormap,
       StaticsData:  state => state.DataStatistics.StaticsData,
-      webConfig: state => state.DataStatistics.webConfig
+      webConfig: state => state.DataStatistics.webConfig,
+      Updatetask:state => state.map.Updatetask,                 //即时更新的小车任务状态
      }), 
      warninfo(){
        if(this.flooridx>-1){
@@ -215,12 +206,12 @@ import      moment                                                              
 
       option && myChart.setOption(option);
     })
-    this.axios.get('/queryAgvtask').then(res => {
-      console.log('--------------------- 数据列表2 ---------------------')
-      console.log(res)
-      const data = res.data
-      this.agvtaskList = data.ReturnData
-    })
+    // this.axios.get('/queryAgvtask').then(res => {
+    //   console.log('--------------------- 数据列表2 ---------------------')
+    //   console.log(res)
+    //   const data = res.data
+    //   this.agvtaskList = data.ReturnData
+    // })
     
     this.axios.get('/queryChargepile').then(res => {
       console.log('--------------------- 数据列表3 ---------------------')
@@ -233,8 +224,8 @@ import      moment                                                              
     var height =this.$('.page').height();  
     this.tween.to('.foot',.5,{top:height+200})
   },
-   methods:{
-     ...mapMutations(['remove','InitFloormap', 'setStatics']),
+  methods:{
+    ...mapMutations(['remove','InitFloormap', 'setStatics']),
     WarnClass(idx,index){
       return 'f'+idx+index
     },
@@ -246,40 +237,54 @@ import      moment                                                              
       let that = this
       this.alertinfo[idx].push(info)
       let index = this.alertinfo[idx].length-1
-       //this.$('f'+idx+index).css({left:'500px'})
+        //this.$('f'+idx+index).css({left:'500px'})
 
       if(this.flooridx==-1){     
         width = this.$('.thumbContain').width()
-           console.log('报警width',width)
+            console.log('报警width',width)
         if(this.ani==''){
-         this.ani = this.tween.fromTo('.WarningStatus',20,{left:500},{left:0,repeat:-1,yoyo:false})
+          this.ani = this.tween.fromTo('.WarningStatus',20,{left:500},{left:0,repeat:-1,yoyo:false})
         }
       
         this.tween.to('f'+idx+index,8,{left:-100,onComplete:function(){     
           that.alertinfo[idx].shift()     
- 
-         }})
+
+          }})
       }else{
-         width = this.$('.WarningStatus:first-child').width()
-           console.log('报警width',this.$('.WarningStatus:first-child'))
+          width = this.$('.WarningStatus:first-child').width()
+            console.log('报警width',this.$('.WarningStatus:first-child'))
 
         if(this.flooridx==idx){  
           if(this.ani2==''){
-         this.ani2 = this.tween.fromTo('.WarningStatus',20,{left:width},{left:0,repeat:-1,yoyo:false,onComplete:function(){     
-           //that.ani2 = ''  
-         }})
+          this.ani2 = this.tween.fromTo('.WarningStatus',20,{left:width},{left:0,repeat:-1,yoyo:false,onComplete:function(){     
+            //that.ani2 = ''  
+          }})
         }
       
         this.tween.to('f'+idx+index,8,{left:0,onComplete:function(){     
           that.alertinfo[idx].shift()     
- 
-         }})
+
+          }})
         } 
       } 
           console.log('报警width',width)
 
-    }  
-   }
+    },
+  },
+  watch:{
+    Updatetask(newV,oldV){
+      let data = JSON.parse(newV)
+      this.agvtaskList = data
+    },
+    flooridx(newV,oldV){ 
+      var height
+      newV==-1?height = 1116:height = 769 
+        this.tween.to('.foot',.5,{top:height+200})  
+
+      this.ani  = ''
+      this.ani2 = ''
+    }, 
+  }
 }
 </script>
 

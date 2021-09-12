@@ -91,7 +91,7 @@ export default {
     },
     Updatetask(newV,oldV){
       let data = JSON.parse(newV)
-      console.log('sdsd')
+      console.log(data)
       data.forEach(item=>{
          this.UpdateTask(item)
       })
