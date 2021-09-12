@@ -223,9 +223,9 @@ export default {
        
        this.leafmap = new LeafMap(this.Lmap) 
         let devOrpub = {   dev:'../../../',   pub:'./'  }
-        console.log('----------------------')
+        console.log('----------地图------------')
         console.info(this.Map)
-        let layer =  this.Map==undefined ? {w:this.webConfig.map.mapw, h:this.webConfig.map.maph,url:' '}: this.Map    //加载背景图版
+        let layer =  this.Map==undefined ? {w:this.webConfig.mapw, h:this.webConfig.maph,url:' '}: this.Map    //加载背景图版
         let url = devOrpub[config.env] + layer.url                                 //适配开发和部署的图片路径
           
           console.log('layer图片路径',url)

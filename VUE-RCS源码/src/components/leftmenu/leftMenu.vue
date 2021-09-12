@@ -7,16 +7,18 @@
         <!-- <el-menu-item  index="/homepage" class='menuItem'>
             <i class="el-icon-menu"></i>  <span slot="title" >首页</span>
         </el-menu-item> -->
-        <el-menu-item  index="/DispatchMonitor" class='menuItem' >
+        <!-- <el-menu-item  index="/DispatchMonitor" class='menuItem' >
             <i class="iconfont icon-jiankong"></i> <span slot="title" >调度监控</span>
-        </el-menu-item>
+        </el-menu-item> -->
         <!-- <el-menu-item  index="/Connections"     class='menuItem' >
             <i class="iconfont icon-lianjie"></i> <span slot="title" >连接管理</span>
         </el-menu-item>  -->
         <!-- <el-menu-item  index="/TaskList" class='menuItem'>
             <i class="iconfont icon-task"></i> <span slot="title" >任务列表</span>
         </el-menu-item> -->
-     
+        <el-menu-item  index="/showPage"       class='menuItem'>
+            <i class="iconfont icon-task"></i> <span slot="title" >新的界面</span>
+        </el-menu-item>
         <el-menu-item  index="/DataStatistics" class='menuItem' >  
             <i class="iconfont icon-kujialeqiyezhan_shujutongji"></i> <span slot="title" >数据统计</span> 
         </el-menu-item>
@@ -26,9 +28,7 @@
         <el-menu-item  index="/ScrollTaskList"       class='menuItem'>
             <i class="iconfont icon-task"></i> <span slot="title" >实时任务</span>
         </el-menu-item>
-        <el-menu-item  index="/showPage"       class='menuItem'>
-            <i class="iconfont icon-task"></i> <span slot="title" >新的界面</span>
-        </el-menu-item>
+        
         <el-menu-item  index="/systemInfo"       class='menuItem'>
             <i class="iconfont icon-task"></i> <span slot="title" >设备状态</span>
         </el-menu-item>

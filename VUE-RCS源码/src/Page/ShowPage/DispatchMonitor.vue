@@ -221,8 +221,9 @@ import      moment                                                              
       const data = res.data
       this.agvtaskList = data.ReturnData
     })
+    
     this.axios.get('/queryChargepile').then(res => {
-      console.log('--------------------- 数据列表2 ---------------------')
+      console.log('--------------------- 数据列表3 ---------------------')
       console.log(res)
       const data = res.data
       this.chargepileList = data.ReturnData

@@ -133,7 +133,7 @@ UpdatePlace:function(Locked,place,type){
 },
 UpdatePath:function(Occupy,path){
   console.log('尝试更新路径颜色!', path._animatedPathId, Occupy)
-  const box = document.querySelector('.thumbContain')
+  const box = document.querySelector('.show-box-right')
   if (!box) {
     console.error('没有盒子')
     return

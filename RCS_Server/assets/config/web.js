@@ -4,9 +4,9 @@ export default {
       "row": 1,
       "column": 1,
       "name": "1",
-      "url": "static/img/map/1floor.png", 
-      "w": 2432, 
-      "h": 1334, 
+      "url": "static/img/map/test.png", 
+      "w": 1369, 
+      "h": 1217, 
       "x": 0, 
       "y": 0, 
       "path": [
