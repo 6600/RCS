@@ -141,11 +141,7 @@ import      Monitoringmap                                               from './
  .page{
    width: 100%;
    height: calc(100vh - 120px);
-<<<<<<< HEAD
-  position: relative;
-=======
    position: relative;
->>>>>>> e6b6674bb3e8516fcc4944898b1329d8e986ef70
    .leftask{
     width: 30%;
    }
@@ -190,11 +186,7 @@ import      Monitoringmap                                               from './
    }
  .top{
    position: absolute;
-<<<<<<< HEAD
    top: 0px;
-=======
-   top:0;
->>>>>>> e6b6674bb3e8516fcc4944898b1329d8e986ef70
    height: 2rem;
    color:red;
    font-size: 1rem; 
