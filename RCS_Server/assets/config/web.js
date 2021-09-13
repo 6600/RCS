@@ -4,9 +4,9 @@ export default {
       "row": 1,
       "column": 1,
       "name": "1",
-      "url": "static/img/map/1floor.png", 
-      "w": 2432, 
-      "h": 1334, 
+      "url": "static/img/map/test.png", 
+      "w": 1369, 
+      "h": 1217, 
       "x": 0, 
       "y": 0, 
       "path": [
@@ -922,7 +922,7 @@ export default {
   "mapColumnNum": 2,
   "mapw": 5000,
   "maph": 3500,
-  "avgText": `<div class='status-{{MovingStatus}}' style='width: 180px; font-size:14px;font-weight:bold;' id='popup'><div class='xiaoche-id'><span>小车ID:</span><span>{{AGVID}}</span></div><div><span>任务:</span><span>{{TaskTypeName}}</span></div><div><span>耗时:</span><span>{{UsedTime}}</span></div><div><span>状态:</span><span>{{CurrentOperateDescription}}</span></div><div><span>异常:</span><span>{{WarningStatus}}</span></div><div><span>电量:</span><span>{{PowerPercent}}</span></div></div>`,
+  "avgText": `<div class='status-{{MovingStatus}}' style='width: 180px; font-size:14px;font-weight:bold;' id='popup'><div class='xiaoche-id'><span>小车ID:</span><span>{{AGVID}}</span></div><div><span>任务:</span><span>{{TaskTypeName}}</span></div><div><span>耗时:</span><span>{{UsedTime}}</span></div><div><span>状态:</span><span>{{CurrentOperateDescription}}</span></div><div><span>异常:</span><span>{{WarningStatus}}</span></div><div><span>电量:</span><span>{{PowerPercent}}</span><span>测试:</span><span>{{test}}</span></div></div>`,
   "taskinfoTable": ["TaskID", "AGVID", "AGVIP", "StartPlaceDescription", "EndPlaceDescription", "TaskTypeName", "TaskType", "TaskStatus", "TaskStatusDescription", "StartTime", "FinishTime", "SetTime", "TokenFinishTime", "TokenStartTime", "TokenUseTime", "TokenMaxTime", "TokenOffset", "Sender", "MaterialNum", "MaterialID", "Number", "Unit", "LabelNumber", "LineID", "OrderID", "CancelCurrentTask"],
   "warninfo": "{{WarningStatus}}， 小车{{AGVID}}",
   // 自定义taskList列表
@@ -946,7 +946,8 @@ export default {
     {"prop": "TokenUseTime", "align": "center", "label": "出入岗时间", "width": 120},
     {"prop": "TokenMaxTime", "align": "center", "label": "规定时间", "width": 80},
     {"prop": "TokenOffset", "align": "center", "label": "差异", "width": 90},
-    {"prop": "CancelCurrentTask", "align": "center", "label": "取消", "width": 90}
+    {"prop": "CancelCurrentTask", "align": "center", "label": "取消", "width": 90},
+    {"prop": "test", "align": "center", "label": "测试", "width": 90}
   ],
   "scrollTaskList": [
     {"prop": "FireTokenID", "align": "center", "label": "序号", "width": 50},

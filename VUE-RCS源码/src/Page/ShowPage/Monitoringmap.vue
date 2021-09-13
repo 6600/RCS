@@ -91,7 +91,7 @@ export default {
     },
     Updatetask(newV,oldV){
       let data = JSON.parse(newV)
-      console.log('sdsd')
+      console.log(data)
       data.forEach(item=>{
          this.UpdateTask(item)
       })
@@ -223,9 +223,9 @@ export default {
        
        this.leafmap = new LeafMap(this.Lmap) 
         let devOrpub = {   dev:'../../../',   pub:'./'  }
-        console.log('----------------------')
+        console.log('----------地图------------')
         console.info(this.Map)
-        let layer =  this.Map==undefined ? {w:this.webConfig.map.mapw, h:this.webConfig.map.maph,url:' '}: this.Map    //加载背景图版
+        let layer =  this.Map==undefined ? {w:this.webConfig.mapw, h:this.webConfig.maph,url:' '}: this.Map    //加载背景图版
         let url = devOrpub[config.env] + layer.url                                 //适配开发和部署的图片路径
           
           console.log('layer图片路径',url)
@@ -266,7 +266,7 @@ export default {
         this.leafmap.markicons.forEach((AGV, idx) => {
           console.log(AGV.ID, data.ID)
           if (AGV.ID == data.ID) {
-            console.error(this.infloor(data, 'update'))
+            // console.error(this.infloor(data, 'update'))
             this.infloor(data, 'update')
             let pointXY = L.point(parseInt(data.X), parseInt(data.Y)); ///将像素坐标转成lanlng坐标
             console.log(pointXY)
@@ -328,9 +328,9 @@ export default {
   height: 100%;
   pointer-events: none;
 }
-// .leaflet-overlay-pane {
-//   position: relative;
-//   width: 100%;
-//   height: 100%;
-// }
+.leaflet-overlay-pane {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
 </style>

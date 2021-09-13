@@ -156,7 +156,7 @@ default {
 			this.axios.get('/config').then(res => {
 				let data = res.data.map
         that.setWebConfig(res.data)
-        console.log('配置信息')
+        console.log(res.data)
         console.log(data)
         let mapList = []
         res.data.map.forEach(element => {
