@@ -29,9 +29,9 @@
             <i class="iconfont icon-task"></i> <span slot="title" >实时任务</span>
         </el-menu-item>
         
-        <el-menu-item  index="/systemInfo"       class='menuItem'>
+        <!-- <el-menu-item  index="/systemInfo"       class='menuItem'>
             <i class="iconfont icon-task"></i> <span slot="title" >设备状态</span>
-        </el-menu-item>
+        </el-menu-item> -->
     </el-menu>
 </div>
 </template>

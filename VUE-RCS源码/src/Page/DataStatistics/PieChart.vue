@@ -14,10 +14,10 @@
      <!-- 订单统计 饼图 趋势图---> 
      <div class="order canvcon" v-if="type == 'OrderStyle'"> 
       <div class="pie" v-show="radio=='1'"> 
-       <div @click="selectPie('Status')" style="width:30%;">
+       <div @click="selectPie('Status')" style="width:50%;height:100%;">
         <div ref="OTaskStatus" style="width:100%;height:100%;"></div> 
        </div> 
-       <div @click="selectPie('TaskName')" style="width:70%;"> 
+       <div @click="selectPie('TaskName')" style="width:50%;height:100%;"> 
         <div ref="OTaskName" style="width:100%;height:100%;"></div> 
        </div> 
        <!-- <div ref='OOrderID' style="top:-1rem;"  :style="StaticPieStyle"></div>      --> 

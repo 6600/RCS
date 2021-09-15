@@ -22,7 +22,7 @@
   </div>
       <!--报错 component lists rendered with v-for should have explicit key  v-show = 'isFirstShow' -->
     <ul class="PieChart">
-      <div class="title-bar">稼动率和机损率饼图</div>
+      <div class="title-bar">稼动率饼图</div>
       <li v-for="(item,idx) in StaticsData.slice(0,4)"  @click="PieSelect(item,idx)"  >  
         <PieChart v-if="!item.hide" :ID='item.ID' :title='item.title' :index="idx"  :Piedata='item.pie' :type='item.type' @pageresponse='Pageonresize'>   </PieChart>   
       </li> 

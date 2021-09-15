@@ -27,7 +27,7 @@
                 </table>
               </div>
             </div>
-            <div class="car border">
+            <div class="car border" style="height: 415px;">
               <h2>小车状况列表</h2>
               <div class="panel-item">
                 <table border="0">
@@ -48,7 +48,7 @@
                 </table>
               </div>
             </div>
-            <div class="charge border">
+            <!-- <div class="charge border">
               <h2>充电桩状况列表</h2>
               <div class="panel-item">
                 <table border="0">
@@ -68,7 +68,7 @@
                   </tr>
                 </table>
               </div>
-            </div>
+            </div> -->
           </div>
           <div class="show-box-right border">
             <!--地图显示插件-->
