@@ -17,7 +17,7 @@
             <i class="iconfont icon-task"></i> <span slot="title" >任务列表</span>
         </el-menu-item> -->
         <el-menu-item  index="/showPage"       class='menuItem'>
-            <i class="iconfont icon-task"></i> <span slot="title" >新的界面</span>
+            <i class="iconfont icon-task"></i> <span slot="title" >主界面</span>
         </el-menu-item>
         <el-menu-item  index="/DataStatistics" class='menuItem' >  
             <i class="iconfont icon-kujialeqiyezhan_shujutongji"></i> <span slot="title" >数据统计</span> 

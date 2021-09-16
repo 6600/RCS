@@ -36,7 +36,7 @@
                     
                     <th width="80">使用时间</th>
                     <th width="120">当前位置</th>
-                    <th width="80">报警状态</th>
+                    <th width="80">小车电量</th>
                   </tr>
                   <tr v-for="(item, ind) in agvtaskList" :key="ind">
                     <td>{{item.AGVID}}</td>
@@ -175,15 +175,17 @@ import      moment                                                              
     this.axios.post('/queryTasklist', param2).then(res => {
       console.log('--------------------- 数据列表2 ---------------------')
       console.log(res)
+      
       const data = res.data
       this.taskList = data.ReturnData
       let list = [0, 0, 0, 0, 0, 0, 0]
       data.ReturnData.forEach(element => {
-        console.log(element)
+        
         if (element.FinishTime) {
-          const finistTime = this.$moment(element.FinishTime).startOf('day').fromNow().split(' ')
-          if (finistTime[0] && parseInt(finistTime[0]) < 7) {
-            list[parseInt(finistTime[0])]++
+          const finistTime = this.$moment(element.FinishTime).diff(moment(), 'days');
+          console.log(finistTime)
+          if (finistTime > -7) {
+            list[6 + finistTime]++
           }
         }
       });
