@@ -208,7 +208,7 @@ export default {
       console.log('准备更新车库', data)      
        data.forEach(item=>{
         this.leafmap.placeicons.map((place,index)=>{ 
-          if(place.ID==item.Name){       
+          if(place.ID==item.ID){       
             //  console.log('更新车库',item,place)  
             this.leafmap.UpdatePlace(item.Locked, place, this.type)  
           } 

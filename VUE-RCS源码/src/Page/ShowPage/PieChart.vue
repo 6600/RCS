@@ -3,14 +3,14 @@
 <div class="chart-contain">
 	<div class="avg canvcon" v-show="type == 'AGVStyle'">
 		<ul class="Charge">
-			<li class="header">
+			<!-- <li class="header">
 				<span>
 					充电次数
 				</span>
 				<span>
 					充电时长
 				</span>
-			</li>
+			</li> -->
 			<li>
 				<span v-for="(value,key) in Charge" :key="key">{{value}}</span>
 			</li>
