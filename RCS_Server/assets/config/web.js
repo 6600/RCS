@@ -1095,4 +1095,5 @@ export default {
       <div><span>电量:</span><span>{{PowerPercent}}</span></div>
     </div>
   `,
+  "foot": `鹏鼎RCS系统    ||                                                    ©鹏鼎控股版权所有t`
 }

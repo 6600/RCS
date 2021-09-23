@@ -158,6 +158,7 @@ default {
         that.setWebConfig(res.data)
         console.log(res.data)
         console.log(data)
+        document.querySelector('.foot-info').innerHTML = res.data.foot
         let mapList = []
         res.data.map.forEach(element => {
           if (element) {
@@ -165,7 +166,6 @@ default {
             element.column = element.column || 1
             mapList[(((element.column - 1) * that.webConfig.mapRowNum) + (element.row - 1))] = element
           }
-          
         });
         that.InitFloormap(mapList)
 
