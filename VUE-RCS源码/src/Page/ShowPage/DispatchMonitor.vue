@@ -43,7 +43,7 @@
                     
                     <td>{{item.UsedTime}}</td>
                     <td>{{item.CurrentPosDescription}}</td>
-                    <td>{{item.WarningStatus}}</td>
+                    <td>{{item.PowerPercent}}</td>
                   </tr>
                 </table>
               </div>
