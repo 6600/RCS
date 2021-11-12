@@ -275,9 +275,6 @@ import      HeaderList                                                          
        mint:{
          StartTime:'',
          EndTime:'',
-          Car:'',  
-          StartP:'',
-          EndP :'',  
          Car:    [ {  values: ['C1', 'C2', 'C3', 'C4'],   } ],
          StartP: [ {  values: ['2楼线边仓', '3楼线边仓', '1楼线边仓', '0楼线边仓'],   } ],
          EndP  : [ {  values: ['2楼线边仓', '3楼线边仓', '1楼线边仓', '0楼线边仓'],   } ]
@@ -299,7 +296,8 @@ import      HeaderList                                                          
       var height =this.$('.page').height();  
      }
     },
-    created(){ 
+    created(){
+      
      if(typeof(this.$router.query)!= 'undefined')
       this.type = 'mint'
      else
@@ -311,116 +309,6 @@ import      HeaderList                                                          
     mounted(){
       var height =this.$('.page').height();
       this.tween.to('.foot',.5,{top:height+300})    
-
-      //图表
-    //var ctx  = document.getElementById('myChart').getContext("2d"); 
-    //var ctx2 = document.getElementById('lineChart').getContext("2d"); 
-    //let doudata = {
-    //  datasets: [
-    //    { 
-    //      data: [10, 20, 30],
-    //      backgroundColor:[
-    //       'rgba(255, 0, 0, 1)',
-    //       'rgba(0, 255, 0, 1)',
-    //       'rgba(0, 0, 255, 1)',
-    //      ]
-    //     }    ], 
-    //      labels: [
-    //      '运行时间',
-    //      '工作时间',
-    //      '维护时间'  ]
-    //  };
-    // let linedata = {                                  //chartjs的相关图表类型api：https://www.chartjs.org/docs/latest/charts/bar.html  (英文文档)。
-    //  datasets: [
-    //    { 
-    //      data: [10, 20, 30],
-    //      backgroundColor:'rgba(255, 0, 0, 1)',
-    //      label:'行驶里程',
-    //      yAxisID: 'A', 
-    //     },{ 
-    //      data: [35, 33, 30],
-    //      backgroundColor:'rgba(0, 255, 0, 1)',
-    //      label:'上线工作时间',
-    //        yAxisID: 'B', 
-    //     },{ 
-    //      data: [10, 20, 30],
-    //      backgroundColor:'rgba(0, 0, 255, 1)',
-    //      label:'执行任务数', 
-    //     },{ 
-    //      data: [10, 20, 30],
-    //      backgroundColor:'rgba(0, 0, 255, 1)',
-    //      label:'故障次数', 
-    //     }    
-    //     ], 
-    //  
-    //      labels: [
-    //      'agv1',
-    //      'agv2',
-    //      'agv3'  ]
-    //  };
-    //  var douChart = new Chart(ctx,{
-    //      // this is the string the constructor was registered at, ie Chart.controllers.MyType
-    //      type: 'doughnut',
-    //      data: doudata,
-    //  //    options: options
-    //   }); 
-    //  var LineChart = new Chart(ctx2,{
-    //      // this is the string the constructor was registered at, ie Chart.controllers.MyType
-    //      type: 'bar',
-    //      data: linedata,
-    //      options: {
-    //       scales: {
-    //         yAxes: [{
-    //         id: 'A',
-    //         type: 'linear',
-    //         position: 'left',
-    //          scaleLabel: {
-    //          display: true,
-    //          labelString: '行驶里程(千米/秒)'
-    //        },
-    //         gridLines: {
-    //          offsetGridLines: true
-    //         }
-    //        }, {
-    //         id: 'B',
-    //         type: 'linear',
-    //         position: 'left',
-    //          scaleLabel: {
-    //          display: true,
-    //          labelString: '上线时间'
-    //        },
-    //         gridLines: {
-    //          offsetGridLines: true
-    //         }}, {
-    //         id: 'C',
-    //         type: 'linear',
-    //         position: 'right',
-    //          scaleLabel: {
-    //          display: true,
-    //          labelString: '任务次数'
-    //        },
-    //         gridLines: {
-    //          offsetGridLines: true
-    //         }}, {
-    //         id: 'D',
-    //         type: 'linear',
-    //         position: 'right',
-    //          scaleLabel: {
-    //          display: true,
-    //          labelString: '故障次数'
-    //        },
-    //         gridLines: {
-    //          offsetGridLines: true
-    //         },
-    //         ticks: {
-    //           max: 22,
-    //           min: 0
-    //         }
-    //       }]
-    //     }
-    //    },
-    //  //    options: options
-    //   }); 
     },
 
     methods: {
@@ -455,7 +343,7 @@ import      HeaderList                                                          
        // 单元格的 style 的回调方法
     cellStyle({row, column, rowIndex, columnIndex}) {
       if (columnIndex == 16) {
-        if (row.TokenOffSet[0] == '-') {
+        if (row.TokenOffSet && row.TokenOffSet[0] == '-') {
           return `color: #ff0000;`
         }
         return ``

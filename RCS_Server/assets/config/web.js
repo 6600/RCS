@@ -970,6 +970,9 @@ export default {
     {"prop": "TokenOffset", "align": "center", "label": "差异", "width": 90},
     {"prop": "CancelCurrentTask", "align": "center", "label": "取消", "width": 90}
   ],
+  // 起始位置
+  "startP": [{values: ['22楼线边仓', '3楼线边仓', '1楼线边仓', '0楼线边仓'],}],
+  "endP": [{values: ['22楼线边仓', '3楼线边仓', '1楼线边仓', '0楼线边仓'],}],
   // 设备状态
   "systemInfo": {
     "设备类型1": [

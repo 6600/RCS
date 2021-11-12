@@ -224,9 +224,6 @@ import      mPicker                                                             
        mint:{                                                            //移动端相关starttime,endtime等相关参数
          StartTime:'',
          EndTime:'',
-          Car:'',  
-          StartP:'',
-          EndP :'',  
          Car: [ {  values: ['全部','C1', 'C2', 'C3', 'C4'],   } ],
          StartP: [ {  values: ['全部','2楼线边仓', '3楼线边仓', '1楼线边仓', '0楼线边仓'],   } ],
          EndP: [ {  values: ['全部','2楼线边仓', '3楼线边仓', '1楼线边仓', '0楼线边仓'],   } ]
