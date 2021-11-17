@@ -186,7 +186,7 @@ import      Monitoringmap                                               from './
    }
  .top{
    position: absolute;
-   top:0;
+   top: 0px;
    height: 2rem;
    color:red;
    font-size: 1rem; 
