@@ -6,12 +6,19 @@ var fs    =         require('fs');
  */
 const conf = Object.freeze({
     // mysql的配置项
+    // mysql: {
+    //     host: "127.0.0.1",
+    //     user:'root',
+    //     password:'123456',
+    //     database:'rcs',
+    //     port: 3306
+    // },
     mysql: {
-        host: "127.0.0.1",
+        host: "bj-cynosdbmysql-grp-kqvvbnw0.sql.tencentcdb.com",
         user:'root',
-        password:'123456',
+        password:'CjMom&xcaq3iPixQ',
         database:'rcs',
-        port: 3306
+        port: 28556
     },
     httpsPort:8211,
     httpPort:8210,

@@ -79,4 +79,8 @@ body {
 .clear {
   clear: both;
 }
+.leaflet-tooltip-top {
+  margin-top: -20px;
+  font-size: 20px;
+}
 </style>

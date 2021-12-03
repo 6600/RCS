@@ -127,11 +127,12 @@ export default {
    mounted() { 
 
     var obj = {
-        minZoom: 10,
+        minZoom: 5,
         maxZoom: 15,
         center: [0, 0], 
         zoomControl:this.type=='Monitor'?true:false,
-        dragging:   this.type=='Monitor'?true:false,
+        dragging:   true,
+        touchZoom: true,
         crs:   L.CRS.Simple,
         scrollWheelZoom:this.type=='Monitor'?true:false,
         attributionControl: false, 
@@ -327,7 +328,6 @@ export default {
   z-index: 0;
   width: 100%;
   height: 100%;
-  pointer-events: none;
 }
 .leaflet-overlay-pane {
   position: relative;

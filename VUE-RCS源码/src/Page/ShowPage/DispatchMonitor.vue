@@ -8,42 +8,23 @@
       <div class="show-box">
         <div class="show-box-top">
           <div class="show-box-left">
-            <div class="now border">
-              <h2>实时任务列表</h2>
-              <div class="panel-item">
-                <table border="0">
-                  <tr>
-                    <th>任务ID</th>
-                    <th width="60">小车ID</th>
-                    <th width="110">任务类型</th>
-                    <th width="80">当前状态</th>
-                  </tr>
-                  <tr v-for="(item, ind) in taskList" :key="ind">
-                    <td>{{item.TaskID}}</td>
-                    <td>{{item.AGVID}}</td>
-                    <td>{{item.TaskTypeName}}</td>
-                    <td>{{item.TaskStatusDescription}}</td>
-                  </tr>
-                </table>
-              </div>
-            </div>
-            <div class="car border" style="height: 415px;">
+            <div class="car border" style="height: 747px;">
               <h2>小车状况列表</h2>
               <div class="panel-item">
                 <table border="0">
                   <tr>
                     <th>ID</th>
-                    
-                    <th width="80">使用时间</th>
-                    <th width="120">当前位置</th>
                     <th width="80">小车电量</th>
+                    <th width="80">温度</th>
+                    <th width="80">湿度</th>
+                    <th width="80">震动</th>
                   </tr>
                   <tr v-for="(item, ind) in agvtaskList" :key="ind">
                     <td>{{item.AGVID}}</td>
-                    
-                    <td>{{item.UsedTime}}</td>
-                    <td>{{item.CurrentPosDescription}}</td>
                     <td>{{item.PowerPercent}}</td>
+                    <td>{{item.Temperature}}</td>
+                    <td>{{item.Humidity}}</td>
+                    <td>{{item.Shock}}</td>
                   </tr>
                 </table>
               </div>
@@ -89,6 +70,32 @@
           </div>
         </div>
         <div class="show-box-bottom">
+          <div class="now border">
+            <h2>实时任务列表</h2>
+            <div class="panel-item">
+              <table border="0">
+                <tr>
+                  <th width="60">任务ID</th>
+                  <th width="60">小车ID</th>
+                  <th>lot1</th>
+                  <th>lot2</th>
+                  <th>lot3</th>
+                  <th>lot4</th>
+                  <th width="80">任务类型</th>
+                </tr>
+                <tr v-for="(item, ind) in taskList" :key="ind">
+                  <td>{{item.AGVID}}</td>
+                  <td>{{item.TaskID}}</td>
+                  
+                  <td>{{item.lotid1}}</td>
+                  <td>{{item.lotid2}}</td>
+                  <td>{{item.lotid3}}</td>
+                  <td>{{item.lotid4}}</td>
+                  <td>{{item.TaskStatusDescription}}</td>
+                </tr>
+              </table>
+            </div>
+          </div>
           <div class="rate border">
             <h2>稼动率情况</h2>
             <div class="chart-panel">
@@ -367,7 +374,9 @@ import      moment                                                              
     margin: 10px;
   }
   .now {
-    height: calc(100% - 425px);
+    height: 100%;
+    
+    width: calc(100% - 990px);
   }
   .car {
     height: 200px;
@@ -396,11 +405,11 @@ import      moment                                                              
   display: flex;
 }
 .rate {
-  width: calc(100% - 610px);
-  margin-right: 10px;
+  width: 570px;
+  margin: 0 10px;
 }
 .order {
-  width: 600px;
+  width: 400px;
 }
 .panel-item {
   height: calc(100% - 30px);
