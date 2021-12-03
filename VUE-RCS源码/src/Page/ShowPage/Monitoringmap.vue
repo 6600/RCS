@@ -133,6 +133,8 @@ export default {
         zoomControl:this.type=='Monitor'?true:false,
         dragging:   true,
         touchZoom: true,
+        zoomDelta: 0.25,
+        zoomSnap: 0,
         crs:   L.CRS.Simple,
         scrollWheelZoom:this.type=='Monitor'?true:false,
         attributionControl: false, 

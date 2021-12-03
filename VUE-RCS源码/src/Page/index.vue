@@ -10,7 +10,7 @@
             <div class="wel">欢迎你，{{username}}</div>
         </el-col>
         <el-col :span="6" class = 'btngroup'>
-          <div class = 'floorGroup'>
+          <div class = 'floorGroup' style="display:none;">
              <ul class='floorbtn' >
               <li v-for='(item, ind) in floormap' @click='SelectFloor(ind + 1)' :key="ind">
                 <template v-if="item">

@@ -1,14 +1,10 @@
 <template>
   <div class="page">
-    <div class="top" v-show="flooridx&gt;-1">
-      <div class="WarningStatus">
-        <div :class="WarnClass(flooridx,index)" v-for="(val,index) in alertinfo[flooridx]" :key="index">{{val}}</div></div>
-    </div>
     <div class="main">
       <div class="show-box">
         <div class="show-box-top">
           <div class="show-box-left">
-            <div class="car border" style="height: 747px;">
+            <div class="car border" style="height: 657px;">
               <h2>小车状况列表</h2>
               <div class="panel-item">
                 <table border="0">
@@ -51,23 +47,33 @@
               </div>
             </div> -->
           </div>
-          <div class="show-box-right border">
-            <!--地图显示插件-->
-            <div class="Monitor" v-if="parseInt(flooridx)!=-1">
-              <Monitoringmap class="map" :map="floormap[flooridx]"  :MapIdx="flooridx" type="Monitor" width="100%" height="100%" v-on:warninfo="updatewarninfo"></Monitoringmap>
+          <div class="right-box">
+            <div class="error-show">
+              <div class="top" v-show="flooridx&gt;-1">
+                <div class="WarningStatus">
+                  <div :class="WarnClass(flooridx,index)" v-for="(val,index) in alertinfo[flooridx]" :key="index">{{val}}</div>
+                </div>
+              </div>
             </div>
-            <!-- 缩略地图 -->
-            <ul class="thumbContain" v-else>
-              <li v-for="(item,idx) in (webConfig.mapRowNum * webConfig.mapColumnNum)" :key="idx" :style="{width: (100 / webConfig.mapRowNum).toFixed(2) + '%', height: (100 / webConfig.mapColumnNum).toFixed(2) + '%'}">
-                <template v-if="floormap[idx] && floormap[idx].url">
-                  <div class="WarningStatus">
-                    <div :class="WarnClass(idx,index)" v-for="(val,index) in alertinfo[idx]" :key="index">{{val}}</div>
-                  </div>
-                  <Monitoringmap class="map" v-on:warninfo="updatewarninfo" :map="floormap[idx]" :MapIdx="idx" type="thumb" width="100%" height="100%"></Monitoringmap>
-                </template>
-              </li>
-            </ul>
+            <div class="show-box-right border">
+              <!--地图显示插件-->
+              <div class="Monitor" v-if="parseInt(flooridx)!=-1">
+                <Monitoringmap class="map" :map="floormap[flooridx]"  :MapIdx="flooridx" type="Monitor" width="100%" height="100%" v-on:warninfo="updatewarninfo"></Monitoringmap>
+              </div>
+              <!-- 缩略地图 -->
+              <ul class="thumbContain" v-else>
+                <li v-for="(item,idx) in (webConfig.mapRowNum * webConfig.mapColumnNum)" :key="idx" :style="{width: (100 / webConfig.mapRowNum).toFixed(2) + '%', height: (100 / webConfig.mapColumnNum).toFixed(2) + '%'}">
+                  <template v-if="floormap[idx] && floormap[idx].url">
+                    <div class="WarningStatus">
+                      <div :class="WarnClass(idx,index)" v-for="(val,index) in alertinfo[idx]" :key="index">{{val}}</div>
+                    </div>
+                    <Monitoringmap class="map" v-on:warninfo="updatewarninfo" :map="floormap[idx]" :MapIdx="idx" type="thumb" width="100%" height="100%"></Monitoringmap>
+                  </template>
+                </li>
+              </ul>
+            </div>
           </div>
+          
         </div>
         <div class="show-box-bottom">
           <div class="now border">
@@ -75,12 +81,12 @@
             <div class="panel-item">
               <table border="0">
                 <tr>
-                  <th width="60">任务ID</th>
-                  <th width="60">小车ID</th>
-                  <th>lot1</th>
-                  <th>lot2</th>
-                  <th>lot3</th>
-                  <th>lot4</th>
+                  <th width="80">任务ID</th>
+                  <th width="80">小车ID</th>
+                  <th width="80">lot1</th>
+                  <th width="80">lot2</th>
+                  <th width="80">lot3</th>
+                  <th width="80">lot4</th>
                   <th width="80">任务类型</th>
                 </tr>
                 <tr v-for="(item, ind) in taskList" :key="ind">
@@ -345,13 +351,11 @@ import      moment                                                              
     }
    }
  .top{
-   position: absolute;
-   top:0px;
-   height: 2rem;
-   color:red;
-   font-size: 1rem; 
-   width: 96%;
-   overflow: hidden;
+    position: relative;
+    height: 100%;
+    font-size: 1rem;
+    width: 100%;
+    overflow: hidden;
    span{
      position:absolute;
    display: inline-block;
@@ -360,7 +364,7 @@ import      moment                                                              
 .show-box {
   height: 100%;
   .show-box-top {
-    height: calc(100% - 200px);
+    height: calc(100% - 290px);
     display: flex;
   }
   .show-box-left {
@@ -369,9 +373,8 @@ import      moment                                                              
     margin: 10px;
   }
   .show-box-right {
-    height: calc(100% - 20px);
-    width: calc(100% - 420px);
-    margin: 10px;
+    height: calc(100% - 40px);
+    width: 100%;
   }
   .now {
     height: 100%;
@@ -400,7 +403,7 @@ import      moment                                                              
   box-sizing: border-box;
 }
 .show-box-bottom {
-  height: 190px;
+  height: 280px;
   margin: 0 10px;
   display: flex;
 }
@@ -432,5 +435,13 @@ import      moment                                                              
 }
 .chart-panel {
   height: 160px;
+}
+.error-show {
+  height: 40px;
+}
+.right-box {
+  height: calc(100% - 20px);
+  width: calc(100% - 420px);
+  margin: 10px;
 }
 </style>
