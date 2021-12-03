@@ -262,13 +262,14 @@ export default {
       UpdateAGV(data) {
         console.log('渲染AGVstatus:');
         console.log(data)
+        const that = this
         let markerUpdate = false
         this.leafmap.markicons.forEach((AGV, idx) => {
           console.log(AGV.ID, data.ID)
           if (AGV.ID == data.ID) {
             // console.error(this.infloor(data, 'update'))
             this.infloor(data, 'update')
-            let pointXY = L.point(parseInt(data.X), parseInt(data.Y)); ///将像素坐标转成lanlng坐标
+            let pointXY = L.point(parseInt(data.X + (that.webConfig.deviationx || 0)), parseInt(data.Y + (that.webConfig.deviationy || 0))); ///将像素坐标转成lanlng坐标
             console.log(pointXY)
             let pointlatlng = this.Lmap.unproject(pointXY, this.Lmap.getMaxZoom() - 1);
             console.log(pointlatlng)
