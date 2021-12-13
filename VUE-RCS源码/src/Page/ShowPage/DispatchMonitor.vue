@@ -90,8 +90,8 @@
                   <th width="80">任务类型</th>
                 </tr>
                 <tr v-for="(item, ind) in taskList" :key="ind">
-                  <td>{{item.AGVID}}</td>
                   <td>{{item.TaskID}}</td>
+                  <td>{{item.AGVID}}</td>
                   
                   <td>{{item.lotid1}}</td>
                   <td>{{item.lotid2}}</td>
