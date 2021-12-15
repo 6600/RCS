@@ -235,7 +235,7 @@ export default {
               fontSize: 12
             },
             //文字的字体大小
-            formatter: '{b}-{c} ({d}%)'
+            formatter: '{b}({d}%)'
           }
         },
       },
