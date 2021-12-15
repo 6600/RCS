@@ -56,18 +56,23 @@ server.on('connection', function connection(ws, req) {
 
    })
 //
-  ws.on('message', function incoming(data) { 
-    RCSdispatch(server,data) 
-    data = JSON.parse(data)    
-    if(typeof(data.RequestType)!='undefined'){ 
-      if(data.RequestType =='UpdatePlaceStatus'||data.RequestType=='UpdateEdgeStatus'){    //这个是不存在下面项的判断，也就是说indexof为-1时可进行socket.brocast类型的传输 // 1,3,4,12,13 //13
-       data.List.forEach(item=>{
-        Datacacha[data.RequestType][item.ID] = item
-       }) 
-      // console.log(data)
-       logger.info('[socket][connection]缓存UPdatePlace,UpdateEdge数据:'+clientName+'');
-    } 
-  }
+  ws.on('message', function incoming(data) {
+    try {
+      RCSdispatch(server,data) 
+      data = JSON.parse(data)    
+      if(typeof(data.RequestType)!='undefined'){ 
+        if(data.RequestType =='UpdatePlaceStatus'||data.RequestType=='UpdateEdgeStatus'){    //这个是不存在下面项的判断，也就是说indexof为-1时可进行socket.brocast类型的传输 // 1,3,4,12,13 //13
+        data.List.forEach(item=>{
+          Datacacha[data.RequestType][item.ID] = item
+        }) 
+        // console.log(data)
+        logger.info('[socket][connection]缓存UPdatePlace,UpdateEdge数据:'+clientName+'');
+        } 
+      }
+    } catch (error) {
+      console.error(error)
+    }
+    
   }); 
 });
 
